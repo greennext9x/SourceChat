@@ -399,7 +399,7 @@ public class OnboardingActivity extends BaseActivity {
 
         mViewFlipper.setDisplayedChild(2);
         findViewById(R.id.progressExistingUser).setVisibility(View.GONE);
-        findViewById(R.id.progressExistingImage).setVisibility(View.GONE);
+//        findViewById(R.id.progressExistingImage).setVisibility(View.GONE);
 
         getSupportActionBar().show();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -579,7 +579,7 @@ public class OnboardingActivity extends BaseActivity {
         String password = ((TextView) findViewById(R.id.edtPass)).getText().toString();
 
         findViewById(R.id.progressExistingUser).setVisibility(View.VISIBLE);
-        findViewById(R.id.progressExistingImage).setVisibility(View.VISIBLE);
+//        findViewById(R.id.progressExistingImage).setVisibility(View.VISIBLE);
 
         if (mExistingAccountTask == null) {
             mExistingAccountTask = new ExistingAccountTask();

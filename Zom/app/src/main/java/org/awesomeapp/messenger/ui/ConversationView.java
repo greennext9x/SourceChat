@@ -1078,19 +1078,15 @@ public class ConversationView {
     }
 
     private void doWordSearch() {
+        if (ds == null)
+            ds = new DictionarySearch(mActivity);
 
-        if (Preferences.getUseTibetanDictionary()) {
-            if (ds == null)
-                ds = new DictionarySearch(mActivity);
+        String searchText = mComposeMessage.getText().toString();
 
-            String searchText = mComposeMessage.getText().toString();
-
-            if (!TextUtils.isEmpty(searchText)) {
-                if (taskSearch == null || taskSearch.getStatus() == AsyncTask.Status.FINISHED) {
-                    taskSearch = new SearchWordTask();
-                    taskSearch.execute(mComposeMessage.getText().toString());
-
-                }
+        if (!TextUtils.isEmpty(searchText)) {
+            if (taskSearch == null || taskSearch.getStatus() == AsyncTask.Status.FINISHED) {
+                taskSearch = new SearchWordTask();
+                taskSearch.execute(mComposeMessage.getText().toString());
             }
         }
 

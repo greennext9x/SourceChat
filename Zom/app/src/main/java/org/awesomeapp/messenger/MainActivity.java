@@ -188,7 +188,7 @@ public class MainActivity extends BaseActivity {
                 mViewPager.setCurrentItem(tab.getPosition());
 
                 setToolbarTitle(tab.getPosition());
-                applyStyleColors();
+//                applyStyleColors();
             }
 
             @Override
@@ -199,7 +199,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 setToolbarTitle(tab.getPosition());
-                applyStyleColors();
+//                applyStyleColors();
             }
         });
 
@@ -296,8 +296,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        applyStyleColors();
+//
+//        applyStyleColors();
 
         //if VFS is not mounted, then send to WelcomeActivity
         if (!VirtualFileSystem.get().isMounted()) {
@@ -987,60 +987,60 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-        applyStyleColors();
+//        applyStyleColors();
     }
 
-    private void applyStyleColors() {
-        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+//    private void applyStyleColors() {
+//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        //not set color
+//
+//        int themeColorHeader = settings.getInt("themeColor", -1);
+//        int themeColorText = settings.getInt("themeColorText", -1);
+//        int themeColorBg = settings.getInt("themeColorBg", -1);
+//
+//        if (themeColorHeader != -1) {
+//
+//            if (themeColorText == -1)
+//                themeColorText = getContrastColor(themeColorHeader);
+//
+//            if (Build.VERSION.SDK_INT >= 21) {
+//                getWindow().setNavigationBarColor(themeColorHeader);
+//                getWindow().setStatusBarColor(themeColorHeader);
+//                getWindow().setTitleColor(getContrastColor(themeColorHeader));
+//            }
+//
+//            mToolbar.setBackgroundColor(themeColorHeader);
+//            mToolbar.setTitleTextColor(getContrastColor(themeColorHeader));
+//
+//            mTabLayout.setBackgroundColor(themeColorHeader);
+//            mTabLayout.setTabTextColors(themeColorText, themeColorText);
+//
+//            mFab.setBackgroundColor(themeColorHeader);
+//
+//        }
+//
+//        if (themeColorBg != -1) {
+//            if (mConversationList != null && mConversationList.getView() != null)
+//                mConversationList.getView().setBackgroundColor(themeColorBg);
+//
+//            if (mContactList != null && mContactList.getView() != null)
+//                mContactList.getView().setBackgroundColor(themeColorBg);
+//
+//            if (mMoreFragment != null && mMoreFragment.getView() != null)
+//                mMoreFragment.getView().setBackgroundColor(themeColorBg);
+//
+//            if (mAccountFragment != null && mAccountFragment.getView() != null)
+//                mAccountFragment.getView().setBackgroundColor(themeColorBg);
+//        }
+//
+//    }
 
-        //not set color
-
-        int themeColorHeader = settings.getInt("themeColor", -1);
-        int themeColorText = settings.getInt("themeColorText", -1);
-        int themeColorBg = settings.getInt("themeColorBg", -1);
-
-        if (themeColorHeader != -1) {
-
-            if (themeColorText == -1)
-                themeColorText = getContrastColor(themeColorHeader);
-
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setNavigationBarColor(themeColorHeader);
-                getWindow().setStatusBarColor(themeColorHeader);
-                getWindow().setTitleColor(getContrastColor(themeColorHeader));
-            }
-
-            mToolbar.setBackgroundColor(themeColorHeader);
-            mToolbar.setTitleTextColor(getContrastColor(themeColorHeader));
-
-            mTabLayout.setBackgroundColor(themeColorHeader);
-            mTabLayout.setTabTextColors(themeColorText, themeColorText);
-
-            mFab.setBackgroundColor(themeColorHeader);
-
-        }
-
-        if (themeColorBg != -1) {
-            if (mConversationList != null && mConversationList.getView() != null)
-                mConversationList.getView().setBackgroundColor(themeColorBg);
-
-            if (mContactList != null && mContactList.getView() != null)
-                mContactList.getView().setBackgroundColor(themeColorBg);
-
-            if (mMoreFragment != null && mMoreFragment.getView() != null)
-                mMoreFragment.getView().setBackgroundColor(themeColorBg);
-
-            if (mAccountFragment != null && mAccountFragment.getView() != null)
-                mAccountFragment.getView().setBackgroundColor(themeColorBg);
-        }
-
-    }
-
-    public static int getContrastColor(int colorIn) {
-        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
-        return y >= 128 ? Color.BLACK : Color.WHITE;
-    }
-
+//    public static int getContrastColor(int colorIn) {
+//        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
+//        return y >= 128 ? Color.BLACK : Color.WHITE;
+//    }
+//
     private void checkCustomFont() {
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

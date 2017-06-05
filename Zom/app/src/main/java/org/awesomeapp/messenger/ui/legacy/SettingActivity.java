@@ -36,7 +36,6 @@ import android.preference.PreferenceManager;
 
 import org.awesomeapp.messenger.ImApp;
 import org.awesomeapp.messenger.Preferences;
-import org.awesomeapp.messenger.ui.PanicSetupActivity;
 import org.awesomeapp.messenger.util.Languages;
 
 import java.util.ArrayList;
@@ -53,51 +52,51 @@ public class SettingActivity extends PreferenceActivity {
     private PackageManager pm;
     private String currentLanguage;
     ListPreference mOtrMode;
-    ListPreference mPanicTriggerApp;
-    Preference mPanicConfig;
+//    ListPreference mPanicTriggerApp;
+//    Preference mPanicConfig;
     ListPreference mLanguage;
     CheckBoxPreference mLinkifyOnTor;
     CheckBoxPreference mHideOfflineContacts;
-    CheckBoxPreference mDeleteUnsecuredMedia;
+//    CheckBoxPreference mDeleteUnsecuredMedia;
     CheckBoxPreference mEnableNotification;
     CheckBoxPreference mNotificationVibrate;
     CheckBoxPreference mNotificationSound;
-    CheckBoxPreference mForegroundService;
-    CheckBoxPreference mAllowScreenshot;
-    EditTextPreference mHeartbeatInterval;
+//    CheckBoxPreference mForegroundService;
+//    CheckBoxPreference mAllowScreenshot;
+//    EditTextPreference mHeartbeatInterval;
 
-    Preference mNotificationRingtone;
+//    Preference mNotificationRingtone;
 
     private void setInitialValues() {
         mOtrMode.setValue(Preferences.getOtrMode());
 
         mLinkifyOnTor.setChecked(Preferences.getLinkifyOnTor());
-        mHideOfflineContacts.setChecked(Preferences.getHideOfflineContacts());
-        mDeleteUnsecuredMedia.setChecked(Preferences.getDeleteInsecureMedia());
+//        mHideOfflineContacts.setChecked(Preferences.getHideOfflineContacts());
+//        mDeleteUnsecuredMedia.setChecked(Preferences.getDeleteInsecureMedia());
         mEnableNotification.setChecked(Preferences.isNotificationEnabled());
         mNotificationVibrate.setChecked(Preferences.getNotificationVibrate());
         mNotificationSound.setChecked(Preferences.getNotificationSound());
-        mForegroundService.setChecked(Preferences.getUseForegroundPriority());
+//        mForegroundService.setChecked(Preferences.getUseForegroundPriority());
 
-        mHeartbeatInterval.setText(String.valueOf(Preferences.getHeartbeatInterval()));
+//        mHeartbeatInterval.setText(String.valueOf(Preferences.getHeartbeatInterval()));
 
-        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
-        ArrayList<CharSequence> entryValues = new ArrayList<CharSequence>();
-        entries.add(0, getString(R.string.panic_app_none));
-        entries.add(1, getString(R.string.panic_app_default));
-        entryValues.add(0, Panic.PACKAGE_NAME_NONE);
-        entryValues.add(1, Panic.PACKAGE_NAME_DEFAULT);
+//        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
+//        ArrayList<CharSequence> entryValues = new ArrayList<CharSequence>();
+//        entries.add(0, getString(R.string.panic_app_none));
+//        entries.add(1, getString(R.string.panic_app_default));
+//        entryValues.add(0, Panic.PACKAGE_NAME_NONE);
+//        entryValues.add(1, Panic.PACKAGE_NAME_DEFAULT);
 
-        for (ResolveInfo resolveInfo : PanicResponder.resolveTriggerApps(pm)) {
-            if (resolveInfo.activityInfo == null)
-                continue;
-            entries.add(resolveInfo.activityInfo.loadLabel(pm));
-            entryValues.add(resolveInfo.activityInfo.packageName);
-        }
-        mPanicTriggerApp.setEntries(entries.toArray(new CharSequence[entries.size()]));
-        mPanicTriggerApp.setEntryValues(entryValues.toArray(new CharSequence[entryValues.size()]));
-        PanicResponder.configTriggerAppListPreference(mPanicTriggerApp,
-                R.string.panic_trigger_app_summary, R.string.panic_app_none_summary);
+//        for (ResolveInfo resolveInfo : PanicResponder.resolveTriggerApps(pm)) {
+//            if (resolveInfo.activityInfo == null)
+//                continue;
+//            entries.add(resolveInfo.activityInfo.loadLabel(pm));
+//            entryValues.add(resolveInfo.activityInfo.packageName);
+//        }
+//        mPanicTriggerApp.setEntries(entries.toArray(new CharSequence[entries.size()]));
+//        mPanicTriggerApp.setEntryValues(entryValues.toArray(new CharSequence[entryValues.size()]));
+//        PanicResponder.configTriggerAppListPreference(mPanicTriggerApp,
+//                R.string.panic_trigger_app_summary, R.string.panic_app_none_summary);
     }
 
     @Override
@@ -111,19 +110,19 @@ public class SettingActivity extends PreferenceActivity {
         mOtrMode.setEntryValues(Preferences.getOtrModeValues());
         mOtrMode.setDefaultValue(Preferences.DEFAULT_OTR_MODE);
 
-        mAllowScreenshot = (CheckBoxPreference)findPreference("prefBlockScreenshots");
+//        mAllowScreenshot = (CheckBoxPreference)findPreference("prefBlockScreenshots");
 
-        mPanicTriggerApp = (ListPreference) findPreference("pref_panic_trigger_app");
-        mPanicConfig = (Preference) findPreference("pref_panic_config");
+//        mPanicTriggerApp = (ListPreference) findPreference("pref_panic_trigger_app");
+//        mPanicConfig = (Preference) findPreference("pref_panic_config");
         mLanguage = (ListPreference) findPreference("pref_language");
         mLinkifyOnTor = (CheckBoxPreference) findPreference("pref_linkify_on_tor");
         mHideOfflineContacts = (CheckBoxPreference) findPreference("pref_hide_offline_contacts");
-        mDeleteUnsecuredMedia = (CheckBoxPreference) findPreference("pref_delete_unsecured_media");
+//        mDeleteUnsecuredMedia = (CheckBoxPreference) findPreference("pref_delete_unsecured_media");
         mEnableNotification = (CheckBoxPreference) findPreference("pref_enable_notification");
         mNotificationVibrate = (CheckBoxPreference) findPreference("pref_notification_vibrate");
         mNotificationSound = (CheckBoxPreference) findPreference("pref_notification_sound");
 
-        mNotificationRingtone = findPreference("pref_notification_ringtone");
+//        mNotificationRingtone = findPreference("pref_notification_ringtone");
 
 
 //        Languages languages = Languages.get(this);
@@ -141,78 +140,78 @@ public class SettingActivity extends PreferenceActivity {
 //            }
 //        });
 
-        mAllowScreenshot.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                setResult(RESULT_OK);
-                return true;
-            }
-        });
+//        mAllowScreenshot.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            @Override
+//            public boolean onPreferenceChange(Preference preference, Object o) {
+//                setResult(RESULT_OK);
+//                return true;
+//            }
+//        });
 
-        mPanicTriggerApp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                String packageName = (String) newValue;
-                PanicResponder.setTriggerPackageName(SettingActivity.this, packageName);
-                PanicResponder.configTriggerAppListPreference(mPanicTriggerApp,
-                        R.string.panic_trigger_app_summary, R.string.panic_app_none_summary);
-                return true;
-            }
-        });
+//        mPanicTriggerApp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            @Override
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                String packageName = (String) newValue;
+//                PanicResponder.setTriggerPackageName(SettingActivity.this, packageName);
+//                PanicResponder.configTriggerAppListPreference(mPanicTriggerApp,
+//                        R.string.panic_trigger_app_summary, R.string.panic_app_none_summary);
+//                return true;
+//            }
+//        });
+//
+//        mPanicConfig.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+//            @Override
+//            public boolean onPreferenceClick(Preference preference) {
+//                Intent intent = new Intent(SettingActivity.this, PanicSetupActivity.class);
+//                startActivity(intent);
+//                return true;
+//            }
+//        });
 
-        mPanicConfig.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent(SettingActivity.this, PanicSetupActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
+//        findPreference("pref_color_reset").setOnPreferenceClickListener(new OnPreferenceClickListener() {
+//            @Override
+//            public boolean onPreferenceClick(Preference preference) {
+//                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this);
+//
+//                SharedPreferences.Editor pEdit = settings.edit();
+//                pEdit.remove("themeColorBg");
+//                pEdit.remove("themeColorText");
+//                pEdit.remove("themeColor");
+//                pEdit.commit();
+//                setResult(RESULT_OK);
+//                finish();
+//                return true;
+//            }
+//        });
 
-        findPreference("pref_color_reset").setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this);
+//        mNotificationRingtone.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+//
+//            @Override
+//            public boolean onPreferenceClick(Preference arg0) {
+//
+//                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
+//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.notification_ringtone_title));
+//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Preferences.getNotificationRingtoneUri());
+//                startActivityForResult(intent, CHOOSE_RINGTONE);
+//                return true;
+//            }
+//
+//        });
 
-                SharedPreferences.Editor pEdit = settings.edit();
-                pEdit.remove("themeColorBg");
-                pEdit.remove("themeColorText");
-                pEdit.remove("themeColor");
-                pEdit.commit();
-                setResult(RESULT_OK);
-                finish();
-                return true;
-            }
-        });
-
-        mNotificationRingtone.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-            @Override
-            public boolean onPreferenceClick(Preference arg0) {
-
-                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.notification_ringtone_title));
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Preferences.getNotificationRingtoneUri());
-                startActivityForResult(intent, CHOOSE_RINGTONE);
-                return true;
-            }
-
-        });
-
-        mForegroundService = (CheckBoxPreference) findPreference("pref_foreground_enable");
-        mHeartbeatInterval = (EditTextPreference) findPreference("pref_heartbeat_interval");
+//        mForegroundService = (CheckBoxPreference) findPreference("pref_foreground_enable");
+//        mHeartbeatInterval = (EditTextPreference) findPreference("pref_heartbeat_interval");
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_RINGTONE) {
-            Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-            Preferences.setNotificationRingtone(uri);
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_RINGTONE) {
+//            Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+//            Preferences.setNotificationRingtone(uri);
+//        }
+//
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
 
     @Override
     protected void onResume() {

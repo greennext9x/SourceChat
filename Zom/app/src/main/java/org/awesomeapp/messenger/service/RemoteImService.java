@@ -259,7 +259,7 @@ public class RemoteImService extends Service implements OtrEngineListener, ImSer
         // Have the heartbeat start autoLogin, unless onStart turns this off
         mNeedCheckAutoLogin = true;
 
-        HeartbeatService.startBeating(getApplicationContext());
+//        HeartbeatService.startBeating(getApplicationContext());
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         startForeground(notifyId, getForegroundNotification());
@@ -302,25 +302,25 @@ public class RemoteImService extends Service implements OtrEngineListener, ImSer
 
     }
 
-    public void sendHeartbeat() {
-        Debug.onHeartbeat();
-        try {
-            if (mNeedCheckAutoLogin && mNetworkState != NetworkConnectivityReceiver.State.NOT_CONNECTED) {
-                debug("autoLogin from heartbeat");
-                mNeedCheckAutoLogin = !autoLogin();;
-            }
-
-            mHeartbeatInterval = Preferences.getHeartbeatInterval();
-            debug("heartbeat interval: " + mHeartbeatInterval);
-
-            for (ImConnectionAdapter conn : mConnections.values())
-            {
-                conn.sendHeartbeat();
-            }
-        } finally {
-            return;
-        }
-    }
+//    public void sendHeartbeat() {
+//        Debug.onHeartbeat();
+//        try {
+//            if (mNeedCheckAutoLogin && mNetworkState != NetworkConnectivityReceiver.State.NOT_CONNECTED) {
+//                debug("autoLogin from heartbeat");
+//                mNeedCheckAutoLogin = !autoLogin();;
+//            }
+//
+//            mHeartbeatInterval = Preferences.getHeartbeatInterval();
+//            debug("heartbeat interval: " + mHeartbeatInterval);
+//
+//            for (ImConnectionAdapter conn : mConnections.values())
+//            {
+//                conn.sendHeartbeat();
+//            }
+//        } finally {
+//            return;
+//        }
+//    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -335,43 +335,43 @@ public class RemoteImService extends Service implements OtrEngineListener, ImSer
                 mNeedCheckAutoLogin = intent.getBooleanExtra(ImServiceConstants.EXTRA_CHECK_AUTO_LOGIN,
                         false);
 
-            if (HeartbeatService.HEARTBEAT_ACTION.equals(intent.getAction())) {
-              //  Log.d(TAG, "HEARTBEAT");
-                if (!mWakeLock.isHeld())
-                {
-                    try {
-                        mWakeLock.acquire();
-                        sendHeartbeat();
-                    } finally {
-                        mWakeLock.release();
-                    }
-                }
-                return START_REDELIVER_INTENT;
-            }
+//            if (HeartbeatService.HEARTBEAT_ACTION.equals(intent.getAction())) {
+//              //  Log.d(TAG, "HEARTBEAT");
+//                if (!mWakeLock.isHeld())
+//                {
+//                    try {
+//                        mWakeLock.acquire();
+//                        sendHeartbeat();
+//                    } finally {
+//                        mWakeLock.release();
+//                    }
+//                }
+//                return START_REDELIVER_INTENT;
+//            }
 
-            if (HeartbeatService.NETWORK_STATE_ACTION.equals(intent.getAction())) {
-                NetworkInfo networkInfo = (NetworkInfo) intent
-                        .getParcelableExtra(HeartbeatService.NETWORK_INFO_EXTRA);
-                NetworkConnectivityReceiver.State networkState = State.values()[intent.getIntExtra(HeartbeatService.NETWORK_STATE_EXTRA, 0)];
-
-                if (!mWakeLock.isHeld())
-                {
-                    try {
-                        mWakeLock.acquire();
-                        networkStateChanged(networkInfo, networkState);
-
-                    } finally {
-                        mWakeLock.release();
-                    }
-                }
-                else
-                {
-                    networkStateChanged(networkInfo, networkState);
-
-                }
-                
-                return START_REDELIVER_INTENT;
-            }
+//            if (HeartbeatService.NETWORK_STATE_ACTION.equals(intent.getAction())) {
+//                NetworkInfo networkInfo = (NetworkInfo) intent
+//                        .getParcelableExtra(HeartbeatService.NETWORK_INFO_EXTRA);
+//                NetworkConnectivityReceiver.State networkState = State.values()[intent.getIntExtra(HeartbeatService.NETWORK_STATE_EXTRA, 0)];
+//
+//                if (!mWakeLock.isHeld())
+//                {
+//                    try {
+//                        mWakeLock.acquire();
+//                        networkStateChanged(networkInfo, networkState);
+//
+//                    } finally {
+//                        mWakeLock.release();
+//                    }
+//                }
+//                else
+//                {
+//                    networkStateChanged(networkInfo, networkState);
+//
+//                }
+//
+//                return START_REDELIVER_INTENT;
+//            }
 
             if (ImServiceConstants.EXTRA_CHECK_SHUTDOWN.equals((intent.getAction())))
             {
@@ -519,7 +519,7 @@ public class RemoteImService extends Service implements OtrEngineListener, ImSer
     {
         Debug.recordTrail(this, SERVICE_DESTROY_TRAIL_TAG, new Date());
 
-        HeartbeatService.stopBeating(getApplicationContext());
+//        HeartbeatService.stopBeating(getApplicationContext());
 
         Log.w(TAG, "ImService stopped.");
         for (ImConnectionAdapter conn : mConnections.values()) {
@@ -666,9 +666,9 @@ public class RemoteImService extends Service implements OtrEngineListener, ImSer
         mConnections.remove(connection);
         mConnectionsByUser.remove(connection.getLoginUser());
 
-        if (mConnections.size() == 0)
-            if (Preferences.getUseForegroundPriority())
-                stopForeground(true);
+//        if (mConnections.size() == 0)
+//            if (Preferences.getUseForegroundPriority())
+//                stopForeground(true);
     }
 
     boolean isNetworkAvailable ()
