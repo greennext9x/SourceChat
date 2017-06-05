@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:filterTouchesWhenObscured="true"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:id="@+id/btnOpenGroups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <org.awesomeapp.messenger.ui.CircleColorImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:src="@drawable/ic_group_add_white_36dp"
+                app:circleColor="@android:color/holo_green_light" />
+
+            <org.ironrabbit.type.CustomTypefaceTextView
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="6dp"
+                android:gravity="center_vertical"
+                android:text="@string/create_group"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+
+                android:textColor="?contactTextSecondary" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

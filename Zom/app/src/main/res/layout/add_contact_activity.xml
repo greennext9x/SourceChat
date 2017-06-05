@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <org.ironrabbit.type.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/header_got_invited"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?colorPrimary" />
+
+    <org.ironrabbit.type.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_tap_invite"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="?colorPrimary"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"></LinearLayout>
+
+    <org.ironrabbit.type.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:text="@string/advanced"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+
+        />
+
+    <org.ironrabbit.type.CustomTypefaceTextView
+        android:id="@+id/input_contact_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_contact_label" />
+
+    <org.ironrabbit.type.CustomTypefaceEditText
+        android:id="@+id/email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:imeOptions="actionSend"
+        android:inputType="textEmailAddress"
+        android:nextFocusLeft="@id/email"
+
+        android:nextFocusUp="@id/email"
+        android:windowSoftInputMode="stateHidden" />
+
+
+</LinearLayout>

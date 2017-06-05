@@ -1,0 +1,51 @@
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        maven {
+
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath files('libs/gradle-witness.jar')
+    }
+}
+
+
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+
+    }
+    project.ext {
+        // these are common variables used in */build.gradle
+        buildToolsVersion="25.0.0"
+        compileSdkVersion=25
+        minSdkVersion=15
+        targetSdkVersion=25
+        appcompat='com.android.support:appcompat-v7:25.2.0'
+    }
+}
+
+/**
+ * Improve build server performance by allowing disabling of pre-dexing
+ * (see http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.)
+ */
+project.ext.preDexLibs = !project.hasProperty('disablePreDex')
+
+subprojects {
+  project.plugins.whenPluginAdded { plugin ->
+    if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+      project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+    } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
+      project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+    }
+  }
+}

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_weight="9"
+            android:divider="#00000000"
+            android:dividerHeight="6dp"
+            android:paddingBottom="48dp"
+            android:paddingTop="0dp"
+            android:scrollbars="vertical"
+            android:stackFromBottom="true"
+            android:transcriptMode="normal"
+            app:layout_behavior="org.awesomeapp.messenger.ui.widgets.PatchedScrollingViewBehavior" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:id="@+id/attachPanel"
+                android:layout_width="match_parent"
+                android:layout_height="96dip"
+                android:layout_gravity="center_vertical"
+                android:background="@color/background_light"
+                android:fillViewport="true"
+                android:gravity="center_vertical"
+                android:measureAllChildren="false"
+                android:scrollbars="none"
+                android:visibility="invisible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal">
+
+
+                    <org.awesomeapp.messenger.ui.CircleColorImageView
+                        android:id="@+id/btnAttachPicture"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="3dp"
+
+                        android:padding="6dp"
+                        android:src="@drawable/ic_insert_photo_white_36dp"
+                        app:circleColor="@android:color/holo_green_light" />
+
+                    <org.awesomeapp.messenger.ui.CircleColorImageView
+                        android:id="@+id/btnTakePicture"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="3dp"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_photo_camera_white_36dp"
+                        app:circleColor="@android:color/holo_blue_light"
+
+                        />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <org.ironrabbit.type.CustomTypefaceTextView
+                android:id="@+id/tvTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/history"
+                android:layout_marginLeft="12dp"
+                android:background="@android:color/transparent"
+                android:text="..."
+                android:textColor="?messageTextPrimary"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/inputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/tvTyping"
+                android:layout_weight="2"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <ImageButton
+                    android:id="@+id/btnAttach"
+                    android:layout_width="28dip"
+                    android:layout_height="28dip"
+                    android:layout_margin="6dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_add_circle_outline_black_36dp" />
+
+                <org.ironrabbit.type.CustomTypefaceEditText
+                    android:id="@+id/composeMessage"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="@string/compose_hint"
+                    android:imeOptions="actionSend|flagNoEnterAction"
+                    android:inputType="textShortMessage|textAutoCorrect|textCapSentences|textMultiLine|textImeMultiLine"
+                    android:padding="2dp"
+                    android:textColor="?messageTextPrimary" />
+
+                <ImageButton
+                    android:id="@+id/btnSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ad_selectable_background"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingBottom="1sp"
+                    android:paddingLeft="3sp"
+                    android:paddingRight="3sp"
+                    android:paddingTop="1sp"
+                    android:src="@drawable/ic_send_holo_light"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/invitationPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:id="@+id/txtInvitation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invitation_prompt" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <org.ironrabbit.type.CustomTypefaceTextView
+                        android:id="@+id/btnAccept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accept_invitation" />
+
+                    <org.ironrabbit.type.CustomTypefaceTextView
+                        android:id="@+id/btnDecline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dip"
+                        android:text="@string/decline_invitation" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:id="@+id/warningText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="3sp"
+                    android:text="@string/disconnected_warning"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#aaff0000"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flipViewAdvanced"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:paddingTop="40dp"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/viewCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <org.ironrabbit.type.CustomTypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/create_id"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+
+            />
+
+        <org.ironrabbit.type.CustomTypefaceEditText
+            android:id="@+id/edtNameAdvanced"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:autoLink="none"
+            android:background="@drawable/rounded_rect"
+            android:cursorVisible="true"
+            android:gravity="center_horizontal"
+            android:inputType="textEmailAddress"
+            android:padding="6dp"
+            android:selectAllOnFocus="true"
+            android:textAlignment="center"
+            android:textColor="?messageTextPrimary"
+            android:textSize="24dp"
+
+            />
+
+        <org.ironrabbit.type.CustomTypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="@string/onboarding_generate"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <org.ironrabbit.type.CustomTypefaceEditText
+            android:id="@+id/edtNewPass"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_rect"
+            android:gravity="center"
+            android:hint="@string/account_setup_password"
+            android:inputType="textPassword"
+            android:padding="6dp"
+            android:selectAllOnFocus="true"
+            android:textColor="?messageTextPrimary"
+
+            />
+
+        <org.ironrabbit.type.CustomTypefaceEditText
+            android:id="@+id/edtNewPassConfirm"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_rect"
+            android:gravity="center"
+            android:hint="@string/account_setup_password_confirm"
+            android:inputType="textPassword"
+            android:padding="6dp"
+            android:selectAllOnFocus="true"
+            android:textColor="?messageTextPrimary"
+
+            />
+
+        <org.ironrabbit.type.CustomTypefaceEditText
+            android:id="@+id/spinnerDomains"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_rect"
+            android:gravity="center"
+            android:hint="@string/select_domain_new_account"
+            android:padding="6dp"
+            android:textColor="?messageTextPrimary"
+
+            />
+
+        <org.ironrabbit.type.CustomTypefaceTextView
+            android:id="@+id/statusError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text=""
+            android:textColor="?colorPrimary"
+            android:textSize="16dp" />
+
+        <org.ironrabbit.type.CustomTypefaceButton
+            android:id="@+id/btnNewRegister"
+            style="@android:style/Widget.Button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="3dip"
+            android:background="@drawable/rounded_rect_primary"
+            android:gravity="center"
+            android:text="@string/btn_create_new_account"
+            android:textColor="@android:color/white"
+
+            />
+    </LinearLayout>
+</ScrollView>

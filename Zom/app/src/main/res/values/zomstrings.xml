@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name_zom">Zom</string> 
+  <string name="create_an_account">Create an Account</string>
+  <string name="create_id">Create a Zom ID</string>
+  <string name="advanced">Advanced</string>
+  <string name="account_congrats">Congratulations, you are ready to Zom!</string>
+  <string name="account_congrats_details">You can find your password and account details on your profile page.</string>
+  <string name="invite_friends">Add Friends!</string>
+  <string name="invite_sms">SMS</string> 
+  <string name="invite_share">Share</string>
+  <string name="invite_scan_qr">Scan</string>
+  <string name="sign_in_message">Sign into an existing account</string>
+  <string name="invite_action">Invite</string>
+  <string name="friends">Friends</string>
+  <string name="add_friends">Add Friends</string>
+  <string name="search_by_id">Search by ID</string>
+  <string name="invite_accepted">You are now friends on Zom</string>
+  <string name="chats">Chats</string>
+  <string name="choose_friend">Choose a Friend</string>
+  <string name="send_message">Send a message</string>
+  <string name="push_to_talk">Push to talk</string>
+  <string name="recording_release">Recording… Release to send</string>
+  <string name="recording_delete">Recording… Release to delete</string>
+  <string name="swipe_up_delete">Swipe up to delete</string>
+  <string name="create_group">Create a Group</string>
+  <string name="members">Members</string>
+  <string name="group_name">Group Name</string>
+  <string name="search_history">Search History</string>
+  <string name="photo_gallery">Photo Stream</string>
+  <string name="me_title">Me</string>
+  <string name="accounts">My Accounts</string>
+  <string name="select_avatar">Select or Create an Avatar</string>
+  <string name="delete_account">Delete Account</string>
+  <string name="add_account_action">Add Account</string>
+  <string name="choose_photos">Choose from Photos</string>
+  <string name="choose_language">Switch Language</string>
+  <string name="welcome_to_zom">WELCOME TO ZOM</string>
+  <string name="onboarding_generate">Create a Zom ID and we will generate a secure password for you.</string>
+  <string name="grant_perms">You must grant permission for Zom to use the camera</string>
+
+  <string name="menu_refresh">Refresh Session</string>
+
+  <string name="action_archived">Archived</string>
+  <string name="action_verified">Verified</string>
+
+  <string name="action_theme">Change Theme</string>
+  <string name="action_stickers">Sticker Share</string>
+
+  <string name="pref_block_screenshots_title">Block Screenshots</string>
+  <string name="pref_block_screenshots_summary">Block attempts for other apps to take screenshots of this app</string>
+
+  <string name="pref_enable_tibetan_dictionary_title">Enable Tibetan Dictionary</string>
+  <string name="pref_enable_tibetan_dictionary_summary">If present, suggest Tibetan matching words from the Monlam Tibetan Dictionary app</string>
+
+  <string name="color_category_title">Custom Colors</string>
+  <string name="color_reset_title">Reset Colors</string>
+  <string name="color_reset_summary">Reset colors to default values</string>
+
+  <string name="color_header_title">Header Colors</string>
+  <string name="color_header_summary">Color of headers, actionbars and toolbars</string>
+
+  <string name="color_text_title">Text Color</string>
+  <string name="color_text_summary">Color of text in messages and lists</string>
+
+
+  <string name="color_bg_title">Background Color</string>
+  <string name="color_bg_summary">Color of chat backgrounds and lists</string>
+
+  <string name="menu_approve_friend">Approve Friend?</string>
+
+  <string name="header_got_invited">GOT INVITED?</string>
+  <string name="action_tap_invite">Tap the Zom invite link from your friend or scan their QR code now</string>
+
+  <string name="action_invite_new_friends">Send an invite link to your friends via SMS or SHARE through any app</string>
+
+  <string name="not_verified">Please verify your friend\'s Secure Identity to be safe!</string>
+
+  <string name="security_code">Secure Identity</string>
+
+  <string name="reset_passphrase">Reset Lock</string>
+
+  <string name="action_services">Zom Services</string>
+
+
+
+</resources>
