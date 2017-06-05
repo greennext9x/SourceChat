@@ -46,7 +46,6 @@ public class SignoutActivity extends ThemeableActivity {
         Uri data = intent.getData();
         if (data == null) {
             Log.e(ImApp.LOG_TAG, "Need account data to sign in");
-            //finish();
             return;
         }
 
@@ -100,9 +99,6 @@ public class SignoutActivity extends ThemeableActivity {
         } catch (RemoteException ex) {
             Log.e(ImApp.LOG_TAG, "signout: caught ", ex);
         } finally {
-            //finish();
-
-         //   Toast.makeText(this, getString(R.string.signed_out_prompt), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -182,11 +182,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
     static final void log(String log) {
         Log.d(LOG_TAG, log);
     }
-/**
-    protected void attachBaseContext(Context base) {
-                super.attachBaseContext(base);
-                MultiDex.install(this);
-            }*/
 
     @Override
     public ContentResolver getContentResolver() {
@@ -202,8 +197,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
         super.onCreate();
 
         Preferences.setup(this);
-//        Languages.setup(MainActivity.class, R.string.use_system_default);
-//        Languages.setLanguage(this, Preferences.getLanguage(), false);
 
         sImApp = this;
 
@@ -215,16 +208,12 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
         SQLiteDatabase.loadLibs(getApplicationContext());
         VirtualFileSystem.get().isMounted();
 
-       // mConnections = new HashMap<Long, IImConnection>();
         mApplicationContext = this;
-
-        //initTrustManager();
 
         mBroadcaster = new Broadcaster();
 
         setAppTheme(null,null);
 
-        // ChatSecure-Push needs to do initial setup as soon as Cacheword is ready
         mCacheWord = new CacheWordHandler(this, this);
         mCacheWord.connectToService();
 
@@ -294,21 +283,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
         }
     }
 
-//    public static void resetLanguage(Activity activity, String language) {
-//        if (!TextUtils.equals(language, Preferences.getLanguage())) {
-//            /* Set the preference after setting the locale in case something goes
-//             * wrong. If setting the locale causes an Exception, it should not be set in
-//             * the preferences, otherwise this will be stuck in a crash loop. */
-//            Languages.setLanguage(activity, language, true);
-//            Preferences.setLanguage(language);
-//            Languages.forceChangeLanguage(activity);
-//
-//            CustomTypefaceManager.loadFromAssets(activity,language.equals("bo"));
-//
-//
-//        }
-//    }
-
     public synchronized void startImServiceIfNeed() {
         startImServiceIfNeed(false);
     }
@@ -320,7 +294,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
         if (mImService == null) {
 
             Intent serviceIntent = new Intent(this, RemoteImService.class);
-//        serviceIntent.putExtra(ImServiceConstants.EXTRA_CHECK_AUTO_LOGIN, isBoot);
 
             mApplicationContext.startService(serviceIntent);
 
@@ -402,19 +375,11 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
             }
             Message msg = Message.obtain(null, EVENT_SERVICE_CONNECTED);
             mBroadcaster.broadcast(msg);
-
-            /*
-            if (mKillServerOnStart)
-            {
-                forceStopImService();
-            }*/
         }
 
         public void onServiceDisconnected(ComponentName className) {
             if (Log.isLoggable(LOG_TAG, Log.DEBUG))
                 log("service disconnected");
-
-           // mConnections.clear();
             mImService = null;
         }
     };
@@ -647,41 +612,10 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
         }
     }
 
-    /**
-    private void fetchActiveConnections() {
-        if (mImService != null)
-        {
-            try {
-                // register the listener before fetch so that we won't miss any connection.
-                mImService.addConnectionCreatedListener(mConnCreationListener);
-                synchronized (mConnections) {
-                    for (IBinder binder : (List<IBinder>) mImService.getActiveConnections()) {
-                        IImConnection conn = IImConnection.Stub.asInterface(binder);
-                        long providerId = conn.getProviderId();
-                        if (!mConnections.containsKey(providerId)) {
-                            mConnections.put(providerId, conn);
-                            conn.registerConnectionListener(mConnectionListener);
-                     }
-                    }
-                }
-            } catch (RemoteException e) {
-                Log.e(LOG_TAG, "fetching active connections", e);
-            }
-        }
-    }*/
-
     private final IConnectionCreationListener mConnCreationListener = new IConnectionCreationListener.Stub() {
         public void onConnectionCreated(IImConnection conn) throws RemoteException {
             long providerId = conn.getProviderId();
              conn.registerConnectionListener(mConnectionListener);
-
-            /**
-            synchronized (mConnections) {
-                if (!mConnections.containsKey(providerId)) {
-                    mConnections.put(providerId, conn);
-                    conn.registerConnectionListener(mConnectionListener);
-                }
-            }*/
             broadcastConnEvent(EVENT_CONNECTION_CREATED, providerId, null);
         }
     };
@@ -926,9 +860,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
-//        Languages.setLanguage(this, Preferences.getLanguage(),true);
-
     }
 
     public void setupChatSecurePush() {

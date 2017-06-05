@@ -65,10 +65,6 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
     private SignInHelper mSignInHelper;
 
     private boolean mDoSignIn = true;
-
-//    public static final String ACTION_LOCK_APP = "actionLockApp";
-
-//    private static String EXTRA_DO_LOCK = "doLock";
     private static String EXTRA_DO_SIGNIN = "doSignIn";
     public static String EXTRA_ORIGINAL_INTENT = "originalIntent";
 
@@ -111,39 +107,6 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
         mHandler = new MyHandler(this);
 
         Intent intent = getIntent();
-
-//        mDoLock = ACTION_LOCK_APP.equals(intent.getAction());
-
-//        if (mDoLock) {
-//            shutdownAndLock(this);
-//
-//            return;
-//        } else if (Panic.isTriggerIntent(intent)) {
-//            if (PanicResponder.receivedTriggerFromConnectedApp(this)) {
-//                if (Preferences.uninstallApp()) {
-//                    // lock and delete first for rapid response, then uninstall
-//                    shutdownAndLock(this);
-//                    PanicResponder.deleteAllAppData(this);
-//                    Intent uninstall = new Intent(Intent.ACTION_DELETE);
-//                    uninstall.setData(Uri.parse("package:" + getPackageName()));
-//                    startActivity(uninstall);
-//                } else if (Preferences.clearAppData()) {
-//                    // lock first for rapid response, then delete
-//                    shutdownAndLock(this);
-//                    PanicResponder.deleteAllAppData(this);
-//                } else if (Preferences.lockApp()) {
-//                    shutdownAndLock(this);
-//                }
-//            } else if (PanicResponder.shouldUseDefaultResponseToTrigger(this)) {
-//                if (Preferences.lockApp()) {
-//                    shutdownAndLock(this);
-//                }
-//            }
-//            // this Intent should not trigger any more processing
-//            finish();
-//            return;
-//        }
-
         mSignInHelper = new SignInHelper(this, mHandler);
         mDoSignIn = intent.getBooleanExtra(EXTRA_DO_SIGNIN, true);
 
@@ -169,12 +132,6 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
             Uri uri = Imps.Provider.CONTENT_URI_WITH_ACCOUNT;
 
             Builder builder = uri.buildUpon();
-            /**
-            if (pKey != null)
-                builder.appendQueryParameter(ImApp.CACHEWORD_PASSWORD_KEY, pKey);
-            if (!allowCreate)
-                builder = builder.appendQueryParameter(ImApp.NO_CREATE_KEY, "1");
-             */
             uri = builder.build();
 
             mProviderCursor = managedQuery(uri,
@@ -256,12 +213,7 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
               //  imUrlIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 if (intent.getExtras() != null)
                     imUrlIntent.putExtras(intent.getExtras());
-
                 startActivityForResult(imUrlIntent, REQUEST_HANDLE_LINK);
-
-           // setIntent(null);
-            //finish();
-
         }
         else if (countAvailable > 0)
         {
@@ -293,9 +245,6 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
 
         boolean isAccountEditable = mProviderCursor.getInt(ACTIVE_ACCOUNT_LOCKED) == 0;
         if (isAccountEditable && mProviderCursor.isNull(ACTIVE_ACCOUNT_PW_COLUMN)) {
-            // no password, edit the account
-            //if (Log.isLoggable(TAG, Log.d))
-              //  Log.i(TAG, "no pw for account " + accountId);
             Intent intent = getEditAccountIntent();
             startActivity(intent);
             finish();
@@ -408,16 +357,6 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
         finish();
     }
 
-    
-//    void showLockScreen() {
-//        Intent intent = new Intent(this, LockScreenActivity.class);
-//        Intent returnIntent = getIntent();
-//        returnIntent.putExtra(EXTRA_DO_SIGNIN, mDoSignIn);
-//        intent.putExtra(EXTRA_ORIGINAL_INTENT, returnIntent);
-//        startActivityForResult(intent, REQUEST_LOCK_SCREEN);
-//
-//    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -459,14 +398,6 @@ public class RouterActivity extends ThemeableActivity implements ICacheWordSubsc
         mApp.maybeInit(this);
 
     }
-
-//    public void shutdownAndLock(Context context) {
-//
-//        mApp.forceStopImService();
-//
-//        finish();
-//
-//    }
 
     private boolean openEncryptedStores(byte[] key) {
 

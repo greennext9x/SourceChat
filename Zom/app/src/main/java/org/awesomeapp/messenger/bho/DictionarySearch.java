@@ -22,10 +22,7 @@ import im.zom.messenger.R;
  */
 public class DictionarySearch {
 
-
-    //	public final static String DEFAULT_FONT = "Jomolhari-alpha3c-0605331.ttf";
     public final static String DEFAULT_FONT = "monlamuniouchan2.ttf";
-    //"Monlam Uni Sans Serif.ttf";//"monlamuniouchan3.ttf";//"monlambodyig.ttf";
 
 
     public final static String COLUMN_ID = "_id";

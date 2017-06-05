@@ -296,7 +296,6 @@ public class MessageListItem extends FrameLayout {
         {
 
             mHolder.mTextViewForTimestamp.setText("");
-            //mHolder.mTextViewForTimestamp.setVisibility(View.GONE);
 
         }
         if (linkify)
@@ -357,26 +356,6 @@ public class MessageListItem extends FrameLayout {
         return true;
 
     }
-
-//    private void showAudioPlayer (String mimeType, Uri mediaUri, int id, MessageViewHolder holder) throws Exception
-//    {
-//        /* Guess the MIME type in case we received a file that we can display or play*/
-//        if (TextUtils.isEmpty(mimeType) || mimeType.startsWith("application")) {
-//            String guessed = URLConnection.guessContentTypeFromName(mediaUri.toString());
-//            if (!TextUtils.isEmpty(guessed)) {
-//                if (TextUtils.equals(guessed, "video/3gpp"))
-//                    mimeType = "audio/3gpp";
-//                else
-//                    mimeType = guessed;
-//            }
-//        }
-//
-//        holder.setOnClickListenerMediaThumbnail(mimeType, mediaUri);
-//        mHolder.mTextViewForMessages.setText("");
-//        mAudioPlayer = new AudioPlayer(getContext(), mediaUri.getPath(), mimeType, mHolder.mVisualizerView,mHolder.mTextViewForMessages);
-//        holder.mContainer.setBackgroundResource(android.R.color.transparent);
-//    }
-
     protected String convertMediaUriToPath(Uri uri) {
         String path = null;
 
@@ -413,24 +392,6 @@ public class MessageListItem extends FrameLayout {
                 context.startActivity(intent);
             }
         }
-//        else if (mimeType.startsWith("audio")) {
-//
-//                if (mAudioPlayer.getDuration() != -1)
-//                    mHolder.mTextViewForMessages.setText((mAudioPlayer.getDuration()/1000) + "secs");
-//
-//                if (mAudioPlayer.isPlaying())
-//                {
-//                    mHolder.mAudioButton.setImageResource(R.drawable.media_audio_play);
-//                    mAudioPlayer.pause();
-//                }
-//                else
-//                {
-//                    mHolder.mAudioButton.setImageResource(R.drawable.media_audio_pause);
-//                    mAudioPlayer.play();
-//                }
-//
-//
-//        }
         else
         {
             exportMediaFile();
@@ -579,9 +540,7 @@ public class MessageListItem extends FrameLayout {
         applyStyleColors();
 
         mHolder.mTextViewForMessages.setVisibility(View.VISIBLE);
-//        mHolder.mAudioContainer.setVisibility(View.GONE);
         mHolder.mMediaContainer.setVisibility(View.GONE);
-//        mHolder.mAudioButton.setImageResource(R.drawable.media_audio_play);
 
         mHolder.resetOnClickListenerMediaThumbnail();
 
@@ -665,9 +624,6 @@ public class MessageListItem extends FrameLayout {
             mHolder.mTextViewForMessages.setText(new SpannableString(lastMessage));
         }
 
-        //if (isSelected())
-          //  mHolder.mContainer.setBackgroundColor(getResources().getColor(R.color.holo_blue_bright));
-
         if (date != null)
         {
 
@@ -707,13 +663,9 @@ public class MessageListItem extends FrameLayout {
             {
                 mHolder.mAvatar.setVisibility(View.VISIBLE);
                 mHolder.mAvatar.setImageDrawable(avatar);
-
-                //setAvatarBorder(presenceStatus, avatar);
-
             }
             else
             {
-              //  int color = getAvatarBorder(presenceStatus);
                 int padding = 24;
 
                 if (nickname.length() > 0) {
@@ -725,29 +677,6 @@ public class MessageListItem extends FrameLayout {
             }
         }
     }
-
-    /**
-    public int getAvatarBorder(int status) {
-        switch (status) {
-        case Presence.AVAILABLE:
-            return (getResources().getColor(R.color.holo_green_light));
-
-        case Presence.IDLE:
-            return (getResources().getColor(R.color.holo_green_dark));
-        case Presence.AWAY:
-            return (getResources().getColor(R.color.holo_orange_light));
-
-        case Presence.DO_NOT_DISTURB:
-            return(getResources().getColor(R.color.holo_red_dark));
-
-        case Presence.OFFLINE:
-            return(getResources().getColor(R.color.holo_grey_dark));
-
-        default:
-        }
-
-        return Color.TRANSPARENT;
-    }**/
 
     public void bindPresenceMessage(MessageViewHolder holder, String contact, int type, Date date, boolean isGroupChat, boolean scrolling) {
 
@@ -932,38 +861,6 @@ public class MessageListItem extends FrameLayout {
             return spanText;
         }
     }
-
-    /**
-    public void setAvatarBorder(int status, RoundedAvatarDrawable avatar) {
-        switch (status) {
-        case Presence.AVAILABLE:
-            avatar.setBorderColor(getResources().getColor(R.color.holo_green_light));
-            break;
-
-        case Presence.IDLE:
-            avatar.setBorderColor(getResources().getColor(R.color.holo_green_dark));
-
-            break;
-
-        case Presence.AWAY:
-            avatar.setBorderColor(getResources().getColor(R.color.holo_orange_light));
-            break;
-
-        case Presence.DO_NOT_DISTURB:
-            avatar.setBorderColor(getResources().getColor(R.color.holo_red_dark));
-
-            break;
-
-        case Presence.OFFLINE:
-            avatar.setBorderColor(getResources().getColor(R.color.holo_grey_light));
-
-            break;
-
-
-        default:
-        }
-    }**/
-
     public void applyStyleColors ()
     {
         //not set color

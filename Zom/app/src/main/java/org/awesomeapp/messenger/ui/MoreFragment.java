@@ -62,29 +62,6 @@ public class MoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_more, container, false);
-
-
-//        View btn = view.findViewById(R.id.btnOpenGalllery);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(getActivity(),GalleryActivity.class);
-//                getActivity().startActivity(intent);
-//            }
-//        });
-//
-//        btn = view.findViewById(R.id.btnOpenServices);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                openZomServices ();
-//
-//            }
-//        });
-
-
         View btn = view.findViewById(R.id.btnOpenGroups);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,78 +71,8 @@ public class MoreFragment extends Fragment {
 
             }
         });
-
-//        btn = view.findViewById(R.id.btnOpenStickers);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getActivity(),StickerActivity.class);
-//                getActivity().startActivity(intent);
-//
-//            }
-//        });
-
-//        btn = view.findViewById(R.id.btnOpenThemes);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                showColors();
-//
-//            }
-//        });
         return view;
     }
-
-//    private void showColors ()
-//    {
-//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//
-//        int selColor = settings.getInt("themeColor",-1);
-//
-//        ColorPickerDialogBuilder
-//                .with(getContext())
-//                .setTitle("Choose color")
-//                .initialColor(selColor)
-//                .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
-//                .density(12)
-//                .lightnessSliderOnly()
-//                .setOnColorSelectedListener(new OnColorSelectedListener() {
-//                    @Override
-//                    public void onColorSelected(int selectedColor) {
-//
-//                    }
-//                })
-//                .setPositiveButton(getString(R.string.ok), new ColorPickerClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
-//
-//                        settings.edit().putInt("themeColor",selectedColor).commit();
-//
-//                        /**
-//                        int textColor = getContrastColor(selectedColor);
-//                        int bgColor = getContrastColor(textColor);
-//
-//                        settings.edit().putInt("themeColorBg",bgColor).commit();
-//                        settings.edit().putInt("themeColorText",textColor).commit();
-//                         */
-//
-//                        MainActivity activity = (MainActivity)getActivity();
-//                        activity.applyStyle();
-//
-//                    }
-//                })
-//                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                })
-//                .build()
-//                .show();
-//
-//    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -182,11 +89,4 @@ public class MoreFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-//    private void openZomServices ()
-//    {
-//        ImApp app = (ImApp)getActivity().getApplication();
-//        new AddContactAsyncTask(app.getDefaultProviderId(), app.getDefaultAccountId(), app).execute(ImApp.ZOM_SERVICES_ADDRESS, null, getString(R.string.action_services));
-//        ((MainActivity)getActivity()).startChat(app.getDefaultProviderId(),app.getDefaultAccountId(),ImApp.ZOM_SERVICES_ADDRESS, true, true);
-//    }
 }

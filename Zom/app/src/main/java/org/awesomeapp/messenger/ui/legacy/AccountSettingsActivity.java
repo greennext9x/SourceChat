@@ -109,27 +109,10 @@ public class AccountSettingsActivity extends PreferenceActivity implements
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-        /**
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.delete_account))
-           //     .setContentText("Won't be able to recover this account!")
-                .setConfirmText(getString(R.string.confirm))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        confirmDeleteAccount();
-                        sDialog.dismissWithAnimation();
-                    }
-                })
-                .show();**/
-
-        //TODO confirm delete dialog
-
     }
 
     private void confirmDeleteAccount ()
     {
-
         //need to delete
         ((ImApp)getApplication()).deleteAccount(getContentResolver(),mAccountId, mProviderId);
 
@@ -251,8 +234,6 @@ public class AccountSettingsActivity extends PreferenceActivity implements
             }
         });
     }
-    
-
 
     @Override
     protected void onResume() {
@@ -266,7 +247,6 @@ public class AccountSettingsActivity extends PreferenceActivity implements
     @Override
     protected void onPause() {
         super.onPause();
-
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
                 this);
     }

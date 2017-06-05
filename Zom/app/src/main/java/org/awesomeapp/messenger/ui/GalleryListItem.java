@@ -111,11 +111,6 @@ public class GalleryListItem extends FrameLayout {
 
 
     }
-/**
-    public void setMessageBackground (Drawable d) {
-        mHolder.mContainer.setBackgroundDrawable(d);
-    }
-*/
 
     public String getLastMessage () {
         return lastMessage.toString();
@@ -249,9 +244,6 @@ public class GalleryListItem extends FrameLayout {
         return list.size() > 0;
     }
 
-
-
-
     private String formatMessage (String body)
     {
         if (body != null)
@@ -311,13 +303,6 @@ public class GalleryListItem extends FrameLayout {
             int len = spanText.length();
 
         }
-
-     //   spanText.setSpan(new StyleSpan(Typeface.SANS_SERIF), 0, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-       // spanText.setSpan(new RelativeSizeSpan(0.8f), 0, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-    //    spanText.setSpan(new ForegroundColorSpan(R.color.soft_grey),
-      //        0, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         return spanText;
     }
 

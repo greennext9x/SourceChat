@@ -82,19 +82,6 @@ public class GroupDisplayActivity extends BaseActivity {
             if (buf.length() > 0)
                 tv.setText(buf.toString());
         }
-
-//        try {
-//            IChatSessionManager manager = mConn.getChatSessionManager();
-//            IChatSession session = manager.getChatSession(mAddress);
-//
-//
-//
-//        }
-//        catch (Exception e)
-//        {
-//
-//        }
-
         Button btn = (Button)findViewById(R.id.btnStartChat);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

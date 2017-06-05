@@ -70,7 +70,6 @@ public class GalleryListFragment extends Fragment {
 
         mRecView =  (RecyclerView)view.findViewById(R.id.recyclerview);
         mEmptyView = view.findViewById(R.id.empty_view);
-//        mEmptyViewImage = view.findViewById(R.id.empty_view_image);
 
         setupRecyclerView(mRecView);
         return view;

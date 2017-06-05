@@ -84,18 +84,13 @@ public class ContactListFilterView extends LinearLayout {
 
         mContext = context;
         mHandler = new SimpleAlertHandler((Activity)context);
-
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-//        mFilterList = (AbsListView) findViewById(R.id.filteredList);
         mFilterList.setTextFilterEnabled(true);
-
-  //      mEmptyView = (TextView) findViewById(R.id.empty);
-
         mFilterList.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -114,11 +109,8 @@ public class ContactListFilterView extends LinearLayout {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
 
                 String[] contactOptions = {
-                                   //        mContext.getString(R.string.menu_verify),
                                            mContext.getString(R.string.menu_contact_nickname),
                                            mContext.getString(R.string.menu_remove_contact)};
-                                     //      mContext.getString(R.string.menu_block_contact)};
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setItems(contactOptions, new DialogInterface.OnClickListener() {
                            public void onClick(DialogInterface dialog, int which) {
@@ -138,73 +130,9 @@ public class ContactListFilterView extends LinearLayout {
                 builder.create().show();
 
                 return true;
-
-
             }
 
         });
-
-        /**
-        mEtSearch = (EditText)findViewById(R.id.contactSearch);
-
-        mEtSearch.addTextChangedListener(new TextWatcher()
-        {
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                ContactListFilterView.this.doFilter(mEtSearch.getText().toString());
-
-            }
-
-        });
-
-
-        mEtSearch.setOnKeyListener(new OnKeyListener ()
-        {
-
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                ContactListFilterView.this.doFilter(mEtSearch.getText().toString());
-                return false;
-            }
-
-        });
-          */
-
-        /*
-        mFilterList.setItemActionListener(new ListView.OnActionClickListener() {
-
-            @Override
-            public void onClick(View listView, View buttonview, int position) {
-
-                Cursor c = (Cursor) mFilterList.getItemAtPosition(position);
-                if (mListener != null)
-                    if (buttonview.getId() == R.id.btnExListChat)
-                        mListener.startChat(c);
-                    else if (buttonview.getId() == R.id.btnExListProfile)
-                        mListener.showProfile(c);
-
-            }
-    }, R.id.btnExListChat, R.id.btnExListProfile);
-    */
-
-       //
-
-        //if (!isInEditMode())
-          //  mPresenceView = (UserPresenceView) findViewById(R.id.userPresence);
-
     }
 
     public AbsListView getListView() {
@@ -276,15 +204,8 @@ public class ContactListFilterView extends LinearLayout {
                 holder = new ContactViewHolder(view);
                 holder.mLine1 = (TextView) view.findViewById(R.id.line1);
                 holder.mLine2 = (TextView) view.findViewById(R.id.line2);
-
                 holder.mAvatar = (ImageView)view.findViewById(R.id.avatar);
-              //  holder.mStatusIcon = (ImageView)view.findViewById(R.id.statusIcon);
-                //holder.mStatusText = (TextView)view.findViewById(R.id.statusText);
-               // //holder.mEncryptionIcon = (ImageView)view.findViewById(R.id.encryptionIcon);
-
                 holder.mContainer = view.findViewById(R.id.message_container);
-
-                // holder.mMediaThumb = (ImageView)findViewById(R.id.media_thumbnail);
                 view.setTag(holder);
             }
 
@@ -461,8 +382,6 @@ public class ContactListFilterView extends LinearLayout {
 
             CursorLoader loader = new CursorLoader(getContext(), mUri, ContactListItem.CONTACT_PROJECTION,
                     buf == null ? null : buf.toString(), null, Imps.Contacts.DEFAULT_SORT_ORDER);
-                        
-            //     loader.setUpdateThrottle(10L);
             return loader;
         }
 
@@ -486,12 +405,7 @@ public class ContactListFilterView extends LinearLayout {
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
-
             mContactAdapter.swapCursor(null);
-
         }
-
     }
-
-
 }

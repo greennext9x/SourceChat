@@ -75,7 +75,6 @@ public class OnboardingActivity extends BaseActivity {
     private ViewFlipper mViewFlipper;
     private EditText mEditUsername;
     private View mSetupProgress;
-    //private View mSetupButton;
     private ImageView mImageAvatar;
 
     private MenuItem mItemSkip = null;
@@ -91,7 +90,6 @@ public class OnboardingActivity extends BaseActivity {
 
     private static final String USERNAME_ONLY_ALPHANUM = "[^A-Za-z0-9]";
 
-    //    private boolean mShowSplash = true;
     private ListPopupWindow mDomainList;
 
     private FindServerTask mCurrentFindServerTask;
@@ -110,20 +108,8 @@ public class OnboardingActivity extends BaseActivity {
         View viewLogin = findViewById(R.id.flipViewLogin);
         View viewAdvanced = findViewById(R.id.flipViewAdvanced);
 
-
-//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        int themeColorHeader = settings.getInt("themeColor",-1);
-
-//        if (themeColorHeader != -1)
-//            viewInvite.setBackgroundColor(themeColorHeader);
-
         mViewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper1);
-
-//        mEditUsername = (EditText)viewCreate.findViewById(R.id.edtNewName);
         mSpinnerDomains = (EditText) viewAdvanced.findViewById(R.id.spinnerDomains);
-        //   ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-        //         android.R.layout.simple_dropdown_item_1line, OnboardingManager.getServers(this));
-        // mSpinnerDomains.setAdapter(adapter);
 
         mDomainList = new ListPopupWindow(this);
         mDomainList.setAdapter(new ArrayAdapter(
@@ -155,39 +141,7 @@ public class OnboardingActivity extends BaseActivity {
             }
         });
 
-//        mImageAvatar = (ImageView) viewCreate.findViewById(R.id.imageAvatar);
-//        mImageAvatar.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//               startAvatarTaker();
-//
-//            }
-//        });
-
         setAnimLeft();
-
-//        ImageView imageLogo = (ImageView)viewSplash.findViewById(R.id.imageLogo);
-//        imageLogo.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                setAnimLeft();
-//                showOnboarding();
-//            }
-//        });
-//
-//        View btnStartOnboardingNext = viewSplash.findViewById(R.id.nextButton);
-//        btnStartOnboardingNext.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                setAnimLeft();
-//                showOnboarding();
-//            }
-//        });
-
-
         View btnShowCreate = viewRegister.findViewById(R.id.btnShowRegister);
         btnShowCreate.setOnClickListener(new OnClickListener() {
 
@@ -209,70 +163,6 @@ public class OnboardingActivity extends BaseActivity {
             }
 
         });
-
-//        View btnShowAdvanced = viewCreate.findViewById(R.id.btnAdvanced);
-//        btnShowAdvanced.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                setAnimLeft();
-//                showAdvancedScreen();
-//            }
-//
-//        });
-
-        // set up language chooser button
-//        View languageButton = viewSplash.findViewById(R.id.languageButton);
-//        languageButton.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Activity activity = OnboardingActivity.this;
-//                final Languages languages = Languages.get(activity);
-//                final ArrayAdapter<String> languagesAdapter = new ArrayAdapter<String>(activity,
-//                        android.R.layout.simple_list_item_single_choice, languages.getAllNames());
-//                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-//                builder.setIcon(R.drawable.ic_settings_language);
-//                builder.setTitle(R.string.KEY_PREF_LANGUAGE_TITLE);
-//                builder.setAdapter(languagesAdapter, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int position) {
-//                        String[] languageCodes = languages.getSupportedLocales();
-//                        ImApp.resetLanguage(activity, languageCodes[position]);
-//                        dialog.dismiss();
-//                    }
-//                });
-//                builder.show();
-//            }
-//        });
-
-//        mEditUsername.setOnEditorActionListener(new OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
-//                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-//                    Handler threadHandler = new Handler();
-//                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0, new ResultReceiver(
-//                            threadHandler) {
-//                        @Override
-//                        protected void onReceiveResult(int resultCode, Bundle resultData) {
-//                            super.onReceiveResult(resultCode, resultData);
-//
-//                            mNickname = mEditUsername.getText().toString();
-//
-//                            if (mNickname.length() > 0) {
-//                                startAccountSetup();
-//                            }
-//
-//
-//                        }
-//                    });
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//        });
-
         View btnCreateAdvanced = viewAdvanced.findViewById(R.id.btnNewRegister);
         btnCreateAdvanced.setOnClickListener(new OnClickListener() {
             @Override
@@ -366,15 +256,6 @@ public class OnboardingActivity extends BaseActivity {
 
         }
     }
-
-//    private void showSplashScreen ()
-//    {
-//        setAnimRight();
-//        getSupportActionBar().hide();
-//        getSupportActionBar().setTitle("");
-//        mViewFlipper.setDisplayedChild(0);
-//    }
-
     private void showOnboarding() {
         mViewFlipper.setDisplayedChild(0);
         setAnimRight();
@@ -399,7 +280,6 @@ public class OnboardingActivity extends BaseActivity {
 
         mViewFlipper.setDisplayedChild(2);
         findViewById(R.id.progressExistingUser).setVisibility(View.GONE);
-//        findViewById(R.id.progressExistingImage).setVisibility(View.GONE);
 
         getSupportActionBar().show();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -463,7 +343,6 @@ public class OnboardingActivity extends BaseActivity {
         View viewCreate = findViewById(R.id.flipViewCreateNew);
         viewCreate.findViewById(R.id.viewProgress).setVisibility(View.GONE);
         viewCreate.findViewById(R.id.viewCreate).setVisibility(View.VISIBLE);
-//        viewCreate.findViewById(R.id.btnAdvanced).setVisibility(View.VISIBLE);
 
     }
 
@@ -471,8 +350,6 @@ public class OnboardingActivity extends BaseActivity {
         View viewCreate = findViewById(R.id.flipViewCreateNew);
         viewCreate.findViewById(R.id.viewProgress).setVisibility(View.VISIBLE);
         viewCreate.findViewById(R.id.viewCreate).setVisibility(View.GONE);
-//        viewCreate.findViewById(R.id.btnAdvanced).setVisibility(View.GONE);
-
     }
 
     private class FindServerTask extends AsyncTask<String, Void, OnboardingAccount> {
@@ -553,7 +430,6 @@ public class OnboardingActivity extends BaseActivity {
             } else {
                 viewCreate.findViewById(R.id.viewProgress).setVisibility(View.GONE);
                 viewCreate.findViewById(R.id.viewCreate).setVisibility(View.VISIBLE);
-//                viewCreate.findViewById(R.id.btnAdvanced).setVisibility(View.VISIBLE);
 
                 StringBuffer sb = new StringBuffer();
                 sb.append(getString(R.string.account_setup_error_server));
@@ -625,99 +501,6 @@ public class OnboardingActivity extends BaseActivity {
             mExistingAccountTask = null;
         }
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//
-//        ImApp mApp = (ImApp)getApplication();
-//        mApp.initAccountInfo();
-//
-//        if (resultCode == RESULT_OK) {
-//            if (requestCode == OnboardingManager.REQUEST_SCAN) {
-//
-//                showInviteScreen();
-//
-//                ArrayList<String> resultScans = data.getStringArrayListExtra("result");
-//                for (String resultScan : resultScans)
-//                {
-//
-//                    try {
-//                        //parse each string and if they are for a new user then add the user
-//                        String[] parts = OnboardingManager.decodeInviteLink(resultScan);
-//                        String address = parts[0];
-//                        String fingerprint = null, nickname = null;
-//                        if (parts.length > 1)
-//                            fingerprint = parts[1];
-//                        if (parts.length > 2)
-//                            nickname = parts[2];
-//
-//                        new AddContactAsyncTask(mNewAccount.providerId, mNewAccount.accountId, mApp).execute(address, fingerprint, nickname);
-//
-//                        //if they are for a group chat, then add the group
-//                    }
-//                    catch (Exception e)
-//                    {
-//                        Log.w(ImApp.LOG_TAG, "error parsing QR invite link", e);
-//                    }
-//                }
-//
-//                if (resultScans.size() > 0)
-//                {
-//                    showMainScreen ();
-//                }
-//            }
-//            else if (requestCode == OnboardingManager.REQUEST_CHOOSE_AVATAR)
-//            {
-//                Uri imageUri = getPickImageResultUri(data);
-//
-//                if (imageUri == null)
-//                    return;
-//
-//                mCropImageView = new CropImageView(OnboardingActivity.this);// (CropImageView)view.findViewById(R.id.CropImageView);
-//                mCropImageView.setAspectRatio(1, 1);
-//                mCropImageView.setFixedAspectRatio(true);
-//                mCropImageView.setCropShape(CropImageView.CropShape.OVAL);
-//              //  mCropImageView.setGuidelines(1);
-//
-//                try {
-//                    Bitmap bmpThumbnail = SecureMediaStore.getThumbnailFile(OnboardingActivity.this, imageUri, 512);
-//                    mCropImageView.setImageBitmap(bmpThumbnail);
-//
-//                    // Use the Builder class for convenient dialog construction
-//                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(OnboardingActivity.this);
-//                    builder.setView(mCropImageView)
-//                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int id) {
-//                                    setAvatar(mCropImageView.getCroppedImage(), mNewAccount);
-//                                    showInviteScreen();
-//
-//                                    delete(mOutputFileUri);
-//                                }
-//                            })
-//                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int id) {
-//                                    // User cancelled the dialog
-//
-//                                    delete(mOutputFileUri);
-//
-//                                }
-//                            });
-//                    // Create the AlertDialog object and return it
-//                    android.support.v7.app.AlertDialog dialog = builder.create();
-//                    dialog.show();
-//
-//
-//                    ;
-//                } catch (IOException ioe) {
-//                    Log.e(ImApp.LOG_TAG, "couldn't load avatar", ioe);
-//                }
-//            }
-//
-//        }
-//    }
-
 
     private void setAvatar(Bitmap bmp, OnboardingAccount account) {
 

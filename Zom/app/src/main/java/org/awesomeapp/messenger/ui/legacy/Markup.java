@@ -30,76 +30,7 @@ public class Markup {
         } else {
             result = new SpannableString(text);
         }
-
         Linkify.addLinks(result, Linkify.ALL);
-  //      applyEmoticons(result);
-
         return result;
     }
-
-    /*
-    public final CharSequence applyEmoticons(CharSequence text) {
-        int offset = 0;
-        final int len = text.length();
-        SpannableString result = null;
-
-        while (offset < len) {
-            int index = offset;
-            IntTrie.Node n = mSmileys.getNode(text.charAt(index++));
-            int candidate = 0;
-            int lastMatchEnd = -1;
-
-            //  Search the trie until we stop matching
-            while (n != null) {
-                //  Record the value and position of the longest match
-                if (n.mValue != 0) {
-                    candidate = n.mValue;
-                    lastMatchEnd = index;
-                }
-
-                //  Let's not run off the end of the input
-                if (index >= len) {
-                    break;
-                }
-
-                n = n.getNode(text.charAt(index++));
-            }
-
-            //  If we matched a smiley, apply its image over the text
-            if (candidate != 0) {
-                //  Lazy-convert the result text to a SpannableString if we have to
-                if (result == null) {
-                    if (text instanceof SpannableString) {
-                        result = (SpannableString) text;
-                    } else {
-                        result = new SpannableString(text);
-                        text = result;
-                    }
-                }
-                Drawable smiley = mRes.getSmileyIcon(candidate);
-                smiley.setBounds(0, 0, smiley.getIntrinsicWidth(), smiley.getIntrinsicHeight());
-                result.setSpan(new ImageSpan(smiley, ImageSpan.ALIGN_BASELINE), offset,
-                        lastMatchEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-                candidate = 0;
-            }
-
-            //  if there was a match, start searching for the next one after it
-            //  if no match, start at the next character
-            if (lastMatchEnd != -1) {
-                offset = lastMatchEnd;
-                lastMatchEnd = -1;
-            } else {
-                offset++;
-            }
-        }
-
-        //  If there were no modifications, return the original string
-        if (result == null) {
-            return text;
-        }
-
-        return result;
-    }
-    */
 }

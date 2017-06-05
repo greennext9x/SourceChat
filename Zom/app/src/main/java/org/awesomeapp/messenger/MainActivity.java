@@ -157,7 +157,6 @@ public class MainActivity extends BaseActivity {
         adapter.addFragment(mMoreFragment, getString(R.string.title_more), R.drawable.ic_more_horiz_white_36dp);
 
         mAccountFragment = new AccountFragment();
-        //  fragAccount.setArguments();
 
         adapter.addFragment(mAccountFragment, getString(R.string.title_me), R.drawable.ic_face_white_24dp);
 
@@ -188,7 +187,6 @@ public class MainActivity extends BaseActivity {
                 mViewPager.setCurrentItem(tab.getPosition());
 
                 setToolbarTitle(tab.getPosition());
-//                applyStyleColors();
             }
 
             @Override
@@ -199,7 +197,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 setToolbarTitle(tab.getPosition());
-//                applyStyleColors();
             }
         });
 
@@ -232,7 +229,7 @@ public class MainActivity extends BaseActivity {
         setToolbarTitle(1);
 
         //don't wnat this to happen to often
-        checkForUpdates();
+
 
         installRingtones();
 
@@ -275,7 +272,6 @@ public class MainActivity extends BaseActivity {
             if (tabPosition == 1) {
                 mFab.setImageResource(R.drawable.ic_person_add_white_36dp);
             } else if (tabPosition == 2) {
-                //                    mFab.setImageResource(R.drawable.ic_photo_camera_white_36dp);
                 mFab.setVisibility(View.GONE);
 
             } else if (tabPosition == 3) {
@@ -296,8 +292,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//
-//        applyStyleColors();
 
         //if VFS is not mounted, then send to WelcomeActivity
         if (!VirtualFileSystem.get().isMounted()) {
@@ -437,17 +431,6 @@ public class MainActivity extends BaseActivity {
                             new AddContactAsyncTask(mApp.getDefaultProviderId(), mApp.getDefaultAccountId(), mApp).execute(address, fingerprint);
 
                         }
-//                        else {
-//                            //parse each string and if they are for a new user then add the user
-//                            String[] parts = OnboardingManager.decodeInviteLink(resultScan);
-//                            address = parts[0];
-//                            String fingerprint = null, nickname = null;
-//                            if (parts.length > 1)
-//                                fingerprint = parts[1];
-//                            if (parts.length > 2)
-//                                nickname = parts[2];
-//                            new AddContactAsyncTask(mApp.getDefaultProviderId(), mApp.getDefaultAccountId(), mApp).execute(address, fingerprint, nickname);
-//                        }
 
                         if (address != null)
                             startChat(mApp.getDefaultProviderId(), mApp.getDefaultAccountId(), address, false, false);
@@ -572,13 +555,6 @@ public class MainActivity extends BaseActivity {
                 }
             });
         }
-
-//        MenuItem mItem = menu.findItem(R.id.menu_lock_reset);
-
-//        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        if (!settings.contains(ImApp.PREFERENCE_KEY_TEMP_PASS))
-//            mItem.setVisible(true);
-
         return true;
     }
 
@@ -586,7 +562,6 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
 
             case R.id.menu_settings:
@@ -594,56 +569,13 @@ public class MainActivity extends BaseActivity {
                 startActivityForResult(sintent, REQUEST_CHANGE_SETTINGS);
                 return true;
 
-//            case R.id.menu_lock:
-//                handleLock();
-//                return true;
-
             case R.id.menu_new_account:
                 Intent i = new Intent(MainActivity.this, AccountsActivity.class);
                 startActivity(i);
                 return true;
-
-//            case R.id.menu_lock_reset:
-//                resetPassphrase();
-//                return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    public void resetPassphrase ()
-//    {
-//        /**
-//        Intent intent = new Intent(this, LockScreenActivity.class);
-//        intent.setAction(LockScreenActivity.ACTION_RESET_PASSPHRASE);
-//        startActivity(intent);**/
-//
-//        //need to setup new user passphrase
-//        Intent intent = new Intent(this, LockScreenActivity.class);
-//        intent.setAction(LockScreenActivity.ACTION_CHANGE_PASSPHRASE);
-//        startActivity(intent);
-//    }
-
-
-//    public void handleLock ()
-//    {
-//        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        if (settings.contains(ImApp.PREFERENCE_KEY_TEMP_PASS))
-//        {
-//            //need to setup new user passphrase
-//            Intent intent = new Intent(this, LockScreenActivity.class);
-//            intent.setAction(LockScreenActivity.ACTION_CHANGE_PASSPHRASE);
-//            startActivity(intent);
-//        }
-//        else {
-//
-//            //time to do the lock
-//            Intent intent = new Intent(this, RouterActivity.class);
-//            intent.setAction(RouterActivity.ACTION_LOCK_APP);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
-
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
@@ -703,12 +635,6 @@ public class MainActivity extends BaseActivity {
         LayoutInflater factory = LayoutInflater.from(this);
 
         final View dialogGroup = factory.inflate(R.layout.alert_dialog_group_chat, null);
-        //TextView tvServer = (TextView) dialogGroup.findViewById(R.id.chat_server);
-        // tvServer.setText(ImApp.DEFAULT_GROUPCHAT_SERVER);// need to make this a list
-
-        // final Spinner listAccounts = (Spinner) dialogGroup.findViewById(R.id.choose_list);
-        // setupAccountSpinner(listAccounts);
-
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.create_group)
                 .setView(dialogGroup)
@@ -724,15 +650,6 @@ public class MainActivity extends BaseActivity {
 
                         TextView tv = (TextView) dialogGroup.findViewById(R.id.chat_room);
                         chatRoom = tv.getText().toString();
-
-                        /**
-                         tv = (TextView) dialogGroup.findViewById(R.id.chat_server);
-                         chatServer = tv.getText().toString();
-
-                         tv = (TextView) dialogGroup.findViewById(R.id.nickname);
-                         nickname = tv.getText().toString();
-                         **/
-
                         try {
                             IImConnection conn = mApp.getConnection(mApp.getDefaultProviderId(), mApp.getDefaultAccountId());
                             if (conn.getState() == ImConnection.LOGGED_IN)
@@ -872,13 +789,6 @@ public class MainActivity extends BaseActivity {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-
-                if (result != null) {
-                    //   mHandler.showServiceErrorAlert(result);
-
-                }
-
-
             }
         }.executeOnExecutor(ImApp.sThreadPoolExecutor, room, server, nickname);
 
@@ -894,57 +804,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //    UpdateManager.unregister();
     }
-
-    private void checkForUpdates() {
-        // Remove this for store builds!
-        //   UpdateManager.register(this, ImApp.HOCKEY_APP_ID);
-
-        //only check github for updates if there is no Google Play
-        if (!hasGooglePlay()) {
-            try {
-
-                String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-
-                //if this is a full release, without -beta -rc etc, then check the appupdater!
-                if (version.indexOf("-") == -1) {
-
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                    long timeNow = new Date().getTime();
-                    long timeSinceLastCheck = prefs.getLong("updatetime", -1);
-
-                    //only check for updates once per day
-                    if (timeSinceLastCheck == -1 || (timeNow - timeSinceLastCheck) > 86400) {
-
-                        AppUpdater appUpdater = new AppUpdater(this);
-                        appUpdater.setDisplay(Display.DIALOG);
-                        appUpdater.setUpdateFrom(UpdateFrom.XML);
-                        appUpdater.setUpdateXML(ImApp.URL_UPDATER);
-
-                        //  appUpdater.showAppUpdated(true);
-                        appUpdater.start();
-
-                        prefs.edit().putLong("updatetime", timeNow).commit();
-                    }
-                }
-            } catch (Exception e) {
-                Log.d("AppUpdater", "error checking app updates", e);
-            }
-        }
-    }
-
-    boolean hasGooglePlay() {
-        try {
-            getApplication().getPackageManager().getPackageInfo("com.android.vending", 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-        return true;
-
-
-    }
-
 
     Uri mLastPhoto = null;
 
@@ -987,60 +847,8 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-//        applyStyleColors();
-    }
+   }
 
-//    private void applyStyleColors() {
-//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-//
-//        //not set color
-//
-//        int themeColorHeader = settings.getInt("themeColor", -1);
-//        int themeColorText = settings.getInt("themeColorText", -1);
-//        int themeColorBg = settings.getInt("themeColorBg", -1);
-//
-//        if (themeColorHeader != -1) {
-//
-//            if (themeColorText == -1)
-//                themeColorText = getContrastColor(themeColorHeader);
-//
-//            if (Build.VERSION.SDK_INT >= 21) {
-//                getWindow().setNavigationBarColor(themeColorHeader);
-//                getWindow().setStatusBarColor(themeColorHeader);
-//                getWindow().setTitleColor(getContrastColor(themeColorHeader));
-//            }
-//
-//            mToolbar.setBackgroundColor(themeColorHeader);
-//            mToolbar.setTitleTextColor(getContrastColor(themeColorHeader));
-//
-//            mTabLayout.setBackgroundColor(themeColorHeader);
-//            mTabLayout.setTabTextColors(themeColorText, themeColorText);
-//
-//            mFab.setBackgroundColor(themeColorHeader);
-//
-//        }
-//
-//        if (themeColorBg != -1) {
-//            if (mConversationList != null && mConversationList.getView() != null)
-//                mConversationList.getView().setBackgroundColor(themeColorBg);
-//
-//            if (mContactList != null && mContactList.getView() != null)
-//                mContactList.getView().setBackgroundColor(themeColorBg);
-//
-//            if (mMoreFragment != null && mMoreFragment.getView() != null)
-//                mMoreFragment.getView().setBackgroundColor(themeColorBg);
-//
-//            if (mAccountFragment != null && mAccountFragment.getView() != null)
-//                mAccountFragment.getView().setBackgroundColor(themeColorBg);
-//        }
-//
-//    }
-
-//    public static int getContrastColor(int colorIn) {
-//        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
-//        return y >= 128 ? Color.BLACK : Color.WHITE;
-//    }
-//
     private void checkCustomFont() {
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

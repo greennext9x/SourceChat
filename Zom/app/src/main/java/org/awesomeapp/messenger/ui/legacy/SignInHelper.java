@@ -116,8 +116,6 @@ public class SignInHelper {
             try {
                 connection.unregisterConnectionListener(mListener);
             } catch (RemoteException e) {
-
-                //mHandler.showServiceErrorAlert(e.getLocalizedMessage());
                 LogCleaner.error(ImApp.LOG_TAG, "handle connection error",e);
             }
         }
@@ -134,17 +132,6 @@ public class SignInHelper {
                 Resources r = mContext.getResources();
                 String errMsg = r.getString(R.string.login_service_failed, providerName, // FIXME
                         error == null ? "" : ErrorResUtils.getErrorRes(r, error.getCode()));
-
-               // Toast.makeText(mContext, errMsg, Toast.LENGTH_LONG).show();
-                /*
-                new AlertDialog.Builder(mContext).setTitle(R.string.error)
-                        .setMessage()
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                // FIXME
-                            }
-                        }).setCancelable(false).show();
-                        */
             }
         }
     }
@@ -157,8 +144,6 @@ public class SignInHelper {
         intent.putExtra(ImServiceConstants.EXTRA_INTENT_ACCOUNT_ID, accountId);
 
         mContext.startActivity(intent);
-        // sign in successfully, finish and switch to contact list
-      //  mContext.finish();
     }
 
     public void signIn(final String password, final long providerId, final long accountId,
@@ -246,14 +231,6 @@ public class SignInHelper {
             }
 
             conn.login(password, autoLoadContacts, autoRetryLogin);
-
-            /*
-            if (mApp.isNetworkAvailableAndConnected()) {
-
-            } else {
-             //   promptForBackgroundDataSetting(providerName);
-                return;
-            }*/
 
     }
 
