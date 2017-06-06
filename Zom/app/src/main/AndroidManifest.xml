@@ -118,7 +118,7 @@
                 <!--
                 The ultimate in crack smoking!  Some apps will only respect these file associations
                 if the mimeType is not set, and other apps will only respect them if mimeType is set
-                to */*.  Therefore we have two whole copies of the same thing, besides setting the mimeType. 
+                to */*.  Therefore we have two whole copies of the same thing, besides setting the mimeType.
                 -->
                 <data android:mimeType="*/*" />
                 <!-- this crack smoking pattern is required to match file extensions in folders -->
@@ -255,9 +255,9 @@
                 <action android:name="info.guardianproject.otr.app.im.SERVICE" />
             </intent-filter>
         </service>
-        <service
-            android:name="org.awesomeapp.messenger.service.HeartbeatService"
-            android:exported="false" />
+        <!--<service-->
+            <!--android:name="org.awesomeapp.messenger.service.HeartbeatService"-->
+            <!--android:exported="false" />-->
 
         <provider
             android:name="org.awesomeapp.messenger.provider.ImpsProvider"
@@ -372,25 +372,25 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name="org.awesomeapp.messenger.ui.LockScreenActivity"
-            android:label="@string/title_activity_lock_screen"></activity>
+        <!--<activity-->
+            <!--android:name="org.awesomeapp.messenger.ui.LockScreenActivity"-->
+            <!--android:label="@string/title_activity_lock_screen"></activity>-->
         <activity
             android:name="org.awesomeapp.messenger.ui.onboarding.OnboardingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"></activity>
-        <activity
-            android:name="org.awesomeapp.messenger.ui.qr.QrScanActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity
-            android:name="org.awesomeapp.messenger.ui.qr.QrDisplayActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <!--<activity-->
+            <!--android:name="org.awesomeapp.messenger.ui.qr.QrScanActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize" />-->
+        <!--<activity-->
+            <!--android:name="org.awesomeapp.messenger.ui.qr.QrDisplayActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize" />-->
         <service
             android:name="info.guardianproject.cacheword.CacheWordService"
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name="net.hockeyapp.android.UpdateActivity" />
+        <!--<activity android:name="net.hockeyapp.android.UpdateActivity" />-->
         <activity
             android:name="org.awesomeapp.messenger.ui.legacy.DummyActivity"
             android:allowTaskReparenting="true"
@@ -440,25 +440,25 @@
         <activity
             android:name="org.awesomeapp.messenger.ui.ContactListActivity"
             android:exported="false" />
-        <activity
-            android:name="org.awesomeapp.messenger.ui.GalleryActivity"
-            android:exported="false"
-            android:title="@string/photo_gallery" />
-        <activity
-            android:name="org.awesomeapp.messenger.ui.StickerActivity"
-            android:exported="false"
-            android:title="@string/action_stickers" />
-        <activity
-            android:name="org.awesomeapp.messenger.ui.PanicSetupActivity"
-            android:label="@string/panic_trigger_app"
-            android:theme="@style/AppThemeNoAction">
-            <intent-filter>
-                <action android:name="info.guardianproject.panic.action.CONNECT" />
-                <action android:name="info.guardianproject.panic.action.DISCONNECT" />
+        <!--<activity-->
+            <!--android:name="org.awesomeapp.messenger.ui.GalleryActivity"-->
+            <!--android:exported="false"-->
+            <!--android:title="@string/photo_gallery" />-->
+        <!--<activity-->
+            <!--android:name="org.awesomeapp.messenger.ui.StickerActivity"-->
+            <!--android:exported="false"-->
+            <!--android:title="@string/action_stickers" />-->
+        <!--<activity-->
+            <!--android:name="org.awesomeapp.messenger.ui.PanicSetupActivity"-->
+            <!--android:label="@string/panic_trigger_app"-->
+            <!--android:theme="@style/AppThemeNoAction">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="info.guardianproject.panic.action.CONNECT" />-->
+                <!--<action android:name="info.guardianproject.panic.action.DISCONNECT" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
         <activity android:name="org.awesomeapp.messenger.ui.ContactDisplayActivity"
             android:exported="false"
             android:theme="@style/AppThemeNoAction"

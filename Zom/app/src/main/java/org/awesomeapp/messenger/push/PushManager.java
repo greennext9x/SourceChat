@@ -33,41 +33,6 @@ import java.util.concurrent.Executors;
 
 import timber.log.Timber;
 
-/**
- * A top-level class for management of ChatSecure-Push.
- * <p>
- * Usage:
- * <pre>
- * {@code
- *      PushManager manager = new PushManager(context);
- *      manager.authenticateAccount("username", "password", new PushSecureClient.RequestCallback<Account>() {
- *          @Override
- *          public void onSuccess(@NonNull Account account) {
- *              // account has been persisted to the application database
- *              // you may now perform authenticated ChatSecure-Push actions:
- *
- *              // Create a Whitelist Token Exchange TLV to transmit a token to a peer
- *              // manager.createWhitelistTokenExchangeTlv(...);
- *
- *              // Send a Push Message to a peer whose token you've received via
- *              // the Whitelist Token Exchange TLV mechanism, or otherwise.
- *              // manager.sendPushMessageToPeer("bob@dukgo.com", new PushSecureClient.RequestCallback<Message>(){...});
- *          }
- *
- *          @Override
- *          public void onFailure(@NonNull Throwable throwable) {
- *              // Unable to authenticate ChatSecure-Push account.
- *
- *              // Check throwable for an error message describing the issue:
- *              // throwable.getMessage();
- *          }
- *      });
- *
- * }
- * </pre>
- * <p>
- * Created by dbro on 9/18/15.
- */
 public class PushManager {
 
     public static final String DEFAULT_PROVIDER = "https://push.zom.im/api/v1/";
