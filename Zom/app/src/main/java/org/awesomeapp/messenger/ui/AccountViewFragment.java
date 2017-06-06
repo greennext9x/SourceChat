@@ -63,33 +63,27 @@ public class AccountViewFragment extends Fragment {
     private long mProviderId = 0;
     private long mAccountId = 0;
     static final int REQUEST_SIGN_IN = 100001;
-    private static final String[] ACCOUNT_PROJECTION = { Imps.Account._ID, Imps.Account.PROVIDER,
-                                                        Imps.Account.USERNAME,
-                                                        Imps.Account.PASSWORD,
-                                                        Imps.Account.KEEP_SIGNED_IN,
-                                                        Imps.Account.LAST_LOGIN_STATE };
+    private static final String[] ACCOUNT_PROJECTION = {
+            Imps.Account._ID, Imps.Account.PROVIDER,
+            Imps.Account.USERNAME,
+            Imps.Account.PASSWORD,
+            Imps.Account.KEEP_SIGNED_IN,
+            Imps.Account.LAST_LOGIN_STATE};
     private static final int ACCOUNT_PROVIDER_COLUMN = 1;
     private static final int ACCOUNT_USERNAME_COLUMN = 2;
     private static final int ACCOUNT_PASSWORD_COLUMN = 3;
-    
+
     private static final String USERNAME_VALIDATOR = "[^a-z0-9\\.\\-_\\+]";
-    //    private static final int ACCOUNT_KEEP_SIGNED_IN_COLUMN = 4;
-    //    private static final int ACCOUNT_LAST_LOGIN_STATE = 5;
 
     Uri mAccountUri;
     EditText mEditUserAccount;
     EditText mEditPass;
     EditText mEditPassConfirm;
-  //  CheckBox mRememberPass;
-   // CheckBox mUseTor;
     Button mBtnSignIn;
-//    Button mBtnQrDisplay;
     AutoCompleteTextView mSpinnerDomains;
 
     Button mBtnAdvanced;
     TextView mTxtFingerprint;
-
-    //Imps.ProviderSettings.QueryMap settings;
 
     boolean isEdit = false;
     boolean isSignedIn = false;
@@ -116,12 +110,11 @@ public class AccountViewFragment extends Fragment {
             initFragment();
     }
 
-    private void initFragment()
-    {
+    private void initFragment() {
 
         Intent i = getIntent();
 
-        mApp = (ImApp)getActivity().getApplication();
+        mApp = (ImApp) getActivity().getApplication();
 
         String action = i.getAction();
 
@@ -136,16 +129,12 @@ public class AccountViewFragment extends Fragment {
             @Override
             public void connectedToService() {
             }
+
             @Override
             public void stateChanged(int state, long accountId) {
-                if (state == ImConnection.LOGGED_IN)
-                {
-                  //  mSignInHelper.goToAccount(accountId);
-                   // finish();
+                if (state == ImConnection.LOGGED_IN) {
                     isSignedIn = true;
-                }
-                else
-                {
+                } else {
                     isSignedIn = false;
                 }
 
@@ -189,9 +178,8 @@ public class AccountViewFragment extends Fragment {
                 setAccountKeepSignedIn(true);
                 mSignInHelper.activateAccount(mProviderId, accountId);
                 mSignInHelper.signIn(pass, mProviderId, accountId, true);
-              //  setResult(RESULT_OK);
                 cursor.close();
-               // finish();
+                // finish();
                 return;
 
             } else {
@@ -205,8 +193,6 @@ public class AccountViewFragment extends Fragment {
             }
 
 
-
-
         } else if (Intent.ACTION_INSERT.equals(action)) {
 
 
@@ -214,7 +200,6 @@ public class AccountViewFragment extends Fragment {
             // TODO once we implement multiple IM protocols
             mProviderId = ContentUris.parseId(uri);
             provider = mApp.getProvider(mProviderId);
-
 
 
         } else if (Intent.ACTION_EDIT.equals(action)) {
@@ -245,19 +230,16 @@ public class AccountViewFragment extends Fragment {
             mProviderId = cursor.getLong(ACCOUNT_PROVIDER_COLUMN);
             provider = mApp.getProvider(mProviderId);
 
-            Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI,new String[] {Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE},Imps.ProviderSettings.PROVIDER + "=?",new String[] { Long.toString(mProviderId)},null);
+            Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI, new String[]{Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE}, Imps.ProviderSettings.PROVIDER + "=?", new String[]{Long.toString(mProviderId)}, null);
 
             Imps.ProviderSettings.QueryMap settings = new Imps.ProviderSettings.QueryMap(
                     pCursor, cr, mProviderId, false /* don't keep updated */, null /* no handler */);
 
             try {
                 mOriginalUserAccount = cursor.getString(ACCOUNT_USERNAME_COLUMN) + "@"
-                                       + settings.getDomain();
+                        + settings.getDomain();
                 mEditUserAccount.setText(mOriginalUserAccount);
                 mEditPass.setText(cursor.getString(ACCOUNT_PASSWORD_COLUMN));
-                //mRememberPass.setChecked(!cursor.isNull(ACCOUNT_PASSWORD_COLUMN));
-                //mUseTor.setChecked(settings.getUseTor());
-//                mBtnQrDisplay.setVisibility(View.VISIBLE);
             } finally {
                 settings.close();
                 cursor.close();
@@ -269,13 +251,12 @@ public class AccountViewFragment extends Fragment {
             return;
         }
 
-       setupUIPost();
+        setupUIPost();
 
     }
 
-    private Intent getIntent ()
-    {
-      return  getActivity().getIntent();
+    private Intent getIntent() {
+        return getActivity().getIntent();
     }
 
 
@@ -302,8 +283,7 @@ public class AccountViewFragment extends Fragment {
         mEditPassConfirm = (EditText) view.findViewById(R.id.edtPassConfirm);
         mSpinnerDomains = (AutoCompleteTextView) view.findViewById(R.id.spinnerDomains);
 
-        if (mIsNewAccount)
-        {
+        if (mIsNewAccount) {
             mEditPassConfirm.setVisibility(View.VISIBLE);
             mSpinnerDomains.setVisibility(View.VISIBLE);
             mEditUserAccount.setHint(R.string.account_setup_new_username);
@@ -313,9 +293,6 @@ public class AccountViewFragment extends Fragment {
             mSpinnerDomains.setAdapter(adapter);
 
         }
-
-//        mRememberPass = (CheckBox) findViewById(R.id.rememberPassword);
-  //      mUseTor = (CheckBox) findViewById(R.id.useTor);
 
 
         mBtnSignIn = (Button) view.findViewById(R.id.btnSignIn);
@@ -327,8 +304,7 @@ public class AccountViewFragment extends Fragment {
 
     }
 
-    private void setupUIPost ()
-    {
+    private void setupUIPost() {
         Intent i = getIntent();
 
         if (isSignedIn) {
@@ -347,20 +323,6 @@ public class AccountViewFragment extends Fragment {
             }
         });
 
-
-//        mBtnQrDisplay.setOnClickListener(new OnClickListener()
-//        {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//               showQR();
-//
-//            }
-//
-//        });
-
-
         mBtnSignIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -370,14 +332,13 @@ public class AccountViewFragment extends Fragment {
                 final boolean rememberPass = true;
                 final boolean isActive = false; // TODO(miron) does this ever need to be true?
                 ContentResolver cr = getActivity().getContentResolver();
-                final boolean useTor =  false;
+                final boolean useTor = false;
 
-                if (mIsNewAccount)
-                {
+                if (mIsNewAccount) {
                     mDomain = mSpinnerDomains.getText().toString();
                     String fullUser = mEditUserAccount.getText().toString();
 
-                    if (fullUser.indexOf("@")==-1)
+                    if (fullUser.indexOf("@") == -1)
                         fullUser += '@' + mDomain;
 
                     if (!parseAccount(fullUser)) {
@@ -389,17 +350,13 @@ public class AccountViewFragment extends Fragment {
                     ImPluginHelper helper = ImPluginHelper.getInstance(getActivity());
                     mProviderId = helper.createAdditionalProvider(helper.getProviderNames().get(0)); //xmpp FIXME
 
-                }
-                else
-                {
+                } else {
                     if (!parseAccount(mEditUserAccount.getText().toString())) {
                         mEditUserAccount.selectAll();
                         mEditUserAccount.requestFocus();
                         return;
-                    }
-                    else
-                    {
-                        settingsForDomain(mDomain,mPort);//apply final settings
+                    } else {
+                        settingsForDomain(mDomain, mPort);//apply final settings
                     }
                 }
                 mAccountId = ImApp.insertOrUpdateAccount(cr, mProviderId, -1, mUserName, mUserName,
@@ -408,22 +365,16 @@ public class AccountViewFragment extends Fragment {
                 mAccountUri = ContentUris.withAppendedId(Imps.Account.CONTENT_URI, mAccountId);
 
                 //if remember pass is true, set the "keep signed in" property to true
-                if (mIsNewAccount)
-                {
-                    if (pass.equals(passConf))
-                    {
+                if (mIsNewAccount) {
+                    if (pass.equals(passConf)) {
                         setAccountKeepSignedIn(rememberPass);
 
                         createNewAccount(mUserName, pass, mAccountId, useTor);
 
+                    } else {
+                        Toast.makeText(getActivity(), getString(R.string.error_account_password_mismatch), Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
-                       Toast.makeText(getActivity(), getString(R.string.error_account_password_mismatch), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else
-                {
+                } else {
                     if (isSignedIn) {
                         signOut();
                         isSignedIn = false;
@@ -438,64 +389,46 @@ public class AccountViewFragment extends Fragment {
             }
         });
 
-        /**
-        mUseTor.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateUseTor(isChecked);
-            }
-        });*/
 
         updateWidgetState();
 
-        if (i.hasExtra("title"))
-        {
+        if (i.hasExtra("title")) {
             String title = i.getExtras().getString("title");
         }
 
-        if (i.hasExtra("newuser"))
-        {
+        if (i.hasExtra("newuser")) {
             String newuser = i.getExtras().getString("newuser");
             mEditUserAccount.setText(newuser);
 
             parseAccount(newuser);
-            settingsForDomain(mDomain,mPort);
+            settingsForDomain(mDomain, mPort);
 
         }
 
-        if (i.hasExtra("newpass"))
-        {
+        if (i.hasExtra("newpass")) {
             mEditPass.setText(i.getExtras().getString("newpass"));
             mEditPass.setVisibility(View.GONE);
         }
 
-        if (i.getBooleanExtra("hideTor", false))
-        {
-            //mUseTor.setVisibility(View.GONE);
+        if (i.getBooleanExtra("hideTor", false)) {
         }
 
     }
 
-    private boolean checkForKey (String userid)
-    {
+    private boolean checkForKey(String userid) {
 
-        try
-        {
+        try {
             OtrAndroidKeyManagerImpl otrKeyMan = OtrAndroidKeyManagerImpl.getInstance(getActivity());
             String fp = otrKeyMan.getLocalFingerprint(userid);
 
-            if (fp == null)
-            {
+            if (fp == null) {
                 otrKeyMan.generateLocalKeyPair(userid);
                 fp = otrKeyMan.getLocalFingerprint(userid);
                 return true;
-            }
-            else
+            } else
                 return true;
-        }
-        catch (Exception e)
-        {
-            Log.e(ImApp.LOG_TAG,"error checking for key",e);
+        } catch (Exception e) {
+            Log.e(ImApp.LOG_TAG, "error checking for key", e);
             return false;
         }
 
@@ -507,21 +440,21 @@ public class AccountViewFragment extends Fragment {
         args[0] = mUserName;
         args[1] = mDomain;
 
-        String[] projection = { Imps.Account._ID };
+        String[] projection = {Imps.Account._ID};
         Cursor cursor = cr.query(Imps.Account.BY_DOMAIN_URI, projection, clauses, args, null);
         return cursor;
     }
+
     private void updateUseTor(boolean useTor) {
         checkUserChanged();
 
         ContentResolver cr = getActivity().getContentResolver();
-        Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI,new String[] {Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE},Imps.ProviderSettings.PROVIDER + "=?",new String[] { Long.toString(mProviderId)},null);
+        Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI, new String[]{Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE}, Imps.ProviderSettings.PROVIDER + "=?", new String[]{Long.toString(mProviderId)}, null);
 
         Imps.ProviderSettings.QueryMap settings = new Imps.ProviderSettings.QueryMap(
-               pCursor, cr, mProviderId, false /* don't keep updated */, null /* no handler */);
+                pCursor, cr, mProviderId, false /* don't keep updated */, null /* no handler */);
 
-        if (useTor && (!OrbotHelper.isOrbotInstalled(getActivity())))
-        {
+        if (useTor && (!OrbotHelper.isOrbotInstalled(getActivity()))) {
             //Toast.makeText(this, "Orbot app is not installed. Please install from Google Play or from https://guardianproject.info/releases", Toast.LENGTH_LONG).show();
 
             Intent intentInstallTor = OrbotHelper.getOrbotInstallIntent(getActivity());
@@ -529,18 +462,16 @@ public class AccountViewFragment extends Fragment {
 
             //mUseTor.setChecked(false);
             settings.setUseTor(false);
-        }
-        else
-        {
+        } else {
             settings.setUseTor(useTor);
         }
 
-        settingsForDomain(settings.getDomain(),settings.getPort(),settings);
+        settingsForDomain(settings.getDomain(), settings.getPort(), settings);
         settings.close();
     }
+
     private void checkUserChanged() {
-        if (mEditUserAccount != null)
-        {
+        if (mEditUserAccount != null) {
             String username = mEditUserAccount.getText().toString().trim().toLowerCase();
 
             if ((!username.equals(mOriginalUserAccount)) && parseAccount(username)) {
@@ -586,10 +517,10 @@ public class AccountViewFragment extends Fragment {
      * If we know the direct XMPP server for a domain, we should turn off DNS lookup
      * because it is slow, error prone, and a way to leak information from third parties
      */
-    void settingsForDomain(String domain,int port) {
+    void settingsForDomain(String domain, int port) {
 
         ContentResolver cr = getActivity().getContentResolver();
-        Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI,new String[] {Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE},Imps.ProviderSettings.PROVIDER + "=?",new String[] { Long.toString(mProviderId)},null);
+        Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI, new String[]{Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE}, Imps.ProviderSettings.PROVIDER + "=?", new String[]{Long.toString(mProviderId)}, null);
 
         Imps.ProviderSettings.QueryMap settings = new Imps.ProviderSettings.QueryMap(
                 pCursor, cr, mProviderId, false /* don't keep updated */, null /* no handler */);
@@ -612,16 +543,13 @@ public class AccountViewFragment extends Fragment {
         settings.setPort(port);
 
         //if use Tor, turn off DNS resolution, and set Server manually from Domain
-        if (settings.getUseTor())
-        {
+        if (settings.getUseTor()) {
             settings.setDoDnsSrv(false);
 
             //if Tor is off, and the user has not provided any values here, set to the @domain
             if (settings.getServer() == null || settings.getServer().length() == 0)
                 settings.setServer(domain);
-        }
-        else if (settings.getServer() == null || settings.getServer().length() == 0)
-        {
+        } else if (settings.getServer() == null || settings.getServer().length() == 0) {
             //if Tor is off, and the user has not provided any values here, then reset to nothing
             settings.setDoDnsSrv(true);
             settings.setServer("");
@@ -639,7 +567,7 @@ public class AccountViewFragment extends Fragment {
         values.put(AccountColumns.KEEP_SIGNED_IN, 0);
         getActivity().getContentResolver().update(mAccountUri, values, null, null);
 
-        mApp = (ImApp)getActivity().getApplication();
+        mApp = (ImApp) getActivity().getApplication();
 
         mApp.callWhenServiceConnected(mHandler, new Runnable() {
             @Override
@@ -655,7 +583,7 @@ public class AccountViewFragment extends Fragment {
 
         try {
 
-            IImConnection conn = mApp.getConnection(providerId,accountId);
+            IImConnection conn = mApp.getConnection(providerId, accountId);
             if (conn != null) {
                 conn.logout();
             } else {
@@ -668,7 +596,7 @@ public class AccountViewFragment extends Fragment {
                 values.put(AccountStatusColumns.CONNECTION_STATUS, Imps.ConnectionStatus.OFFLINE);
                 String where = AccountStatusColumns.ACCOUNT + "=?";
                 getActivity().getContentResolver().update(Imps.AccountStatus.CONTENT_URI, values, where,
-                        new String[] { Long.toString(accountId) });
+                        new String[]{Long.toString(accountId)});
             }
         } catch (RemoteException ex) {
             Log.e(ImApp.LOG_TAG, "signout: caught ", ex);
@@ -680,17 +608,15 @@ public class AccountViewFragment extends Fragment {
         }
     }
 
-    void createNewaccount (long accountId)
-    {
+    void createNewaccount(long accountId) {
 
-            ContentValues values = new ContentValues(2);
+        ContentValues values = new ContentValues(2);
 
-            values.put(AccountStatusColumns.PRESENCE_STATUS, CommonPresenceColumns.NEW_ACCOUNT);
-            values.put(AccountStatusColumns.CONNECTION_STATUS, Imps.ConnectionStatus.OFFLINE);
-            String where = AccountStatusColumns.ACCOUNT + "=?";
+        values.put(AccountStatusColumns.PRESENCE_STATUS, CommonPresenceColumns.NEW_ACCOUNT);
+        values.put(AccountStatusColumns.CONNECTION_STATUS, Imps.ConnectionStatus.OFFLINE);
+        String where = AccountStatusColumns.ACCOUNT + "=?";
         getActivity().getContentResolver().update(Imps.AccountStatus.CONTENT_URI, values, where,
                 new String[]{Long.toString(accountId)});
-
 
 
     }
@@ -704,18 +630,13 @@ public class AccountViewFragment extends Fragment {
         mEditPass.setFocusable(goodUsername);
         mEditPass.setFocusableInTouchMode(goodUsername);
 
-        //mRememberPass.setEnabled(hasNameAndPassword);
-        //mRememberPass.setFocusable(hasNameAndPassword);
-
         mEditUserAccount.setEnabled(!isSignedIn);
         mEditPass.setEnabled(!isSignedIn);
 
         if (!isSignedIn) {
             mBtnSignIn.setEnabled(hasNameAndPassword);
             mBtnSignIn.setFocusable(hasNameAndPassword);
-        }
-        else
-        {
+        } else {
 
         }
     }
@@ -737,11 +658,10 @@ public class AccountViewFragment extends Fragment {
         }
     };
 
-    private void deleteAccount ()
-    {
+    private void deleteAccount() {
 
         //need to delete
-        ((ImApp)getActivity().getApplication()).deleteAccount(getActivity().getContentResolver(),mAccountId, mProviderId);
+        ((ImApp) getActivity().getApplication()).deleteAccount(getActivity().getContentResolver(), mAccountId, mProviderId);
 
     }
 
@@ -754,10 +674,8 @@ public class AccountViewFragment extends Fragment {
         startActivity(intent);
     }
 
-    public void createNewAccount (final String usernameNew, final String passwordNew, final long newAccountId, final boolean useTor)
-    {
-        if (mCreateAccountTask != null && (!mCreateAccountTask.isCancelled()))
-        {
+    public void createNewAccount(final String usernameNew, final String passwordNew, final long newAccountId, final boolean useTor) {
+        if (mCreateAccountTask != null && (!mCreateAccountTask.isCancelled())) {
             mCreateAccountTask.cancel(true);
         }
 
@@ -776,16 +694,16 @@ public class AccountViewFragment extends Fragment {
             @Override
             protected String doInBackground(Void... params) {
                 ContentResolver cr = getActivity().getContentResolver();
-                Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI,new String[] {Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE},Imps.ProviderSettings.PROVIDER + "=?",new String[] { Long.toString(mProviderId)},null);
+                Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI, new String[]{Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE}, Imps.ProviderSettings.PROVIDER + "=?", new String[]{Long.toString(mProviderId)}, null);
 
                 Imps.ProviderSettings.QueryMap settings = new Imps.ProviderSettings.QueryMap(
-                       pCursor, cr, mProviderId, false /* don't keep updated */, null /* no handler */);
+                        pCursor, cr, mProviderId, false /* don't keep updated */, null /* no handler */);
 
                 try {
                     settings.setUseTor(useTor);
                     settingsForDomain(mDomain, mPort, settings);
 
-                    HashMap<String,String> aParams = new HashMap<String,String>();
+                    HashMap<String, String> aParams = new HashMap<String, String>();
 
                     XmppConnection xmppConn = new XmppConnection(getActivity());
 
@@ -802,48 +720,32 @@ public class AccountViewFragment extends Fragment {
                 }
 
                 return null;
-              }
+            }
 
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
 
-                try
-                {
+                try {
                     if (dialog != null && dialog.isShowing()) {
                         dialog.dismiss();
                         dialog = null;
                     }
-                }
-                catch ( java.lang.IllegalArgumentException iae)
-                {
+                } catch (java.lang.IllegalArgumentException iae) {
                     //dialog may not be attached to window if Activity was closed
                 }
 
-                if (result != null)
-                {
+                if (result != null) {
                     Toast.makeText(getActivity(), "error creating account: " + result, Toast.LENGTH_LONG).show();
                     //AccountActivity.this.setResult(Activity.RESULT_CANCELED);
                     //AccountActivity.this.finish();
-                }
-                else
-                {
+                } else {
                     mSignInHelper.activateAccount(mProviderId, newAccountId);
                     mSignInHelper.signIn(passwordNew, mProviderId, newAccountId, true);
-
-//                    AccountViewFragment.this.setResult(Activity.RESULT_OK);
-  //                  AccountViewFragment.this.finish();
                 }
             }
         }.execute();
     }
-
-//    public void showQR ()
-//    {
-//           String localFingerprint = OtrAndroidKeyManagerImpl.getInstance(getActivity()).getLocalFingerprint(mOriginalUserAccount);
-//           String uri = XmppUriHelper.getUri(mOriginalUserAccount, localFingerprint);
-//         //  new IntentIntegrator(this).shareText(uri);
-//    }
 
     private void setAccountKeepSignedIn(final boolean rememberPass) {
         ContentValues values = new ContentValues();

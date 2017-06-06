@@ -150,7 +150,6 @@ public class ContactsPickerActivity extends BaseActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 multiStart(i);
-                //getSupportActionBar().startActionMode(mActionModeCallback);
 
                 return true;
             }
@@ -494,13 +493,7 @@ public class ContactsPickerActivity extends BaseActivity {
                 holder.mButtonSubApprove = (Button)view.findViewById(R.id.btnApproveSubscription);
                 holder.mButtonSubDecline = (Button)view.findViewById(R.id.btnDeclineSubscription);
 
-                //holder.mStatusIcon = (ImageView)view.findViewById(R.id.statusIcon);
-                //holder.mStatusText = (TextView)view.findViewById(R.id.statusText);
-                //holder.mEncryptionIcon = (ImageView)view.findViewById(R.id.encryptionIcon);
-
                 holder.mContainer = view.findViewById(R.id.message_container);
-
-                // holder.mMediaThumb = (ImageView)findViewById(R.id.media_thumbnail);
                 view.setTag(holder);
             }
 
@@ -531,7 +524,6 @@ public class ContactsPickerActivity extends BaseActivity {
 
             CursorLoader loader = new CursorLoader(ContactsPickerActivity.this, mUri, ContactListItem.CONTACT_PROJECTION,
                     buf == null ? null : buf.toString(), null, Imps.Contacts.MODE_AND_ALPHA_SORT_ORDER);
-        //    loader.setUpdateThrottle(50L);
             return loader;
         }
 

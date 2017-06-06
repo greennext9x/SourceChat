@@ -88,23 +88,15 @@ public class AccountActivity extends BaseActivity {
     public final static String ONION_CALYX = "ijeeynrc6x2uy5ob.onion";
     
     private static final String USERNAME_VALIDATOR = "[^a-z0-9\\.\\-_\\+]";
-    //    private static final int ACCOUNT_KEEP_SIGNED_IN_COLUMN = 4;
-    //    private static final int ACCOUNT_LAST_LOGIN_STATE = 5;
 
     Uri mAccountUri;
     EditText mEditUserAccount;
     EditText mEditPass;
     EditText mEditPassConfirm;
-   // CheckBox mRememberPass;
-   // CheckBox mUseTor;
- //   Button mBtnSignIn;
-//    Button mBtnQrDisplay;
     AutoCompleteTextView mSpinnerDomains;
 
     Button mBtnAdvanced;
     TextView mTxtFingerprint;
-
-    //Imps.ProviderSettings.QueryMap settings;
 
     boolean isEdit = false;
     boolean isSignedIn = false;
@@ -146,8 +138,6 @@ public class AccountActivity extends BaseActivity {
             public void stateChanged(int state, long accountId) {
                 if (state == ImConnection.LOGGED_IN)
                 {
-                  //  mSignInHelper.goToAccount(accountId);
-                   // finish();
                     isSignedIn = true;
                 }
                 else
@@ -209,10 +199,6 @@ public class AccountActivity extends BaseActivity {
                 cursor.close();
                 return;
             }
-
-
-
-
         } else if (Intent.ACTION_INSERT.equals(action)) {
 
 
@@ -276,16 +262,12 @@ public class AccountActivity extends BaseActivity {
                                        + settings.getDomain();
                 mEditUserAccount.setText(mOriginalUserAccount);
                 mEditPass.setText(cursor.getString(ACCOUNT_PASSWORD_COLUMN));
-                //mRememberPass.setChecked(!cursor.isNull(ACCOUNT_PASSWORD_COLUMN));
-                //mUseTor.setChecked(settings.getUseTor());
-
                 mPort = settings.getPort();
                 
             } finally {
                 settings.close();
                 cursor.close();
             }
-
 
         } else {
             LogCleaner.warn(ImApp.LOG_TAG, "<AccountActivity> unknown intent action " + action);
@@ -326,156 +308,14 @@ public class AccountActivity extends BaseActivity {
             mEditPassConfirm.setVisibility(View.VISIBLE);
             mSpinnerDomains.setVisibility(View.VISIBLE);
             mEditUserAccount.setHint(R.string.account_setup_new_username);
-
-            /*
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.account_domains));
-            mSpinnerDomains.setAdapter(adapter);
-            */
-
         }
-
-        //mRememberPass = (CheckBox) findViewById(R.id.rememberPassword);
-        //mUseTor = (CheckBox) findViewById(R.id.useTor);
-
-
-       // mBtnSignIn = (Button) findViewById(R.id.btnSignIn);
-
-//        if (mIsNewAccount)
-  //          mBtnSignIn.setText(R.string.btn_create_new_account);
-
-//        viewCreate = (Button) findViewById(R.id.btnAdvanced);
-
-        /**
-        mRememberPass.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateWidgetState();
-            }
-        });*/
-
     }
 
     private void setupUIPost ()
     {
         Intent i = getIntent();
-
-
-
         mEditUserAccount.addTextChangedListener(mTextWatcher);
         mEditPass.addTextChangedListener(mTextWatcher);
-
-        /**
-        mBtnAdvanced.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                showAdvanced();
-            }
-        });*/
-
-
-        /**
-
-        mBtnSignIn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                checkUserChanged();
-
-                final String pass = mEditPass.getText().toString();
-                final String passConf = mEditPassConfirm.getText().toString();
-                final boolean rememberPass =true;// mRememberPass.isChecked();
-                final boolean isActive = false; // TODO(miron) does this ever need to be true?
-                ContentResolver cr = getContentResolver();
-                final boolean useTor = false;// mUseTor.isChecked();
-
-                if (mIsNewAccount)
-                {
-                    mDomain = mSpinnerDomains.getText().toString();
-                    String fullUser = mEditUserAccount.getText().toString();
-
-                    if (fullUser.indexOf("@")==-1)
-                        fullUser += '@' + mDomain;
-
-                    if (!parseAccount(fullUser)) {
-                        mEditUserAccount.selectAll();
-                        mEditUserAccount.requestFocus();
-                        return;
-                    }
-
-                    ImPluginHelper helper = ImPluginHelper.getInstance(AccountActivity.this);
-                    mProviderId = helper.createAdditionalProvider(helper.getProviderNames().get(0)); //xmpp FIXME
-
-                }
-                else
-                {
-                    if (!parseAccount(mEditUserAccount.getText().toString())) {
-                        mEditUserAccount.selectAll();
-                        mEditUserAccount.requestFocus();
-                        return;
-                    }
-                    else
-                    {
-                        settingsForDomain(mDomain,mPort);//apply final settings
-                    }
-                }
-
-
-                mAccountId = ImApp.insertOrUpdateAccount(cr, mProviderId, mAccountId, mUserName, mUserName,
-                        rememberPass ? pass : null);
-
-                mAccountUri = ContentUris.withAppendedId(Imps.Account.CONTENT_URI, mAccountId);
-
-                //if remember pass is true, set the "keep signed in" property to true
-                if (mIsNewAccount)
-                {
-                    if (pass.equals(passConf))
-                    {
-                        setAccountKeepSignedIn(rememberPass);
-
-                        createNewAccount(mUserName, pass, mAccountId, useTor);
-
-                    }
-                    else
-                    {
-                       Toast.makeText(AccountActivity.this, getString(R.string.error_account_password_mismatch), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else
-                {
-                    if (isSignedIn) {((MainActivity)getActivity()).showGroupChatDialog();
-                        signOut();
-                        isSignedIn = false;
-                    } else {
-                        setAccountKeepSignedIn(rememberPass);
-
-
-                        boolean hasKey = checkForKey (mUserName + '@' + mDomain);
-
-                        mSignInHelper.signIn(pass, mProviderId, mAccountId, isActive);
-
-
-                        isSignedIn = true;
-                        setResult(RESULT_OK);
-                        finish();
-                    }
-                    updateWidgetState();
-
-
-                }
-
-            }
-        });*/
-
-        /**
-        mUseTor.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateUseTor(isChecked);
-            }
-        });*/
-
         updateWidgetState();
 
         if (i.hasExtra("title"))
@@ -498,13 +338,10 @@ public class AccountActivity extends BaseActivity {
         {
             mEditPass.setText(i.getExtras().getString("newpass"));
             mEditPass.setVisibility(View.GONE);
-      //     mRememberPass.setChecked(true);((MainActivity)getActivity()).showGroupChatDialog();
-       //     mRememberPass.setVisibility(View.GONE);
         }
 
         if (i.getBooleanExtra("hideTor", false))
         {
-       //     mUseTor.setVisibility(View.GONE);
         }
 
     }
@@ -570,8 +407,6 @@ public class AccountActivity extends BaseActivity {
     private void updateUseTor(boolean useTor) {
         checkUserChanged();
 
-     //   OrbotHelper orbotHelper = new OrbotHelper(this);
-
         ContentResolver cr = getContentResolver();
         Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI, new String[]{Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE}, Imps.ProviderSettings.PROVIDER + "=?", new String[]{Long.toString(mProviderId)}, null);
 
@@ -580,11 +415,6 @@ public class AccountActivity extends BaseActivity {
 
         if (useTor)
         {
-            //Toast.makeText(this, "Orbot app is not installed. Please install from Google Play or from https://guardianproject.info/releases", Toast.LENGTH_LONG).show();
-
-           // orbotHelper.promptToInstall(this);
-
-           // mUseTor.setChecked(false);
             settings.setUseTor(false);
         }
         else
@@ -595,37 +425,6 @@ public class AccountActivity extends BaseActivity {
         settingsForDomain(settings.getDomain(),settings.getPort(),settings);
         settings.close();
     }
-/*
-    private void getOTRKeyInfo() {
-
-        if (mApp != null && FFF != null) {
-            try {
-                otrKeyManager = mApp.getRemoteImService().getOtrKeyManager(mOriginalUserAccount);
-
-                if (otrKeyManager == null) {
-                    mTxtFingerprint = ((TextView) findViewById(R.id.txtFingerprint));
-
-                    String localFingerprint = otrKeyManager.getLocalFingerprint();
-                    if (localFingerprint != null) {
-                        ((TextView) findViewById(R.id.lblFingerprint)).setVisibility(View.VISIBLE);
-                        mTxtFingerprint.setText(processFingerprint(localFingerprint));
-                    } else {
-                        ((TextView) findViewById(R.id.lblFingerprint)).setVisibility(View.GONE);
-                        mTxtFingerprint.setText("");
-                    }
-                } else {
-                    //don't need to notify people if there is nothing to show here
-//                    Toast.makeText(this, "OTR is not initialized yet", Toast.LENGTH_SHORT).show();
-                }
-
-            } catch (Exception e) {
-                Log.e(ImApp.LOG_TAG, "error on create", e);
-
-            }
-        }
-
-    }*/
-
     private void checkUserChanged() {
         if (mEditUserAccount != null)
         {
@@ -772,14 +571,7 @@ public class AccountActivity extends BaseActivity {
         } catch (RemoteException ex) {
             Log.e(ImApp.LOG_TAG, "signout: caught ", ex);
         } finally {
-
-        //    Toast.makeText(this,
-        //            getString(R.string.signed_out_prompt, this.mEditUserAccount.getText()),
-        //            Toast.LENGTH_SHORT).show();
             isSignedIn = false;
-
-            //mBtnSignIn.setText(getString(R.string.sign_in));
-            //mBtnSignIn.setBackgroundResource(R.drawable.btn_green);
         }
     }
 
@@ -820,20 +612,8 @@ public class AccountActivity extends BaseActivity {
         mEditPass.setFocusable(goodUsername);
         mEditPass.setFocusableInTouchMode(goodUsername);
 
-        //mRememberPass.setEnabled(hasNameAndPassword);
-        //mRememberPass.setFocusable(hasNameAndPassword);
-
         mEditUserAccount.setEnabled(!isSignedIn);
         mEditPass.setEnabled(!isSignedIn);
-
-        if (!isSignedIn) {
-         //   mBtnSignIn.setEnabled(hasNameAndPassword);
-          //  mBtnSignIn.setFocusable(hasNameAndPassword);
-        }
-        else
-        {
-
-        }
     }
 
     private final TextWatcher mTextWatcher = new TextWatcher() {
@@ -890,11 +670,6 @@ public class AccountActivity extends BaseActivity {
         case android.R.id.home:
             finish();
             return true;
-/*
-        case R.id.menu_account_delete:
-            deleteAccount();
-            return true;
-*/
         }
         return super.onOptionsItemSelected(item);
     }
@@ -968,8 +743,6 @@ public class AccountActivity extends BaseActivity {
                 if (result != null)
                 {
                     Toast.makeText(AccountActivity.this, "error creating account: " + result, Toast.LENGTH_LONG).show();
-                    //AccountActivity.this.setResult(Activity.RESULT_CANCELED);
-                    //AccountActivity.this.finish();
                 }
                 else
                 {
@@ -982,14 +755,6 @@ public class AccountActivity extends BaseActivity {
             }
         }.execute();
     }
-
-//    public void showQR ()
-//    {
-//           String localFingerprint = OtrAndroidKeyManagerImpl.getInstance(this).getLocalFingerprint(mOriginalUserAccount);
-//           String uri = XmppUriHelper.getUri(mOriginalUserAccount, localFingerprint);
-//           new IntentIntegrator(this).shareText(uri);
-//    }
-
     private void setAccountKeepSignedIn(final boolean rememberPass) {
         ContentValues values = new ContentValues();
         values.put(Imps.AccountColumns.KEEP_SIGNED_IN, rememberPass ? 1 : 0);

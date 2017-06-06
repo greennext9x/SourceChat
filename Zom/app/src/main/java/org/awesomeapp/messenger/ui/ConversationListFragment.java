@@ -66,7 +66,6 @@ public class ConversationListFragment extends Fragment {
     private RecyclerView mRecView;
 
     private View mEmptyView;
-//    private View mEmptyViewImage;
 
     @Nullable
     @Override
@@ -76,25 +75,7 @@ public class ConversationListFragment extends Fragment {
 
         mRecView =  (RecyclerView)view.findViewById(R.id.recyclerview);
         mEmptyView = view.findViewById(R.id.empty_view);
-
-
-//        mEmptyViewImage = view.findViewById(R.id.empty_view_image);
-//        mEmptyViewImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                ((MainActivity)getActivity()).inviteContact();
-//            }
-//        });
-
         setupRecyclerView(mRecView);
-
-        //not set color
-        /**
-        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int themeColorBg = settings.getInt("themeColorBg",-1);
-        view.setBackgroundColor(themeColorBg);
-            */
 
         return view;
     }
@@ -145,13 +126,11 @@ public class ConversationListFragment extends Fragment {
         if (mAdapter.getItemCount() == 0) {
             mRecView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
-//            mEmptyViewImage.setVisibility(View.VISIBLE);
 
         }
         else if (mRecView.getVisibility() == View.GONE) {
             mRecView.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
-//            mEmptyViewImage.setVisibility(View.GONE);
 
         }
 
@@ -293,11 +272,6 @@ public class ConversationListFragment extends Fragment {
             if (!TextUtils.isEmpty(mSearchString)) {
 
                 mUri = Imps.Messages.CONTENT_URI_MESSAGES_BY_SEARCH;
-
-           //     buf.append("contacts." + Imps.Contacts.NICKNAME);
-            //    buf.append(" LIKE ");
-            //    DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
-             //     buf.append(" OR ");
                 buf.append(Imps.Messages.BODY);
                 buf.append(" LIKE ");
                 DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
@@ -332,13 +306,11 @@ public class ConversationListFragment extends Fragment {
             {
                 mRecView.setVisibility(View.VISIBLE);
                 mEmptyView.setVisibility(View.GONE);
-//                mEmptyViewImage.setVisibility(View.GONE);
 
             }
             else if (mAdapter.getItemCount() == 0) {
                 mRecView.setVisibility(View.GONE);
                 mEmptyView.setVisibility(View.VISIBLE);
-//                mEmptyViewImage.setVisibility(View.VISIBLE);
 
             }
 
@@ -362,8 +334,6 @@ public class ConversationListFragment extends Fragment {
                 Imps.Presence.PRESENCE_CUSTOM_STATUS,
                 Imps.Chats.LAST_MESSAGE_DATE,
                 Imps.Chats.LAST_UNREAD_MESSAGE
-      //          Imps.Contacts.AVATAR_HASH,
-        //        Imps.Contacts.AVATAR_DATA
 
         };
 

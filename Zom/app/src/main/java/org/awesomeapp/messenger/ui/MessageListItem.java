@@ -166,7 +166,7 @@ public class MessageListItem extends FrameLayout {
             boolean scrolling, EncryptionState encryption, boolean showContact, int presenceStatus) {
 
         mHolder = holder;
-        applyStyleColors();
+//        applyStyleColors();
         mHolder.mTextViewForMessages.setVisibility(View.VISIBLE);
 //        mHolder.mAudioContainer.setVisibility(View.GONE);
         mHolder.mMediaContainer.setVisibility(View.GONE);
@@ -537,7 +537,7 @@ public class MessageListItem extends FrameLayout {
             DeliveryState delivery, EncryptionState encryption) {
 
         mHolder = holder;
-        applyStyleColors();
+//        applyStyleColors();
 
         mHolder.mTextViewForMessages.setVisibility(View.VISIBLE);
         mHolder.mMediaContainer.setVisibility(View.GONE);
@@ -861,49 +861,49 @@ public class MessageListItem extends FrameLayout {
             return spanText;
         }
     }
-    public void applyStyleColors ()
-    {
-        //not set color
-        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int themeColorHeader = settings.getInt("themeColor",-1);
-        int themeColorText = settings.getInt("themeColorText",-1);
-        int themeColorBg = settings.getInt("themeColorBg",-1);
+//    public void applyStyleColors ()
+//    {
+//        //not set color
+//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+//        int themeColorHeader = settings.getInt("themeColor",-1);
+//        int themeColorText = settings.getInt("themeColorText",-1);
+//        int themeColorBg = settings.getInt("themeColorBg",-1);
+//
+//        if (mHolder != null) {
+//            if (themeColorText != -1) {
+//                if (mHolder.mTextViewForMessages != null)
+//                    mHolder.mTextViewForMessages.setTextColor(themeColorText);
+//
+//                if (mHolder.mTextViewForTimestamp != null)
+//                    mHolder.mTextViewForTimestamp.setTextColor(themeColorText);
+//
+//            }
+//
+//            if (themeColorBg != -1)
+//            {
+//
+//                int textBubbleBg = getContrastColor(themeColorText);
+//                 if (textBubbleBg == Color.BLACK)
+//                    mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_dark);
+//                 else
+//                    mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_light);
+//
+//                //mHolder.mContainer.setBackgroundResource(android.R.color.transparent);
+//                //mHolder.mContainer.setBackgroundColor(themeColorBg);
+//            }
+//            else
+//            {
+//                mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_light);
+//
+//            }
+//        }
+//
+//    }
 
-        if (mHolder != null) {
-            if (themeColorText != -1) {
-                if (mHolder.mTextViewForMessages != null)
-                    mHolder.mTextViewForMessages.setTextColor(themeColorText);
-
-                if (mHolder.mTextViewForTimestamp != null)
-                    mHolder.mTextViewForTimestamp.setTextColor(themeColorText);
-
-            }
-
-            if (themeColorBg != -1)
-            {
-
-                int textBubbleBg = getContrastColor(themeColorText);
-                 if (textBubbleBg == Color.BLACK)
-                    mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_dark);
-                 else
-                    mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_light);
-
-                //mHolder.mContainer.setBackgroundResource(android.R.color.transparent);
-                //mHolder.mContainer.setBackgroundColor(themeColorBg);
-            }
-            else
-            {
-                mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_light);
-
-            }
-        }
-
-    }
-
-    public static int getContrastColor(int colorIn) {
-        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
-        return y >= 128 ? Color.BLACK : Color.WHITE;
-    }
+//    public static int getContrastColor(int colorIn) {
+//        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
+//        return y >= 128 ? Color.BLACK : Color.WHITE;
+//    }
 
     @TargetApi(Build.VERSION_CODES.N)
     public Locale getCurrentLocale(){

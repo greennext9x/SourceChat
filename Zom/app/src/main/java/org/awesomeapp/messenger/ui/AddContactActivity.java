@@ -73,13 +73,13 @@ import im.zom.messenger.R;
 public class AddContactActivity extends BaseActivity {
     private static final String TAG = "AddContactActivity";
 
-    private static final String[] CONTACT_LIST_PROJECTION = { Imps.ContactList._ID,
-                                                             Imps.ContactList.NAME, };
+    private static final String[] CONTACT_LIST_PROJECTION = {Imps.ContactList._ID,
+            Imps.ContactList.NAME,};
     private static final int CONTACT_LIST_NAME_COLUMN = 1;
 
     private EditText mNewAddress;
     //private Spinner mListSpinner;
-  //  Button mInviteButton;
+    //  Button mInviteButton;
     ImApp mApp;
     SimpleAlertHandler mHandler;
 
@@ -99,7 +99,7 @@ public class AddContactActivity extends BaseActivity {
 
         setTitle("");
 
-        mApp = (ImApp)getApplication();
+        mApp = (ImApp) getApplication();
 
         mHandler = new SimpleAlertHandler(this);
 
@@ -123,12 +123,11 @@ public class AddContactActivity extends BaseActivity {
 
         Intent intent = getIntent();
         String scheme = intent.getScheme();
-        if (TextUtils.equals(scheme, "xmpp"))
-        {
+        if (TextUtils.equals(scheme, "xmpp")) {
             addContactFromUri(intent.getData());
         }
 
-        setupActions ();
+//        setupActions ();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -138,8 +137,7 @@ public class AddContactActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!checkConnection())
-        {
+        if (!checkConnection()) {
             Snackbar sb = Snackbar.make(findViewById(R.id.main_content), R.string.error_suspended_connection, Snackbar.LENGTH_LONG);
             sb.setAction(getString(R.string.connect), new View.OnClickListener() {
                 @Override
@@ -153,91 +151,89 @@ public class AddContactActivity extends BaseActivity {
         }
     }
 
-    private void setupActions ()
-    {
-
-//        View btnInviteSms = findViewById(R.id.btnInviteSMS);
-//        btnInviteSms.setOnClickListener(new View.OnClickListener() {
+//    private void setupActions ()
+//    {
 //
-//            @Override
-//            public void onClick(View v) {
+////        View btnInviteSms = findViewById(R.id.btnInviteSMS);
+////        btnInviteSms.setOnClickListener(new View.OnClickListener() {
+////
+////            @Override
+////            public void onClick(View v) {
+////
+////                ImApp app = ((ImApp)getApplication());
+////
+////                String nickname = app.getDefaultNickname();
+////                if (nickname == null)
+////                    nickname = new XmppAddress(app.getDefaultUsername()).getUser();
+////
+////                String inviteString = OnboardingManager.generateInviteMessage(AddContactActivity.this, nickname, app.getDefaultUsername(), app.getDefaultOtrKey());
+////                OnboardingManager.inviteSMSContact(AddContactActivity.this, null, inviteString);
+////            }
+////
+////        });
+////
+////        View btnInviteShare = findViewById(R.id.btnInviteShare);
+////        btnInviteShare.setOnClickListener(new View.OnClickListener()
+////        {
+////
+////            @Override
+////            public void onClick(View v) {
+////
+////                ImApp app = ((ImApp)getApplication());
+////
+////                String nickname = app.getDefaultNickname();
+////                if (nickname == null)
+////                    nickname = new XmppAddress(app.getDefaultUsername()).getUser();
+////
+////                String inviteString = OnboardingManager.generateInviteMessage(AddContactActivity.this,  nickname, app.getDefaultUsername(), app.getDefaultOtrKey());
+////                OnboardingManager.inviteShare(AddContactActivity.this, inviteString);
+////
+////            }
+////
+////        });
+////
+////        View btnInviteQR = findViewById(R.id.btnInviteScan);
+////        btnInviteQR.setOnClickListener(new View.OnClickListener() {
+////
+////            @Override
+////            public void onClick(View v) {
+////
+////                if (hasCameraPermission()) {
+////                    ImApp app = ((ImApp) getApplication());
+////
+////                    String nickname = app.getDefaultNickname();
+////                    if (nickname == null)
+////                        nickname = new XmppAddress(app.getDefaultUsername()).getUser();
+////
+////                    String inviteString;
+////                    try {
+////                        inviteString = OnboardingManager.generateInviteLink(AddContactActivity.this, app.getDefaultUsername(), app.getDefaultOtrKey(), nickname);
+////                        OnboardingManager.inviteScan(AddContactActivity.this, inviteString);
+////                    } catch (IOException e) {
+////                        e.printStackTrace();
+////                    }
+////                }
+////            }
+////
+////        });
 //
-//                ImApp app = ((ImApp)getApplication());
 //
-//                String nickname = app.getDefaultNickname();
-//                if (nickname == null)
-//                    nickname = new XmppAddress(app.getDefaultUsername()).getUser();
-//
-//                String inviteString = OnboardingManager.generateInviteMessage(AddContactActivity.this, nickname, app.getDefaultUsername(), app.getDefaultOtrKey());
-//                OnboardingManager.inviteSMSContact(AddContactActivity.this, null, inviteString);
-//            }
-//
-//        });
-//
-//        View btnInviteShare = findViewById(R.id.btnInviteShare);
-//        btnInviteShare.setOnClickListener(new View.OnClickListener()
-//        {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                ImApp app = ((ImApp)getApplication());
-//
-//                String nickname = app.getDefaultNickname();
-//                if (nickname == null)
-//                    nickname = new XmppAddress(app.getDefaultUsername()).getUser();
-//
-//                String inviteString = OnboardingManager.generateInviteMessage(AddContactActivity.this,  nickname, app.getDefaultUsername(), app.getDefaultOtrKey());
-//                OnboardingManager.inviteShare(AddContactActivity.this, inviteString);
-//
-//            }
-//
-//        });
-//
-//        View btnInviteQR = findViewById(R.id.btnInviteScan);
-//        btnInviteQR.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (hasCameraPermission()) {
-//                    ImApp app = ((ImApp) getApplication());
-//
-//                    String nickname = app.getDefaultNickname();
-//                    if (nickname == null)
-//                        nickname = new XmppAddress(app.getDefaultUsername()).getUser();
-//
-//                    String inviteString;
-//                    try {
-//                        inviteString = OnboardingManager.generateInviteLink(AddContactActivity.this, app.getDefaultUsername(), app.getDefaultOtrKey(), nickname);
-//                        OnboardingManager.inviteScan(AddContactActivity.this, inviteString);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//        });
-
-
-    }
+//    }
 
     private final static int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
-    boolean hasCameraPermission () {
+    boolean hasCameraPermission() {
         int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA);
 
-        if (permissionCheck == PackageManager.PERMISSION_DENIED)
-        {
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
 
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     MY_PERMISSIONS_REQUEST_CAMERA);
 
             return false;
-        }
-        else {
+        } else {
 
             return true;
         }
@@ -247,45 +243,42 @@ public class AddContactActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        
+
         if (mCursorProviders != null && (!mCursorProviders.isClosed()))
-                mCursorProviders.close();
-        
+            mCursorProviders.close();
+
     }
 
 
-
-    private void setupAccountSpinner ()
-    {
+    private void setupAccountSpinner() {
         final Uri uri = Imps.Provider.CONTENT_URI_WITH_ACCOUNT;
 
-        mCursorProviders = managedQuery(uri,  PROVIDER_PROJECTION,
-        Imps.Provider.CATEGORY + "=?" + " AND " + Imps.Provider.ACTIVE_ACCOUNT_USERNAME + " NOT NULL" /* selection */,
-        new String[] { ImApp.IMPS_CATEGORY } /* selection args */,
-        Imps.Provider.DEFAULT_SORT_ORDER);
-        
+        mCursorProviders = managedQuery(uri, PROVIDER_PROJECTION,
+                Imps.Provider.CATEGORY + "=?" + " AND " + Imps.Provider.ACTIVE_ACCOUNT_USERNAME + " NOT NULL" /* selection */,
+                new String[]{ImApp.IMPS_CATEGORY} /* selection args */,
+                Imps.Provider.DEFAULT_SORT_ORDER);
+
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_spinner_item, mCursorProviders, 
-                new String[] { 
-                       Imps.Provider.ACTIVE_ACCOUNT_USERNAME
-                       },
-                new int[] { android.R.id.text1 });
+                android.R.layout.simple_spinner_item, mCursorProviders,
+                new String[]{
+                        Imps.Provider.ACTIVE_ACCOUNT_USERNAME
+                },
+                new int[]{android.R.id.text1});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        
+
         // TODO Something is causing the managedQuery() to return null, use null guard for now
-        if (mCursorProviders != null && mCursorProviders.getCount() > 0)
-        {
+        if (mCursorProviders != null && mCursorProviders.getCount() > 0) {
             mCursorProviders.moveToFirst();
             mProviderId = mCursorProviders.getLong(PROVIDER_ID_COLUMN);
             mAccountId = mCursorProviders.getLong(ACTIVE_ACCOUNT_ID_COLUMN);
         }
     }
-    
+
     public class ProviderListItemFactory implements LayoutInflater.Factory {
         @Override
         public View onCreateView(String name, Context context, AttributeSet attrs) {
             if (name != null && name.equals(AccountListItem.class.getName())) {
-            //    return new ProviderListItem(context, AddContactActivity.this, null);
+                //    return new ProviderListItem(context, AddContactActivity.this, null);
                 return new AccountListItem(context, attrs);
             }
             return null;
@@ -306,10 +299,9 @@ public class AddContactActivity extends BaseActivity {
         return 0;
     }
 
-    private String getDomain (long providerId)
-    {
+    private String getDomain(long providerId) {
         //mDefaultDomain = Imps.ProviderSettings.getStringValue(getContentResolver(), mProviderId,
-          //      ImpsConfigNames.DEFAULT_DOMAIN);
+        //      ImpsConfigNames.DEFAULT_DOMAIN);
         ContentResolver cr = getContentResolver();
         Cursor pCursor = cr.query(Imps.ProviderSettings.CONTENT_URI, new String[]{Imps.ProviderSettings.NAME, Imps.ProviderSettings.VALUE}, Imps.ProviderSettings.PROVIDER + "=?", new String[]{Long.toString(providerId)}, null);
 
@@ -347,7 +339,6 @@ public class AddContactActivity extends BaseActivity {
             setResult(RESULT_OK, intent);
             finish();
         }
-
 
 
     }
@@ -397,7 +388,7 @@ public class AddContactActivity extends BaseActivity {
 
     private View.OnClickListener mScanHandler = new View.OnClickListener() {
         public void onClick(View v) {
-         //   new IntentIntegrator(AddContactActivity.this).initiateScan();
+            //   new IntentIntegrator(AddContactActivity.this).initiateScan();
 
         }
     };
@@ -427,59 +418,36 @@ public class AddContactActivity extends BaseActivity {
             if (requestCode == OnboardingManager.REQUEST_SCAN) {
 
                 ArrayList<String> resultScans = resultIntent.getStringArrayListExtra("result");
-                for (String resultScan : resultScans)
-                {
+                for (String resultScan : resultScans) {
 
                     try {
-                        if (resultScan.startsWith("xmpp:"))
-                        {
+                        if (resultScan.startsWith("xmpp:")) {
                             String address = XmppUriHelper.parse(Uri.parse(resultScan)).get(XmppUriHelper.KEY_ADDRESS);
-                            String fingerprint =  XmppUriHelper.getOtrFingerprint(resultScan);
+                            String fingerprint = XmppUriHelper.getOtrFingerprint(resultScan);
 
                             new AddContactAsyncTask(mApp.getDefaultProviderId(), mApp.getDefaultAccountId(), mApp).execute(address, fingerprint);
 
-                            Intent intent=new Intent();
+                            Intent intent = new Intent();
                             intent.putExtra(ContactsPickerActivity.EXTRA_RESULT_USERNAME, address);
                             intent.putExtra(ContactsPickerActivity.EXTRA_RESULT_PROVIDER, mApp.getDefaultProviderId());
                             setResult(RESULT_OK, intent);
 
                         }
-//                        else {
-//                            //parse each string and if they are for a new user then add the user
-//                            String[] parts = OnboardingManager.decodeInviteLink(resultScan);
-//                            String address = parts[0];
-//                            String fingerprint = null, nickname = null;
-//                            if (parts.length > 1)
-//                                fingerprint = parts[1];
-//                            if (parts.length > 2)
-//                                nickname = parts[2];
-//
-//                            new AddContactAsyncTask(mApp.getDefaultProviderId(), mApp.getDefaultAccountId(), mApp).execute(address, fingerprint, nickname);
-//
-//                            Intent intent=new Intent();
-//                            intent.putExtra(ContactsPickerActivity.EXTRA_RESULT_USERNAME, address);
-//                            intent.putExtra(ContactsPickerActivity.EXTRA_RESULT_PROVIDER, mApp.getDefaultProviderId());
-//                            setResult(RESULT_OK, intent);
-//                        }
 
                         //if they are for a group chat, then add the group
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         Log.w(ImApp.LOG_TAG, "error parsing QR invite link", e);
                     }
                 }
             }
 
             finish();
-
         }
-
-
     }
 
     /**
      * Implement {@code xmpp:} URI parsing according to the RFC: http://tools.ietf.org/html/rfc5122
+     *
      * @param uri the URI to be parsed
      */
     private void addContactFromUri(Uri uri) {
@@ -491,7 +459,7 @@ public class AddContactActivity extends BaseActivity {
         }
         String address = parsedUri.get(XmppUriHelper.KEY_ADDRESS);
         mNewAddress.setText(address);
-      //  this.mInviteButton.setBackgroundColor(R.drawable.btn_green);
+        //  this.mInviteButton.setBackgroundColor(R.drawable.btn_green);
 
         //store this for future use... ideally the user comes up as verified the first time!
         String fingerprint = parsedUri.get(XmppUriHelper.KEY_OTR_FINGERPRINT);
@@ -530,20 +498,21 @@ public class AddContactActivity extends BaseActivity {
         }
 
     }
+
     private static final String[] PROVIDER_PROJECTION = {
-                                                         Imps.Provider._ID,
-                                                         Imps.Provider.NAME,
-                                                         Imps.Provider.FULLNAME,
-                                                         Imps.Provider.CATEGORY,
-                                                         Imps.Provider.ACTIVE_ACCOUNT_ID,
-                                                         Imps.Provider.ACTIVE_ACCOUNT_USERNAME,
-                                                         Imps.Provider.ACTIVE_ACCOUNT_PW,
-                                                         Imps.Provider.ACTIVE_ACCOUNT_LOCKED,
-                                                         Imps.Provider.ACTIVE_ACCOUNT_KEEP_SIGNED_IN,
-                                                         Imps.Provider.ACCOUNT_PRESENCE_STATUS,
-                                                         Imps.Provider.ACCOUNT_CONNECTION_STATUS
-                                                         
-                                                        };
+            Imps.Provider._ID,
+            Imps.Provider.NAME,
+            Imps.Provider.FULLNAME,
+            Imps.Provider.CATEGORY,
+            Imps.Provider.ACTIVE_ACCOUNT_ID,
+            Imps.Provider.ACTIVE_ACCOUNT_USERNAME,
+            Imps.Provider.ACTIVE_ACCOUNT_PW,
+            Imps.Provider.ACTIVE_ACCOUNT_LOCKED,
+            Imps.Provider.ACTIVE_ACCOUNT_KEEP_SIGNED_IN,
+            Imps.Provider.ACCOUNT_PRESENCE_STATUS,
+            Imps.Provider.ACCOUNT_CONNECTION_STATUS
+
+    };
 
     static final int PROVIDER_ID_COLUMN = 0;
     static final int PROVIDER_NAME_COLUMN = 1;

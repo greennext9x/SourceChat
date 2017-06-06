@@ -137,8 +137,6 @@ public class ConversationView {
     public static final int SUBSCRIPTION_STATUS_COLUMN = 10;
     public static final int AVATAR_COLUMN = 11;
 
-    //static final int MIME_TYPE_COLUMN = 9;
-
     static final String[] INVITATION_PROJECT = {Imps.Invitation._ID, Imps.Invitation.PROVIDER,
             Imps.Invitation.SENDER,};
     static final int INVITATION_ID_COLUMN = 0;
@@ -155,17 +153,11 @@ public class ConversationView {
     private SimpleAlertHandler mHandler;
     IImConnection mConn;
 
-    //private ImageView mStatusIcon;
-    // private TextView mTitle;
     /*package*/ RecyclerView mHistory;
     EditText mComposeMessage;
     private ImageButton mSendButton;
-    //    private TextView mButtonTalk;
     private ImageButton mButtonAttach;
     private View mViewAttach;
-
-//    private ImageView mButtonDeleteVoice;
-//    private View mViewDeleteVoice;
 
     private View mStatusWarningView;
     private TextView mWarningText;
@@ -205,7 +197,6 @@ public class ConversationView {
     private static final int VIEW_TYPE_INVITATION = 2;
     private static final int VIEW_TYPE_SUBSCRIPTION = 3;
 
-    //    private static final long SHOW_TIME_STAMP_INTERVAL = 30 * 1000; // 15 seconds
     private static final long SHOW_DELIVERY_INTERVAL = 10 * 1000; // 5 seconds
     private static final long SHOW_MEDIA_DELIVERY_INTERVAL = 120 * 1000; // 2 minutes
     private static final long DEFAULT_QUERY_INTERVAL = 2000;
@@ -237,7 +228,6 @@ public class ConversationView {
         mIsSelected = isSelected;
 
         if (mIsSelected) {
-            //  bindChat(mLastChatId);
             startListening();
 
             updateWarningView();
@@ -258,10 +248,6 @@ public class ConversationView {
                 }
 
                 if ((mLastSessionStatus == null || mLastSessionStatus == SessionStatus.PLAINTEXT)) {
-
-                    //boolean otrPolicyAuto = mActivity.getOtrPolicy() == OtrPolicy.OTRL_POLICY_ALWAYS
-                    //|| this.mNewChatActivity.getOtrPolicy() == OtrPolicy.OPPORTUNISTIC;
-
                     boolean otrPolicyAuto = true;
 
                     if (mCurrentChatSession == null)
@@ -321,9 +307,6 @@ public class ConversationView {
         }
 
     }
-    //    collapsingToolbar.setCollapsedTitleTypeface(typeface);
-    //   collapsingToolbar.setExpandedTitleTypeface(typeface);
-
 
     private boolean checkConnection() {
         if (mConn == null && mProviderId != -1) {
@@ -335,8 +318,6 @@ public class ConversationView {
         }
 
         return true;
-
-
     }
 
     public void setOTRState(boolean otrEnabled) {
@@ -586,9 +567,7 @@ public class ConversationView {
 
     private Runnable mUpdateChatCallback = new Runnable() {
         public void run() {
-            // if (mCursor != null && mCursor.requery() && mCursor.moveToFirst()) {
             updateChat();
-            // }
         }
     };
 
@@ -667,9 +646,6 @@ public class ConversationView {
     }
 
     protected void initViews() {
-        //  mStatusIcon = (ImageView) mActivity.findViewById(R.id.statusIcon);
-        //   mDeliveryIcon = (ImageView) mActivity.findViewById(R.id.deliveryIcon);
-        // mTitle = (TextView) mActivity.findViewById(R.id.title);
         mHistory = (RecyclerView) mActivity.findViewById(R.id.history);
         LinearLayoutManager llm = new LinearLayoutManager(mHistory.getContext());
         llm.setStackFromEnd(true);
@@ -677,25 +653,6 @@ public class ConversationView {
 
         mComposeMessage = (EditText) mActivity.findViewById(R.id.composeMessage);
         mSendButton = (ImageButton) mActivity.findViewById(R.id.btnSend);
-
-//        mButtonDeleteVoice = (ImageView)mActivity.findViewById(R.id.btnDeleteVoice);
-//        mViewDeleteVoice = mActivity.findViewById(R.id.viewDeleteVoice);
-
-//        mButtonDeleteVoice.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE)
-//                {
-//                    int resolvedColor = mHistory.getResources().getColor(android.R.color.holo_red_light);
-//                    mButtonDeleteVoice.setBackgroundColor(resolvedColor);
-//                }
-//
-//                return false;
-//            }
-//        });
-
-
         mButtonAttach = (ImageButton) mActivity.findViewById(R.id.btnAttach);
         mViewAttach = mActivity.findViewById(R.id.attachPanel);
 
@@ -731,147 +688,6 @@ public class ConversationView {
             }
 
         });
-
-        /**
-         mActivity.findViewById(R.id.btnAttachFile).setOnClickListener(new View.OnClickListener() {
-
-        @Override public void onClick(View v) {
-        mActivity.startFilePicker();
-        }
-
-        });*/
-
-//        mActivity.findViewById(R.id.btnAttachSticker).setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                toggleAttachMenu();
-//                showStickers();
-//            }
-//
-//        });
-
-
-//        mMicButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                //this is the tap to change to hold to talk mode
-//                if (mMicButton.getVisibility() == View.VISIBLE) {
-//                    mComposeMessage.setVisibility(View.GONE);
-//                    mMicButton.setVisibility(View.GONE);
-//
-//                    // Check if no view has focus:
-//                    View view = mActivity.getCurrentFocus();
-//                    if (view != null) {
-//                        InputMethodManager imm = (InputMethodManager)mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                    }
-//
-//                    mSendButton.setImageResource(R.drawable.ic_keyboard_black_36dp);
-//                    mSendButton.setVisibility(View.VISIBLE);
-//                    mButtonTalk.setVisibility(View.VISIBLE);
-//
-//                }
-//            }
-//
-//        });
-
-
-//        final GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
-//            public void onLongPress(MotionEvent e) {
-//
-//                //this is for recording audio directly from one press
-//                mActivity.startAudioRecording();
-//
-//            }
-//
-//            @Override
-//            public boolean onSingleTapUp(MotionEvent e) {
-//
-//
-//                if (mActivity.isAudioRecording()) {
-//                    boolean send = true;//inViewInBounds(mMicButton, (int) motionEvent.getX(), (int) motionEvent.getY());
-//                    mActivity.stopAudioRecording(send);
-//                }
-//
-//                return super.onSingleTapUp(e);
-//            }
-//        });
-//
-//        mMicButton.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return gestureDetector.onTouchEvent(motionEvent);
-//
-//            }
-//        });
-
-//        mButtonTalk.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch( View btnTalk , MotionEvent theMotion ) {
-//                switch ( theMotion.getAction() ) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        mActivity.startAudioRecording();
-//                        mButtonTalk.setText(mActivity.getString(R.string.recording_release));
-//                        mViewDeleteVoice.setVisibility(View.VISIBLE);
-//
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        boolean inBounds = inViewInBounds(btnTalk,(int)theMotion.getX(),(int)theMotion.getY());
-//                        if (!inBounds)
-//                            mButtonTalk.setText(mActivity.getString(R.string.recording_delete));
-//                        else {
-//                            mButtonTalk.setText(mActivity.getString(R.string.recording_release));
-//                            mViewDeleteVoice.setVisibility(View.VISIBLE);
-//                        }
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        mButtonTalk.setText(mActivity.getString(R.string.push_to_talk));
-//                        boolean send = inViewInBounds(btnTalk,(int)theMotion.getX(),(int)theMotion.getY());
-//                        mActivity.stopAudioRecording(send);
-//                        mViewDeleteVoice.setVisibility(View.GONE);
-//
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-        /**
-         mHistory.setOnItemLongClickListener(new OnItemLongClickListener ()
-         {
-
-         @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-         @Override public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
-
-         if (arg1 instanceof MessageView)
-         {
-
-         String textToCopy = ((MessageView)arg1).getLastMessage();
-
-         int sdk = android.os.Build.VERSION.SDK_INT;
-         if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
-         android.text.ClipboardManager clipboard = (android.text.ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-         clipboard.setText(textToCopy); //
-         } else {
-         android.content.ClipboardManager clipboard = (android.content.ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-         android.content.ClipData clip = android.content.ClipData.newPlainText("chat",textToCopy);
-         clipboard.setPrimaryClip(clip); //
-         }
-
-         Toast.makeText(mActivity, mContext.getString(R.string.toast_chat_copied_to_clipboard), Toast.LENGTH_SHORT).show();
-
-         return true;
-
-         }
-
-         return false;
-         }
-
-         });**/
-
         mWarningText.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -968,9 +784,7 @@ public class ConversationView {
                         mSendButton.setImageResource(R.drawable.ic_send_secure);
 
                     mSendButton.setVisibility(View.GONE);
-//                    mButtonTalk.setVisibility(View.GONE);
                     mComposeMessage.setVisibility(View.VISIBLE);
-//                    mMicButton.setVisibility(View.VISIBLE);
 
 
                 }
@@ -1105,19 +919,6 @@ public class ConversationView {
         if (!isServiceUp)
             return;
         mIsListening = true;
-
-        /*
-        if (mViewType == VIEW_TYPE_CHAT) {
-            Cursor cursor = getMessageCursor();
-            if (cursor == null) {
-                long chatId = getChatId();
-                if (chatId != -1)
-                    startQuery(chatId);
-            } else {
-                //requeryCursor();
-            }
-        }*/
-
         registerChatListener();
         registerForConnEvents();
 
@@ -1125,11 +926,6 @@ public class ConversationView {
     }
 
     public void stopListening() {
-        //Cursor cursor = getMessageCursor();
-        //if (cursor != null && (!cursor.isClosed())) {
-        //   cursor.close();
-        // }
-
         cancelRequery();
         unregisterChatListener();
         unregisterForConnEvents();
@@ -1139,7 +935,6 @@ public class ConversationView {
     void updateChat() {
         setViewType(VIEW_TYPE_CHAT);
 
-        //mHistory.invalidate();
         checkConnection();
 
         startQuery(getChatId());
@@ -1153,19 +948,12 @@ public class ConversationView {
             //disable unsupported features for now
             mActivity.findViewById(R.id.btnAttachPicture).setEnabled(false);
             mActivity.findViewById(R.id.btnTakePicture).setEnabled(false);
-            //mActivity.findViewById(R.id.btnAttachFile).setEnabled(false);
-//            mMicButton.setEnabled(false);
-            ;
 
             mActivity.findViewById(R.id.btnAttachPicture).setAlpha(0.2f);
             mActivity.findViewById(R.id.btnTakePicture).setAlpha(0.2f);
-            //mActivity.findViewById(R.id.btnAttachFile).setAlpha(0.2f);
-//            mMicButton.setAlpha(0.5f);
         } else {
             mActivity.findViewById(R.id.btnAttachPicture).setEnabled(true);
             mActivity.findViewById(R.id.btnTakePicture).setEnabled(true);
-            //mActivity.findViewById(R.id.btnAttachFile).setEnabled(true);
-//            mMicButton.setEnabled(true);
         }
     }
 
@@ -1282,23 +1070,6 @@ public class ConversationView {
                 buf.append(count);
                 buf.append(")");
             }
-            /*
-            final String[] projection = { Imps.GroupMembers.NICKNAME };
-            Uri memberUri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, mLastChatId);
-            ContentResolver cr = mActivity.getContentResolver();
-            Cursor c = cr.query(memberUri, projection, null, null, null);
-            StringBuilder buf = new StringBuilder();
-            buf.append(mActivity.getString(R.string.menu_new_group_chat));
-
-            if (c != null) {
-                buf.append(" (");
-                buf.append(c.getCount());
-                buf.append(")");
-                c.close();
-
-
-            }
-            */
 
             mRemoteNickname = buf.toString();
         }
@@ -1399,7 +1170,6 @@ public class ConversationView {
                 if (Log.isLoggable(ImApp.LOG_TAG, Log.DEBUG)) {
                     log("Failed to query invitation: " + invitationId);
                 }
-                //  mNewChatActivity.finish();
             } else {
                 setViewType(VIEW_TYPE_INVITATION);
 
@@ -1409,7 +1179,6 @@ public class ConversationView {
 
                 TextView mInvitationText = (TextView) mActivity.findViewById(R.id.txtInvitation);
                 mInvitationText.setText(mContext.getString(R.string.invitation_prompt, sender));
-                //  mNewChatActivity.setTitle(mContext.getString(R.string.chat_with, sender));
             }
         } finally {
             cursor.close();
@@ -1418,33 +1187,12 @@ public class ConversationView {
 
     }
 
-
-    /**
-     * public void bindSubscription(long providerId, String from) {
-     * mProviderId = providerId;
-     * <p>
-     * //  mRemoteAddressString = from;
-     * <p>
-     * setViewType(VIEW_TYPE_SUBSCRIPTION);
-     * <p>
-     * TextView text = (TextView) mActivity.findViewById(R.id.txtSubscription);
-     * String displayableAddr = ImpsAddressUtils.getDisplayableAddress(from);
-     * text.setText(mContext.getString(R.string.subscription_prompt, displayableAddr));
-     * //.displayableAdd    mNewChatActivity.setTitle(mContext.getString(R.string.chat_with, displayableAddr));
-     * <p>
-     * mApp.dismissChatNotification(providerId, from);
-     * }
-     */
-
-
     private void setViewType(int type) {
         mViewType = type;
         if (type == VIEW_TYPE_CHAT) {
             mActivity.findViewById(R.id.invitationPanel).setVisibility(View.GONE);
-            //     mActivity.findViewById(R.id.subscription).setVisibility(View.GONE);
             setChatViewEnabled(true);
         } else if (type == VIEW_TYPE_INVITATION) {
-            //setChatViewEnabled(false);
             mActivity.findViewById(R.id.invitationPanel).setVisibility(View.VISIBLE);
             mActivity.findViewById(R.id.btnAccept).requestFocus();
         } else if (type == VIEW_TYPE_SUBSCRIPTION) {
@@ -1609,24 +1357,6 @@ public class ConversationView {
 
     }
 
-    /**
-     * public void verifyScannedFingerprint (String scannedFingerprint)
-     * {
-     * try
-     * {
-     * IOtrChatSession otrChatSession = mCurrentChatSession.getDefaultOtrChatSession();
-     * <p>
-     * if (scannedFingerprint != null && scannedFingerprint.equalsIgnoreCase(otrChatSession.getRemoteFingerprint())) {
-     * verifyRemoteFingerprint();
-     * }
-     * }
-     * catch (RemoteException e)
-     * {
-     * LogCleaner.error(ImApp.LOG_TAG, "unable to perform manual key verification", e);
-     * }
-     * }
-     */
-
     public void showVerifyDialog() {
 
         Intent intent = new Intent(mContext, ContactDisplayActivity.class);
@@ -1771,11 +1501,6 @@ public class ConversationView {
         //new SendMessageAsyncTask().execute(msg);
         sendMessageAsync(msg);
         sendTypingStatus(false);
-        /**
-         if (ds != null)
-         {
-         ds.close();
-         }*/
     }
 
     void sendMessageAsync(final String msg) {
@@ -2037,33 +1762,6 @@ public class ConversationView {
         return mPresenceStatus;
     }
 
-    /*
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        userActionDetected();
-        return mActivity.dispatchKeyEvent(event);
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        try {
-            userActionDetected();
-            return mActivity.dispatchTouchEvent(ev);
-        } catch (ActivityNotFoundException e) {
-           // if the user clicked a link, e.g. geo:60.17,24.829, and there is
-            //  no app to handle that kind of link, catch the exception
-            Toast.makeText(mActivity, R.string.error_no_app_to_handle_url, Toast.LENGTH_SHORT)
-                    .show();
-            return true;
-        }
-    }
-
-    @Override
-    public boolean dispatchTrackballEvent(MotionEvent ev) {
-        userActionDetected();
-        return mActivity.dispatchTrackballEvent(ev);
-    }*/
-
     private void userActionDetected() {
         // Check that we have a chat session and that our fragment is resumed
         // The latter filters out bogus TextWatcher events on restore from saved
@@ -2174,8 +1872,6 @@ public class ConversationView {
             mDeltaColumn = len;
             mColumnNames[mDeltaColumn] = DELTA_COLUMN_NAME;
 
-            //if (DBG) log("##### DeltaCursor constructor: mDeltaColumn=" +
-            //        mDeltaColumn + ", columnName=" + mColumnNames[mDeltaColumn]);
         }
 
         public int getCount() {
@@ -2533,20 +2229,20 @@ public class ConversationView {
         }
 
 
-        void setLinkifyForMessageView(MessageListItem messageView) {
-            try {
-
-                if (messageView == null)
-                    return;
-
-                if (mConn != null)
-                    messageView.setLinkify(!mConn.isUsingTor() || Preferences.getLinkifyOnTor());
-
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                messageView.setLinkify(false);
-            }
-        }
+//        void setLinkifyForMessageView(MessageListItem messageView) {
+//            try {
+//
+//                if (messageView == null)
+//                    return;
+//
+//                if (mConn != null)
+//                    messageView.setLinkify(!mConn.isUsingTor() || Preferences.getLinkifyOnTor());
+//
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//                messageView.setLinkify(false);
+//            }
+//        }
 
 
         @Override
@@ -2577,7 +2273,7 @@ public class ConversationView {
             });
 
             MessageViewHolder mvh = new MessageViewHolder(view);
-            view.applyStyleColors();
+//            view.applyStyleColors();
             return mvh;
         }
 
@@ -2585,8 +2281,8 @@ public class ConversationView {
         public void onBindViewHolder(MessageViewHolder viewHolder, Cursor cursor) {
 
             MessageListItem messageView = (MessageListItem) viewHolder.itemView;
-            setLinkifyForMessageView(messageView);
-            messageView.applyStyleColors();
+//            setLinkifyForMessageView(messageView);
+//            messageView.applyStyleColors();
 
             int messageType = cursor.getInt(mTypeColumn);
 
@@ -2615,21 +2311,6 @@ public class ConversationView {
             if (!mExpectingDelivery && isDelivered) {
                 mExpectingDelivery = true;
             } else if (cursor.getPosition() == cursor.getCount() - 1) {
-                /*
-                // if showTimeStamp is false for the latest message, then set a timer to query the
-                // cursor again in a minute, so we can update the last message timestamp if no new
-                // message is received
-                if (Log.isLoggable(ImApp.LOG_TAG, Log.DEBUG)) {
-                    log("delta = " + delta + ", showTs=" + showTimeStamp);
-                }
-                *//*
-                if (!showDelivery) {
-                    scheduleRequery(SHOW_DELIVERY_INTERVAL);
-                } else if (!showTimeStamp) {
-                    scheduleRequery(SHOW_TIME_STAMP_INTERVAL);
-                } else {
-                    cancelRequery();
-                }*/
             }
 
             EncryptionState encState = EncryptionState.NONE;
@@ -2728,12 +2409,6 @@ public class ConversationView {
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 
                 switch (item.getItemId()) {
-                    /**
-                     case R.id.menu_message_delete:
-                     //shareCurrentItem();
-                     mode.finish(); // Action picked, so close the CAB
-                     return true;
-                     */
                     case R.id.menu_message_share:
                         ((MessageListItem) mLastSelectedView).exportMediaFile();
                         mode.finish(); // Action picked, so close the CAB
@@ -2849,80 +2524,7 @@ public class ConversationView {
             }
 
         }
-
-
-//        if (mStickerBox != null)
-//            mStickerBox.setVisibility(View.GONE);
     }
-
-//    private ViewPager mStickerPager = null;
-//    private View mStickerBox = null;
-
-//    private void showStickers ()
-//    {
-//        if (mStickerPager == null)
-//        {
-//
-//            initStickers();
-//            mStickerBox = mActivity.findViewById(R.id.stickerBox);
-//        }
-//
-//        mStickerBox.setVisibility(mStickerBox.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-//    }
-
-
-//    private synchronized void initStickers () {
-//
-//
-//        mStickerPager = (ViewPager) mActivity.findViewById(R.id.stickerPager);
-//
-//        Collection<StickerGroup> emojiGroups = StickerManager.getInstance(mActivity).getEmojiGroups();
-//
-//        if (emojiGroups.size() > 0) {
-//            StickerPagerAdapter emojiPagerAdapter = new StickerPagerAdapter(mActivity, new ArrayList<StickerGroup>(emojiGroups),
-//                    new StickerSelectListener() {
-//                        @Override
-//                        public void onStickerSelected(Sticker s) {
-//
-//                            sendStickerCode(s.assetUri);
-//                            /**
-//                             if (isGroupChat())
-//                             {
-//                             sendStickerCode(s.assetUri);
-//
-//                             }
-//                             else
-//                             {
-//                             mActivity.handleSendDelete(s.assetUri,"image/png", false, false, true);
-//                             }*/
-//                            //   mActivity.handleSendData(Uri.parse(s.assetPath),"image/png");
-//
-//                            mViewAttach.setVisibility(View.INVISIBLE);
-//                            showStickers();
-//                        }
-//                    });
-//
-//            mStickerPager.setAdapter(emojiPagerAdapter);
-//
-//        }
-//
-//
-//    }
-
-    //generate a :pack-sticker: code
-//    private void sendStickerCode (Uri assetUri)
-//    {
-//        StringBuffer stickerCode = new StringBuffer();
-//        stickerCode.append(":");
-//
-//        stickerCode.append(assetUri.getPathSegments().get(assetUri.getPathSegments().size()-2));
-//        stickerCode.append("-");
-//        stickerCode.append(assetUri.getLastPathSegment().split("\\.")[0]);
-//
-//        stickerCode.append(":");
-//
-//        sendMessageAsync(stickerCode.toString());
-//    }
 
     void approveSubscription() {
 

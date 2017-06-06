@@ -105,7 +105,6 @@ public class ConversationDetailActivity extends BaseActivity {
 
     private ImApp mApp;
 
-    //private AppBarLayout appBarLayout;
     private View mRootLayout;
     private Toolbar mToolbar;
 
@@ -168,15 +167,6 @@ public class ConversationDetailActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         applyStyleForToolbar();
-
-        /**
-        appBarLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                expandToolbar();
-            }
-        });**/
-
         processIntent(getIntent());
 
         collapseToolbar();
@@ -217,49 +207,49 @@ public class ConversationDetailActivity extends BaseActivity {
         }
 
         //not set color
-        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        int themeColorHeader = settings.getInt("themeColor",-1);
-        int themeColorText = settings.getInt("themeColorText",-1);
-        int themeColorBg = settings.getInt("themeColorBg",-1);
+//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+//        int themeColorHeader = settings.getInt("themeColor",-1);
+//        int themeColorText = settings.getInt("themeColorText",-1);
+//        int themeColorBg = settings.getInt("themeColorBg",-1);
 
-        if (themeColorHeader != -1) {
+//        if (themeColorHeader != -1) {
+//
+//            if (themeColorText == -1)
+//                themeColorText = getContrastColor(themeColorHeader);
+//
+//            if (Build.VERSION.SDK_INT >= 21) {
+//                getWindow().setNavigationBarColor(themeColorHeader);
+//                getWindow().setStatusBarColor(themeColorHeader);
+//                getWindow().setTitleColor(themeColorText);
+//            }
+//
+//      //      appBarLayout.setBackgroundColor(themeColorHeader);
+//         //   collapsingToolbar.setBackgroundColor(themeColorHeader);
+//            mToolbar.setBackgroundColor(themeColorHeader);
+//            mToolbar.setTitleTextColor(themeColorText);
+//
+//        }
 
-            if (themeColorText == -1)
-                themeColorText = getContrastColor(themeColorHeader);
-
-            if (Build.VERSION.SDK_INT >= 21) {
-                getWindow().setNavigationBarColor(themeColorHeader);
-                getWindow().setStatusBarColor(themeColorHeader);
-                getWindow().setTitleColor(themeColorText);
-            }
-
-      //      appBarLayout.setBackgroundColor(themeColorHeader);
-         //   collapsingToolbar.setBackgroundColor(themeColorHeader);
-            mToolbar.setBackgroundColor(themeColorHeader);
-            mToolbar.setTitleTextColor(themeColorText);
-
-        }
-
-        if (themeColorBg != -1)
-        {
-            if (mRootLayout != null)
-                mRootLayout.setBackgroundColor(themeColorBg);
-
-            View viewInput = findViewById(R.id.inputLayout);
-            viewInput.setBackgroundColor(themeColorBg);
-
-            if (themeColorText != -1) {
-                mConvoView.mComposeMessage.setTextColor(themeColorText);
-                mConvoView.mComposeMessage.setHintTextColor(themeColorText);
-            }
-        }
+//        if (themeColorBg != -1)
+//        {
+//            if (mRootLayout != null)
+//                mRootLayout.setBackgroundColor(themeColorBg);
+//
+//            View viewInput = findViewById(R.id.inputLayout);
+//            viewInput.setBackgroundColor(themeColorBg);
+//
+//            if (themeColorText != -1) {
+//                mConvoView.mComposeMessage.setTextColor(themeColorText);
+//                mConvoView.mComposeMessage.setHintTextColor(themeColorText);
+//            }
+//        }
 
     }
 
-    public static int getContrastColor(int colorIn) {
-        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
-        return y >= 128 ? Color.BLACK : Color.WHITE;
-    }
+//    public static int getContrastColor(int colorIn) {
+//        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
+//        return y >= 128 ? Color.BLACK : Color.WHITE;
+//    }
 
 
     private void processIntent(Intent intent)

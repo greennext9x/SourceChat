@@ -1,210 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<FrameLayout
-    android:orientation="vertical"
-    android:id="@+id/main_content"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:padding="0dp">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="0dp"
-        android:gravity="center_horizontal"
-        android:id="@+id/contactmain">
-        <ImageView
-            android:id="@+id/imageAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="gone"
-            android:src='@drawable/avatar_unknown'
-            android:scaleType="centerCrop"/>
+        android:padding="0dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
-        android:id="@+id/imageSpacer"
-        >
-        </LinearLayout>
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/contactmain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            >
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="0dp">
 
-                <org.ironrabbit.type.CustomTypefaceTextView android:id="@+id/tvNickname"
-                    android:selectAllOnFocus="true"
+            <ImageView
+                android:id="@+id/imageAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src='@drawable/avatar_unknown'
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/imageSpacer"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:id="@+id/tvNickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/account_setup_example_email_address"
                     android:autoLink="none"
                     android:cursorVisible="true"
+                    android:hint="@string/account_setup_example_email_address"
                     android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true"
                     android:text="user person"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="30dp"
- />
+                    android:textSize="30dp" />
 
-            <ImageView android:id="@+id/btnStartChat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_message"
-                android:padding="6dp"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                />
-
-                <org.ironrabbit.type.CustomTypefaceTextView android:id="@+id/tvUsername"
-                    android:selectAllOnFocus="true"
+                <ImageView
+                    android:id="@+id/btnStartChat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/account_setup_example_email_address"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    android:gravity="right"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_action_message" />
+
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvNickname"
                     android:autoLink="none"
                     android:cursorVisible="true"
+                    android:hint="@string/account_setup_example_email_address"
                     android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true"
                     android:text="user@domain.com"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="?contactTextSecondary"
-                    android:layout_below="@+id/tvNickname"
 
                     />
-        </RelativeLayout>
+            </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-        <org.ironrabbit.type.CustomTypefaceTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="none"
-            android:text="@string/security_code"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?contactTextSecondary"
-            android:layout_gravity="start"
-            />
-</RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:id="@+id/listOtr"
-            >
-
-            <!--<ImageView-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:id="@+id/qrcode"-->
-                <!--android:background="#dddddd"-->
-                <!--android:src="@drawable/qr"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--/>-->
-
-            <org.ironrabbit.type.CustomTypefaceTextView android:id="@+id/tvFingerprint"
-                android:selectAllOnFocus="true"
-                android:layout_width="200dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:autoLink="none"
-                android:text=""
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?contactTextSecondary"
+                android:padding="10dp">
 
-                android:layout_toRightOf="@+id/qrcode"
-                android:layout_centerVertical="true"
-                />
-            <!--<ImageView-->
-                <!--android:layout_width="48dp"-->
-                <!--android:layout_height="48dp"-->
-                <!--android:id="@+id/qrshare"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:src="@android:drawable/ic_menu_share"-->
-                <!--android:padding="6dp"-->
-                <!--android:layout_margin="1dp"-->
-                <!--/>-->
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:autoLink="none"
+                    android:text="@string/security_code"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?contactTextSecondary" />
+            </RelativeLayout>
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:id="@+id/listOmemo"
-            android:visibility="gone"
-            >
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:id="@+id/qrcodeOmemo"
-                android:background="#dddddd"
-                android:src="@drawable/qr"
-                android:layout_alignParentLeft="true"
-                />
-
-            <org.ironrabbit.type.CustomTypefaceTextView android:id="@+id/tvFingerprintOmemo"
-                android:selectAllOnFocus="true"
-                android:layout_width="200dp"
+            <RelativeLayout
+                android:id="@+id/listOtr"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:autoLink="none"
-                android:text=""
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?contactTextSecondary"
+                android:padding="10dp">
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:id="@+id/tvFingerprint"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:autoLink="none"
+                    android:selectAllOnFocus="true"
+                    android:text=""
 
-                android:layout_toRightOf="@+id/qrcodeOmemo"
-                android:layout_centerVertical="true"
-                />
-            <!--<ImageView-->
-                <!--android:layout_width="48dp"-->
-                <!--android:layout_height="48dp"-->
-                <!--android:id="@+id/qrshareOmemo"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:src="@android:drawable/ic_menu_share"-->
-                <!--android:padding="6dp"-->
-                <!--android:layout_margin="1dp"-->
-                <!--/>-->
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?contactTextSecondary" />
+            </RelativeLayout>
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-            <org.ironrabbit.type.CustomTypefaceButton android:id="@+id/btnVerify"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/listOmemo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/menu_verify"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?contactTextSecondary"
-                android:onClick="verifyClicked"
-                >
+                android:padding="10dp"
+                android:visibility="gone">
+                <org.ironrabbit.type.CustomTypefaceTextView
+                    android:id="@+id/tvFingerprintOmemo"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:autoLink="none"
+                    android:selectAllOnFocus="true"
+                    android:text=""
 
-            </org.ironrabbit.type.CustomTypefaceButton>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?contactTextSecondary" />
+            </RelativeLayout>
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <org.ironrabbit.type.CustomTypefaceButton
+                    android:id="@+id/btnVerify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="verifyClicked"
+                    android:text="@string/menu_verify"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?contactTextSecondary">
+
+                </org.ironrabbit.type.CustomTypefaceButton>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/fragment_container"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
-        </LinearLayout>
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:layout_collapseMode="pin" />
+            android:layout_height="300dp"
+            android:orientation="vertical"></LinearLayout>
 
-</FrameLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:layout_collapseMode="pin" />
+
+    </FrameLayout>
 </ScrollView>

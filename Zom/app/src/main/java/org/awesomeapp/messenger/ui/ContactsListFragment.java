@@ -128,38 +128,6 @@ public class ContactsListFragment extends Fragment {
             mEmptyView.setVisibility(View.GONE);
 
         }
-
-        /**
-        // init swipe to dismiss logic
-        ItemTouchHelper swipeToDismissTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.RIGHT, ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                // callback for drag-n-drop, false to skip this feature
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
-                final long itemId = mAdapter.getItemId( viewHolder.getAdapterPosition());
-                 final String address= ((ContactListRecyclerViewAdapter.ViewHolder)viewHolder).mAddress;
-
-                Snackbar.make(mRecView, "Remove " + address + "?", Snackbar.LENGTH_LONG)
-                        .setAction("Yes", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //if they click, then cancel timer that will be used to end the chat
-                                deleteContact(itemId, address);
-
-                            }
-                        }).show();
-            }
-        });
-
-        swipeToDismissTouchHelper.attachToRecyclerView(recyclerView);
-         */
-
     }
 
     private static void deleteContact (Activity activity, long itemId, String address, long providerId, long accountId)
@@ -229,9 +197,6 @@ public class ContactsListFragment extends Fragment {
                 holder.mLine2 = (TextView) view.findViewById(R.id.line2);
 
                 holder.mAvatar = (ImageView)view.findViewById(R.id.avatar);
-               // holder.mStatusIcon = (ImageView)view.findViewById(R.id.statusIcon);
-               // holder.mStatusText = (TextView)view.findViewById(R.id.statusText);
-                //holder.mEncryptionIcon = (ImageView)view.findViewById(R.id.encryptionIcon);
 
                 holder.mSubBox = view.findViewById(R.id.subscriptionBox);
                 holder.mButtonSubApprove = (Button)view.findViewById(R.id.btnApproveSubscription);
@@ -239,8 +204,6 @@ public class ContactsListFragment extends Fragment {
 
                 holder.mContainer = view.findViewById(R.id.message_container);
                 view.applyStyleColors(holder);
-
-                // holder.mMediaThumb = (ImageView)findViewById(R.id.media_thumbnail);
                 view.setTag(holder);
             }
 
@@ -274,14 +237,6 @@ public class ContactsListFragment extends Fragment {
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    /*
-                    if (mContext instanceof ContactListActivity)
-                        ((ContactListActivity)mContext).startChat(viewHolder.mProviderId, viewHolder.mAccountId, viewHolder.mAddress);
-                    else if (mContext instanceof MainActivity)
-                        ((MainActivity)mContext).startChat(viewHolder.mProviderId,viewHolder.mAccountId, viewHolder.mAddress);
-                        */
-
                     Intent intent = new Intent(mContext,ContactDisplayActivity.class);
                     intent.putExtra("address", viewHolder.mAddress);
                     intent.putExtra("nickname", viewHolder.mNickname);
@@ -373,7 +328,6 @@ public class ContactsListFragment extends Fragment {
             }
             else {
                 mRecView.setVisibility(View.VISIBLE);
-  //              mEmptyView.setVisibility(View.GONE);
                 mEmptyView.setVisibility(View.GONE);
 
             };
@@ -397,8 +351,6 @@ public class ContactsListFragment extends Fragment {
                 Imps.Presence.PRESENCE_CUSTOM_STATUS,
                 Imps.Chats.LAST_MESSAGE_DATE,
                 Imps.Chats.LAST_UNREAD_MESSAGE
-        ///        Imps.Contacts.AVATAR_HASH,
-           //     Imps.Contacts.AVATAR_DATA
 
         };
 

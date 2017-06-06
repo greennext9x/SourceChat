@@ -53,7 +53,7 @@ public class SettingActivity extends PreferenceActivity {
     private String currentLanguage;
     ListPreference mOtrMode;
     ListPreference mLanguage;
-    CheckBoxPreference mLinkifyOnTor;
+//    CheckBoxPreference mLinkifyOnTor;
     CheckBoxPreference mHideOfflineContacts;
     CheckBoxPreference mEnableNotification;
     CheckBoxPreference mNotificationVibrate;
@@ -62,7 +62,7 @@ public class SettingActivity extends PreferenceActivity {
     private void setInitialValues() {
         mOtrMode.setValue(Preferences.getOtrMode());
 
-        mLinkifyOnTor.setChecked(Preferences.getLinkifyOnTor());
+//        mLinkifyOnTor.setChecked(Preferences.getLinkifyOnTor());
         mEnableNotification.setChecked(Preferences.isNotificationEnabled());
         mNotificationVibrate.setChecked(Preferences.getNotificationVibrate());
         mNotificationSound.setChecked(Preferences.getNotificationSound());
@@ -79,7 +79,7 @@ public class SettingActivity extends PreferenceActivity {
         mOtrMode.setEntryValues(Preferences.getOtrModeValues());
         mOtrMode.setDefaultValue(Preferences.DEFAULT_OTR_MODE);
         mLanguage = (ListPreference) findPreference("pref_language");
-        mLinkifyOnTor = (CheckBoxPreference) findPreference("pref_linkify_on_tor");
+//        mLinkifyOnTor = (CheckBoxPreference) findPreference("pref_linkify_on_tor");
         mHideOfflineContacts = (CheckBoxPreference) findPreference("pref_hide_offline_contacts");
         mEnableNotification = (CheckBoxPreference) findPreference("pref_enable_notification");
         mNotificationVibrate = (CheckBoxPreference) findPreference("pref_notification_vibrate");

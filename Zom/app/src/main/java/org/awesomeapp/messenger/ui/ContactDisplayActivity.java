@@ -203,17 +203,17 @@ public class ContactDisplayActivity extends BaseActivity {
         findViewById(R.id.btnVerify).setVisibility(View.GONE);
     }
 
-    private void showGallery (int contactId)
-    {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        GalleryListFragment fragment = new GalleryListFragment();
-        Bundle args = new Bundle();
-        args.putInt("contactId", contactId);
-        fragment.setArguments(args);
-        fragmentTransaction.add(R.id.fragment_container, fragment, "MyActivity");
-        fragmentTransaction.commit();
-    }
+//    private void showGallery (int contactId)
+//    {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        GalleryListFragment fragment = new GalleryListFragment();
+//        Bundle args = new Bundle();
+//        args.putInt("contactId", contactId);
+//        fragment.setArguments(args);
+//        fragmentTransaction.add(R.id.fragment_container, fragment, "MyActivity");
+//        fragmentTransaction.commit();
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

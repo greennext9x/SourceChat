@@ -49,7 +49,6 @@ public class ImageViewActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //getSupportActionBar().setElevation(0);
 
         setContentView(R.layout.image_view_activity);
         getSupportActionBar().show();
@@ -57,16 +56,6 @@ public class ImageViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         setTitle("");
-
-       // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        /**
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE);*/
     }
 
 
@@ -89,11 +78,6 @@ public class ImageViewActivity extends AppCompatActivity {
             case R.id.menu_message_share:
                 exportMediaFile();
                 return true;
-            /**
-            case R.id.menu_message_delete:
-                deleteMediaFile();
-                return true;
-                */
             default:
         }
         return super.onOptionsItemSelected(item);

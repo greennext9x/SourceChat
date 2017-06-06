@@ -21,12 +21,6 @@
         android:layout_margin="20dp"
 
         >
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/olo_invite"-->
-
-        <!--/>-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

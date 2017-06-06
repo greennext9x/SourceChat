@@ -503,7 +503,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
 
                 } else {
                     im = createConnection(providerId, accountId);
-
                 }
 
                 return im;

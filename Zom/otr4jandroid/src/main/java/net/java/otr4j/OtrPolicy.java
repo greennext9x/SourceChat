@@ -5,7 +5,9 @@
  */
 package net.java.otr4j;
 
-/** @author George Politis */
+/**
+ * @author George Politis
+ */
 public interface OtrPolicy {
 
     public static final int ALLOW_V1 = 0x01;
@@ -21,10 +23,10 @@ public interface OtrPolicy {
 
     public static final int NEVER = 0x00;
     public static final int OPPORTUNISTIC = (ALLOW_V1 | ALLOW_V2 | SEND_WHITESPACE_TAG
-                                             | WHITESPACE_START_AKE | ERROR_START_AKE);
+            | WHITESPACE_START_AKE | ERROR_START_AKE);
     public static final int OTRL_POLICY_MANUAL = (ALLOW_V1 | ALLOW_V2);
     public static final int OTRL_POLICY_ALWAYS = (ALLOW_V1 | ALLOW_V2 | REQUIRE_ENCRYPTION
-                                                  | WHITESPACE_START_AKE | ERROR_START_AKE);
+            | WHITESPACE_START_AKE | ERROR_START_AKE);
     public static final int OTRL_POLICY_DEFAULT = OPPORTUNISTIC;
 
     public abstract boolean getAllowV1();

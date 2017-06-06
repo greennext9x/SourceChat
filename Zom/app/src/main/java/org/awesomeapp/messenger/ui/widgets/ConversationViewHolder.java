@@ -6,10 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import im.zom.messenger.R;
-
-/**
- * Created by n8fr8 on 12/14/15.
- */
 public class ConversationViewHolder extends RecyclerView.ViewHolder
 {
 
@@ -37,5 +33,4 @@ public class ConversationViewHolder extends RecyclerView.ViewHolder
         mMediaThumb = (ImageView)view.findViewById(R.id.media_thumbnail);
 
     }
-
 }
