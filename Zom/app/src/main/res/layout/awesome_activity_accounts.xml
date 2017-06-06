@@ -9,10 +9,10 @@
 
     >
 
-    <fragment android:name="org.awesomeapp.messenger.ui.AccountsFragment"
+    <fragment
         android:id="@+id/accounts_fragment"
-        android:layout_weight="1"
+        android:name="org.awesomeapp.messenger.ui.AccountsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_weight="1" />
 </android.support.design.widget.CoordinatorLayout>

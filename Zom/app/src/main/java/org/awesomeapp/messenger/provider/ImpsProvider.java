@@ -22,7 +22,7 @@ import info.guardianproject.cacheword.ICacheWordSubscriber;
 import org.awesomeapp.messenger.ImApp;
 import org.awesomeapp.messenger.provider.Imps.Contacts;
 
-import org.awesomeapp.messenger.push.model.PushDatabase;
+
 import org.awesomeapp.messenger.util.Debug;
 import org.awesomeapp.messenger.util.LogCleaner;
 
@@ -451,10 +451,10 @@ public class ImpsProvider extends ContentProvider implements ICacheWordSubscribe
          
             //DELETE FROM cache WHERE id IN (SELECT cache.id FROM cache LEFT JOIN main ON cache.id=main.id WHERE main.id IS NULL);
 
-            // ChatSecure-Push tables
-            db.execSQL(PushDatabase.getAccountsTableSqlWithName(TABLE_CSP_ACCOUNTS));
-            db.execSQL(PushDatabase.getDeviceTableSqlWithName(TABLE_CSP_DEVICES));
-            db.execSQL(PushDatabase.getTokenTableSqlWithName(TABLE_CSP_TOKENS));
+//            // ChatSecure-Push tables
+//            db.execSQL(PushDatabase.getAccountsTableSqlWithName(TABLE_CSP_ACCOUNTS));
+//            db.execSQL(PushDatabase.getDeviceTableSqlWithName(TABLE_CSP_DEVICES));
+//            db.execSQL(PushDatabase.getTokenTableSqlWithName(TABLE_CSP_TOKENS));
 
         }
 
@@ -632,21 +632,20 @@ public class ImpsProvider extends ContentProvider implements ICacheWordSubscribe
                 return;
             case 105:
                     // Add ChatSecure-Push
-                    db.beginTransaction();
-
-                    try {
-                        db.execSQL(PushDatabase.getAccountsTableSqlWithName(TABLE_CSP_ACCOUNTS));
-                        db.execSQL(PushDatabase.getDeviceTableSqlWithName(TABLE_CSP_DEVICES));
-                        db.execSQL(PushDatabase.getTokenTableSqlWithName(TABLE_CSP_TOKENS));
-
-                        db.setTransactionSuccessful();
-                    } catch (Throwable ex) {
-                        LogCleaner.error(LOG_TAG, ex.getMessage(), ex);
-                    } finally {
-                        db.endTransaction();
-                    }
-                return; // TODO : Why do other case blocks return at their conclusion?
-                        // Wouldn't we want all applicable upgrades?
+//                    db.beginTransaction();
+//
+//                    try {
+//                        db.execSQL(PushDatabase.getAccountsTableSqlWithName(TABLE_CSP_ACCOUNTS));
+//                        db.execSQL(PushDatabase.getDeviceTableSqlWithName(TABLE_CSP_DEVICES));
+//                        db.execSQL(PushDatabase.getTokenTableSqlWithName(TABLE_CSP_TOKENS));
+//
+//                        db.setTransactionSuccessful();
+//                    } catch (Throwable ex) {
+//                        LogCleaner.error(LOG_TAG, ex.getMessage(), ex);
+//                    } finally {
+//                        db.endTransaction();
+//                    }
+//                return;
             case 1:
                 if (newVersion <= 100) {
                     return;
@@ -1804,21 +1803,21 @@ public class ImpsProvider extends ContentProvider implements ICacheWordSubscribe
             qb.setTables(TABLE_S2D_RMQ_IDS);
             break;
 
-        // ChatSecure-Push queries
-        case MATCH_CSP_ACCOUNT:
-            appendWhere(whereClause, PushDatabase.Accounts._ID, "=", url.getPathSegments().get(1));
-        case MATCH_CSP_ACCOUNTS:
-            qb.setTables(TABLE_CSP_ACCOUNTS);
-            break;
+//        // ChatSecure-Push queries
+//        case MATCH_CSP_ACCOUNT:
+//            appendWhere(whereClause, PushDatabase.Accounts._ID, "=", url.getPathSegments().get(1));
+//        case MATCH_CSP_ACCOUNTS:
+//            qb.setTables(TABLE_CSP_ACCOUNTS);
+//            break;
 
-        case MATCH_CSP_DEVICE:
-            appendWhere(whereClause, PushDatabase.Devices._ID, "=", url.getPathSegments().get(1));
+//        case MATCH_CSP_DEVICE:
+//            appendWhere(whereClause, PushDatabase.Devices._ID, "=", url.getPathSegments().get(1));
         case MATCH_CSP_DEVICES:
             qb.setTables(TABLE_CSP_DEVICES);
             break;
 
-        case MATCH_CSP_TOKEN:
-            appendWhere(whereClause, PushDatabase.Tokens._ID, "=", url.getPathSegments().get(1));
+//        case MATCH_CSP_TOKEN:
+//            appendWhere(whereClause, PushDatabase.Tokens._ID, "=", url.getPathSegments().get(1));
         case MATCH_CSP_TOKENS:
             qb.setTables(TABLE_CSP_TOKENS);
             break;
@@ -2883,27 +2882,27 @@ public class ImpsProvider extends ContentProvider implements ICacheWordSubscribe
             }
             break;
 
-        // ChatSecure-Push
-        case MATCH_CSP_ACCOUNTS:
-            rowID = db.insert(TABLE_CSP_ACCOUNTS, null, initialValues);
-            if (rowID > 0) {
-                resultUri = Uri.parse(PushDatabase.Accounts.CONTENT_URI + "/" + rowID);
-            }
-            break;
+//        // ChatSecure-Push
+//        case MATCH_CSP_ACCOUNTS:
+//            rowID = db.insert(TABLE_CSP_ACCOUNTS, null, initialValues);
+//            if (rowID > 0) {
+//                resultUri = Uri.parse(PushDatabase.Accounts.CONTENT_URI + "/" + rowID);
+//            }
+//            break;
 
-        case MATCH_CSP_DEVICES:
-            rowID = db.insert(TABLE_CSP_DEVICES, null, initialValues);
-            if (rowID > 0) {
-                resultUri = Uri.parse(PushDatabase.Devices.CONTENT_URI + "/" + rowID);
-            }
-            break;
+//        case MATCH_CSP_DEVICES:
+//            rowID = db.insert(TABLE_CSP_DEVICES, null, initialValues);
+//            if (rowID > 0) {
+//                resultUri = Uri.parse(PushDatabase.Devices.CONTENT_URI + "/" + rowID);
+//            }
+//            break;
 
-        case MATCH_CSP_TOKENS:
-            rowID = db.insert(TABLE_CSP_TOKENS, null, initialValues);
-            if (rowID > 0) {
-                resultUri = Uri.parse(PushDatabase.Tokens.CONTENT_URI + "/" + rowID);
-            }
-            break;
+//        case MATCH_CSP_TOKENS:
+//            rowID = db.insert(TABLE_CSP_TOKENS, null, initialValues);
+//            if (rowID > 0) {
+//                resultUri = Uri.parse(PushDatabase.Tokens.CONTENT_URI + "/" + rowID);
+//            }
+//            break;
 
         default:
             throw new UnsupportedOperationException("Cannot insert into URL: " + url);

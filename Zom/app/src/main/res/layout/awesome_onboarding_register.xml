@@ -25,9 +25,7 @@
         android:text="@string/create_an_account"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-
-        />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,9 +33,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="0dp"
         android:gravity="center_horizontal|bottom"
-        android:orientation="horizontal"
-
-        >
+        android:orientation="horizontal">
 
         <org.ironrabbit.type.CustomTypefaceButton
             android:id="@+id/btnShowLogin"
@@ -50,9 +46,7 @@
             android:gravity="center"
             android:text="@string/sign_in_message"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"
-
-            />
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

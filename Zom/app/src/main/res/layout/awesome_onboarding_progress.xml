@@ -12,18 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="?colorPrimary"
-
-        />
-
-
-    <!--<ImageView-->
-        <!--android:id="@+id/progressImage"-->
-        <!--android:layout_width="196dp"-->
-        <!--android:layout_height="196dp"-->
-        <!--android:src="@drawable/olo_welcome"-->
-
-        <!--/>-->
+        android:textColor="?colorPrimary" />
 
     <org.ironrabbit.type.CustomTypefaceTextView
         android:layout_width="wrap_content"

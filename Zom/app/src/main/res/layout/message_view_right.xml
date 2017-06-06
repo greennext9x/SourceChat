@@ -15,28 +15,6 @@
         android:gravity="right"
         android:orientation="vertical">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/audio_container"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:descendantFocusability="blocksDescendants"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:padding="0dp"-->
-            <!--android:visibility="gone">-->
-
-            <!--<org.awesomeapp.messenger.ui.widgets.VisualizerView-->
-                <!--android:id="@+id/audio_view"-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="60dp" />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/audio_button"-->
-                <!--android:layout_width="60dp"-->
-                <!--android:layout_height="60dp"-->
-                <!--android:src="@drawable/media_audio_play" />-->
-        <!--</LinearLayout>-->
-
-
         <org.ironrabbit.type.CustomTypefaceTextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
@@ -66,6 +44,7 @@
                 android:scaleType="centerInside" />
 
         </FrameLayout>
+
         <TextView
             android:id="@+id/messagets"
             android:layout_width="wrap_content"
@@ -80,6 +59,7 @@
 
             />
     </LinearLayout>
+
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="48dp"

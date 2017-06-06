@@ -52,11 +52,11 @@
         <item name="colorPrimary">@color/zom_primary</item>
 
         <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">#BF204B</item>
+        <item name="colorPrimaryDark">#1b9c49</item>
 
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
-        <item name="colorAccent">#FF2b63</item>
+        <item name="colorAccent">#23bf5c</item>
 
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight, and colorSwitchThumbNormal. -->

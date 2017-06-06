@@ -121,19 +121,19 @@ public class ChatSession {
         sendMessageAsync(message);
     }*/
 
-    public boolean sendKnock (String from) {
-        if (mParticipant instanceof Contact) {
-            OtrChatManager cm = OtrChatManager.getInstance();
-            SessionID sId = cm.getSessionId(from, mParticipant.getAddress().getAddress());
-            SessionStatus otrStatus = cm.getSessionStatus(sId);
-            if (OtrChatManager.getInstance().canDoKnockPushMessage(sId)) {
-                OtrChatManager.getInstance().sendKnockPushMessage(sId);
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    public boolean sendKnock (String from) {
+//        if (mParticipant instanceof Contact) {
+//            OtrChatManager cm = OtrChatManager.getInstance();
+//            SessionID sId = cm.getSessionId(from, mParticipant.getAddress().getAddress());
+//            SessionStatus otrStatus = cm.getSessionStatus(sId);
+//            if (OtrChatManager.getInstance().canDoKnockPushMessage(sId)) {
+//                OtrChatManager.getInstance().sendKnockPushMessage(sId);
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
     /**
      * Sends a message to other participant(s) in this session asynchronously
      * and adds the message to the history. TODO: more docs on async callbacks.
@@ -172,17 +172,17 @@ public class ChatSession {
                 message.setType(Imps.MessageType.OUTGOING);
 
                 //try to send ChatSecure Push message regardless of OMEMO or OTR
-                if (isOffline && OtrChatManager.getInstance().canDoKnockPushMessage(sId)) {
-
-                        // ChatSecure-Push : If no session is available when sending peer message,
-                        // attempt to send a "Knock" push message to the peer asking them to come online
-                        //cm.sendKnockPushMessage(sId);
-                       // if (!mPushSent) {
-                            // ChatSecure-Push: If the remote peer is offline, send them a push
-                            OtrChatManager.getInstance().sendKnockPushMessage(sId);
-                            mPushSent = true;
-                        //}
-                }
+//                if (isOffline && OtrChatManager.getInstance().canDoKnockPushMessage(sId)) {
+//
+//                        // ChatSecure-Push : If no session is available when sending peer message,
+//                        // attempt to send a "Knock" push message to the peer asking them to come online
+//                        //cm.sendKnockPushMessage(sId);
+//                       // if (!mPushSent) {
+//                            // ChatSecure-Push: If the remote peer is offline, send them a push
+//                            OtrChatManager.getInstance().sendKnockPushMessage(sId);
+//                            mPushSent = true;
+//                        //}
+//                }
 
                 if (mCanOmemo) {
                     message.setType(Imps.MessageType.OUTGOING);
@@ -192,11 +192,11 @@ public class ChatSession {
 
                     if (otrStatus == SessionStatus.ENCRYPTED) {
 
-                        if (!OtrChatManager.getInstance().canDoKnockPushMessage(sId)) {
-                            // ChatSecure-Push : If OTR session is available when sending peer message,
-                            // ensure we have exchanged Push Whitelist tokens with that peer
-                            cm.maybeBeginPushWhitelistTokenExchange(sId);
-                        }
+//                        if (!OtrChatManager.getInstance().canDoKnockPushMessage(sId)) {
+//                            // ChatSecure-Push : If OTR session is available when sending peer message,
+//                            // ensure we have exchanged Push Whitelist tokens with that peer
+//                            cm.maybeBeginPushWhitelistTokenExchange(sId);
+//                        }
 
                         if (verified) {
                             message.setType(Imps.MessageType.OUTGOING_ENCRYPTED_VERIFIED);
@@ -379,31 +379,31 @@ public class ChatSession {
         return Collections.unmodifiableList(mHistoryMessages);
     }*/
 
-    public void sendPushWhitelistTokenAsync(@NonNull Message message,
-                                            @NonNull String[] whitelistTokens) {
-
-        OtrChatManager cm = OtrChatManager.getInstance();
-        SessionID sId = cm.getSessionId(message.getFrom().getAddress(), mParticipant.getAddress().getAddress());
-        SessionStatus otrStatus = cm.getSessionStatus(sId);
-
-        message.setTo(new XmppAddress(sId.getRemoteUserId()));
-
-        if (otrStatus == SessionStatus.ENCRYPTED) {
-            boolean verified = cm.getKeyManager().isVerified(sId);
-
-            if (verified) {
-                message.setType(Imps.MessageType.OUTGOING_ENCRYPTED_VERIFIED);
-            } else {
-                message.setType(Imps.MessageType.OUTGOING_ENCRYPTED);
-            }
-
-            boolean canSend = cm.transformPushWhitelistTokenSending(message, whitelistTokens);
-
-            if (canSend)
-                mManager.sendMessageAsync(this, message);
-
-        }
-    }
+//    public void sendPushWhitelistTokenAsync(@NonNull Message message,
+//                                            @NonNull String[] whitelistTokens) {
+//
+//        OtrChatManager cm = OtrChatManager.getInstance();
+//        SessionID sId = cm.getSessionId(message.getFrom().getAddress(), mParticipant.getAddress().getAddress());
+//        SessionStatus otrStatus = cm.getSessionStatus(sId);
+//
+//        message.setTo(new XmppAddress(sId.getRemoteUserId()));
+//
+//        if (otrStatus == SessionStatus.ENCRYPTED) {
+//            boolean verified = cm.getKeyManager().isVerified(sId);
+//
+//            if (verified) {
+//                message.setType(Imps.MessageType.OUTGOING_ENCRYPTED_VERIFIED);
+//            } else {
+//                message.setType(Imps.MessageType.OUTGOING_ENCRYPTED);
+//            }
+//
+////            boolean canSend = cm.transformPushWhitelistTokenSending(message, whitelistTokens);
+//
+////            if (canSend)
+////                mManager.sendMessageAsync(this, message);
+//
+//        }
+//    }
 
     public boolean isSubscribed() {
         return mIsSubscribed;

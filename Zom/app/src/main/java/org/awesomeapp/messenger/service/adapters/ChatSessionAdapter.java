@@ -377,10 +377,10 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
       //  }
     }
 
-    public boolean sendKnock () {
-
-        return mChatSession.sendKnock(mConnection.getLoginUser().getAddress().getAddress());
-    }
+//    public boolean sendKnock () {
+//
+//        return mChatSession.sendKnock(mConnection.getLoginUser().getAddress().getAddress());
+//    }
 
     public void sendMessage(String text, boolean isResend) {
 
@@ -1287,24 +1287,24 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
     }
 
-    public boolean sendPushWhitelistToken(@NonNull String token) {
-        if (mConnection.getState() == ImConnection.SUSPENDED) {
-            // TODO Is it possible to postpone a TLV message? e.g: insertMessageInDb with type POSTPONED
-            return false;
-        }
-
-        // Whitelist tokens are intended for one recipient, for now
-        if (isGroupChatSession())
-            return false;
-
-        org.awesomeapp.messenger.model.Message msg = new org.awesomeapp.messenger.model.Message("");
-
-        msg.setFrom(mConnection.getLoginUser().getAddress());
-        msg.setType(Imps.MessageType.OUTGOING);
-
-        mChatSession.sendPushWhitelistTokenAsync(msg, new String[]{token});
-        return true;
-    }
+//    public boolean sendPushWhitelistToken(@NonNull String token) {
+//        if (mConnection.getState() == ImConnection.SUSPENDED) {
+//            // TODO Is it possible to postpone a TLV message? e.g: insertMessageInDb with type POSTPONED
+//            return false;
+//        }
+//
+//        // Whitelist tokens are intended for one recipient, for now
+//        if (isGroupChatSession())
+//            return false;
+//
+//        org.awesomeapp.messenger.model.Message msg = new org.awesomeapp.messenger.model.Message("");
+//
+//        msg.setFrom(mConnection.getLoginUser().getAddress());
+//        msg.setType(Imps.MessageType.OUTGOING);
+//
+////        mChatSession.sendPushWhitelistTokenAsync(msg, new String[]{token});
+//        return true;
+//    }
 
     public synchronized void setContactTyping (Contact contact, boolean isTyping)
     {

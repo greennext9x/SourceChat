@@ -93,7 +93,7 @@ interface IChatSession {
 /**
 *  Send knock to wake up remote user
 **/
-    boolean sendKnock ();
+//    boolean sendKnock ();
 
     /**
      * Mark this chat session as read.
@@ -128,7 +128,7 @@ interface IChatSession {
     /**
          * Sends a ChatSecure-Push Whitelist token to all participants in this ChatSession.
      */
-     boolean sendPushWhitelistToken(String token);
+//     boolean sendPushWhitelistToken(String token);
 
      /**
      * set typing active indicator for contact
