@@ -99,9 +99,6 @@ public class ConversationDetailActivity extends BaseActivity {
     private String mNickname = null;
 
     private ConversationView mConvoView = null;
-//
-//    MediaRecorder mMediaRecorder = null;
-//    File mAudioFilePath = null;
 
     private ImApp mApp;
 
@@ -143,7 +140,6 @@ public class ConversationDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         setContentView(R.layout.awesome_activity_detail);
@@ -159,7 +155,6 @@ public class ConversationDetailActivity extends BaseActivity {
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-      //  appBarLayout = (AppBarLayout)findViewById(R.id.appbar);
         mRootLayout = findViewById(R.id.main_content);
 
         mPrettyTime = new PrettyTime(getCurrentLocale());
@@ -205,52 +200,7 @@ public class ConversationDetailActivity extends BaseActivity {
                 }
             }
         }
-
-        //not set color
-//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        int themeColorHeader = settings.getInt("themeColor",-1);
-//        int themeColorText = settings.getInt("themeColorText",-1);
-//        int themeColorBg = settings.getInt("themeColorBg",-1);
-
-//        if (themeColorHeader != -1) {
-//
-//            if (themeColorText == -1)
-//                themeColorText = getContrastColor(themeColorHeader);
-//
-//            if (Build.VERSION.SDK_INT >= 21) {
-//                getWindow().setNavigationBarColor(themeColorHeader);
-//                getWindow().setStatusBarColor(themeColorHeader);
-//                getWindow().setTitleColor(themeColorText);
-//            }
-//
-//      //      appBarLayout.setBackgroundColor(themeColorHeader);
-//         //   collapsingToolbar.setBackgroundColor(themeColorHeader);
-//            mToolbar.setBackgroundColor(themeColorHeader);
-//            mToolbar.setTitleTextColor(themeColorText);
-//
-//        }
-
-//        if (themeColorBg != -1)
-//        {
-//            if (mRootLayout != null)
-//                mRootLayout.setBackgroundColor(themeColorBg);
-//
-//            View viewInput = findViewById(R.id.inputLayout);
-//            viewInput.setBackgroundColor(themeColorBg);
-//
-//            if (themeColorText != -1) {
-//                mConvoView.mComposeMessage.setTextColor(themeColorText);
-//                mConvoView.mComposeMessage.setHintTextColor(themeColorText);
-//            }
-//        }
-
     }
-
-//    public static int getContrastColor(int colorIn) {
-//        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
-//        return y >= 128 ? Color.BLACK : Color.WHITE;
-//    }
-
 
     private void processIntent(Intent intent)
     {
@@ -263,15 +213,9 @@ public class ConversationDetailActivity extends BaseActivity {
 
         mConvoView.bindChat(mChatId, mAddress, mNickname);
         mConvoView.startListening();
-        //loadBackdrop();
-
-     //   CollapsingToolbarLayout collapsingToolbar =
-       //         (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        //collapsingToolbar.setTitle(mConvoView.getTitle());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(mConvoView.getTitle());
 
-        //getSupportActionBar().setSubtitle("foo bar");
 
     }
 
@@ -341,9 +285,9 @@ public class ConversationDetailActivity extends BaseActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.menu_add_person:
-                showAddContact();
-                return true;
+//            case R.id.menu_add_person:
+//                showAddContact();
+//                return true;
             case R.id.menu_end_conversation:
                 mConvoView.closeChatSession(true);
                 finish();
@@ -361,26 +305,9 @@ public class ConversationDetailActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-    private void loadBackdrop() {
-        final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-
-        if (mConvoView.getHeader()!=null)
-            imageView.setImageDrawable(mConvoView.getHeader());
-
-    }**/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        if (mConvoView.isGroupChat())
-        {
-            getMenuInflater().inflate(R.menu.menu_conversation_detail_group, menu);
-        }
-        else {
-            getMenuInflater().inflate(R.menu.menu_conversation_detail, menu);
-        }
-
+        getMenuInflater().inflate(R.menu.menu_conversation_detail, menu);
         return true;
     }
 

@@ -42,7 +42,6 @@ public class Preferences {
     public static final boolean DEFAULT_NOTIFICATION_SOUND = true;
     public static final boolean DEFAULT_NOTIFICATION_VIBRATE = true;
 
-//    private static final String LINKIFY_ON_TOR = "pref_linkify_on_tor";
     private static final String NOTIFICATION = "pref_enable_notification";
     private static final String NOTIFICATION_SOUND = "pref_notification_sound";
     private static final String NOTIFICATION_VIBRATE = "pref_notification_vibrate";
@@ -66,14 +65,6 @@ public class Preferences {
         }
         instance = new Preferences(context);
     }
-
-//    public static boolean getLinkifyOnTor() {
-//        return preferences.getBoolean(LINKIFY_ON_TOR, DEFAULT_LINKIFY_ON_TOR);
-//    }
-//
-//    public static void setLinkifyOnTor(boolean linkify) {
-//        preferences.edit().putBoolean(LINKIFY_ON_TOR, linkify).apply();
-//    }
 
     public static boolean isNotificationEnabled() {
         return preferences.getBoolean(NOTIFICATION, DEFAULT_NOTIFICATION);

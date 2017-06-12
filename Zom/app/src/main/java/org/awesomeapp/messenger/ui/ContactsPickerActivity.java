@@ -99,38 +99,6 @@ public class ContactsPickerActivity extends BaseActivity {
 
     private boolean mIsCABDestroyed= true;
 
-//    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-//        @Override
-//        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-//            MenuInflater inflater = getMenuInflater();
-//            inflater.inflate(R.menu.menu_contact_picker_multi, menu);
-//            return false;
-//        }
-//
-//        @Override
-//        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-//            return false;
-//        }
-//
-//        @Override
-//        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-//            if (menuItem.getItemId() == R.id.action_start_chat)
-//            {
-//                SparseBooleanArray checkedPos = mListView.getCheckedItemPositions();
-//                multiFinish(checkedPos);
-//
-//                return true;
-//            }
-//            return false;
-//        }
-//
-//        @Override
-//        public void onDestroyActionMode(ActionMode actionMode) {
-//            mAdapter.clearSelection();
-//            mIsCABDestroyed = true;
-//        }
-//    };
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -144,65 +112,6 @@ public class ContactsPickerActivity extends BaseActivity {
 
         mListView = (ListView)findViewById(R.id.contactsList);
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-//        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                multiStart(i);
-//
-//                return true;
-//            }
-//        });
-
-
-//        mListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-//
-//            private int nr = 0;
-//
-//            @Override
-//            public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
-//                MenuInflater inflater = getMenuInflater();
-//                inflater.inflate(R.menu.menu_contact_picker_multi, menu);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onPrepareActionMode(android.view.ActionMode mode, Menu menu) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
-//
-//                if (item.getItemId() == R.id.action_start_chat)
-//                {
-//                    SparseBooleanArray checkedPos = mListView.getCheckedItemPositions();
-//                    multiFinish(checkedPos);
-//
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public void onDestroyActionMode(android.view.ActionMode mode) {
-//                nr = 0;
-//                mAdapter.clearSelection();
-//                mIsCABDestroyed = true;
-//            }
-//
-//            @Override
-//            public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
-//
-//                mAdapter.setNewSelection(position, checked);
-//
-//                if (!checked)
-//                    mAdapter.removeSelection(position);
-//            }
-//
-//        });
 
         mListView.setOnItemClickListener(new OnItemClickListener ()
         {
@@ -242,48 +151,6 @@ public class ContactsPickerActivity extends BaseActivity {
 
         doFilterAsync("");
     }
-
-//    private void multiStart (int i)
-//    {
-//
-//        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-//        mListView.startActionMode(mActionModeCallback);
-//
-//        if (i != -1)
-//            mAdapter.setNewSelection(i, true);
-//
-//        mIsCABDestroyed = false; // mark readiness to switch back to SINGLE CHOICE after the CABis destroyed
-//
-//    }
-
-//    private void multiFinish (SparseBooleanArray positions)
-//    {
-//
-//        ArrayList<String> users = new ArrayList<String>();
-//        ArrayList<Integer> providers = new ArrayList<Integer>();
-//        ArrayList<Integer> accounts = new ArrayList<Integer>();
-//
-//        for (int i = 0; i < positions.size(); i++)
-//        {
-//            if (positions.valueAt(i)) {
-//                Cursor cursor = (Cursor) mAdapter.getItem(i);
-//
-//                users.add(cursor.getString(ContactListItem.COLUMN_CONTACT_USERNAME));
-//                providers.add((int) cursor.getLong(ContactListItem.COLUMN_CONTACT_PROVIDER));
-//                accounts.add((int) cursor.getLong(ContactListItem.COLUMN_CONTACT_ACCOUNT));
-//            }
-//        }
-//
-//        Intent data = new Intent();
-//        data.putStringArrayListExtra(EXTRA_RESULT_USERNAMES, users);
-//        data.putIntegerArrayListExtra(EXTRA_RESULT_PROVIDER, providers);
-//        data.putIntegerArrayListExtra(EXTRA_RESULT_ACCOUNT, accounts);
-//        setResult(RESULT_OK, data);
-//        finish();
-//    }
-
-
-
     @Override
     protected void onActivityResult(int request, int response, Intent data) {
         super.onActivityResult(request, response, data);
@@ -354,17 +221,6 @@ public class ContactsPickerActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-//        switch (item.getItemId())
-//        {
-//            case R.id.menu_new_group_chat:
-//                multiStart(-1);
-//             //   getSupportActionBar().startActionMode(mActionModeCallback);
-//                return true;
-//
-//
-//
-//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -530,18 +386,11 @@ public class ContactsPickerActivity extends BaseActivity {
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
             mAdapter.swapCursor(newCursor);
-
-
-
         }
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
-
             mAdapter.swapCursor(null);
-
-
-
         }
 
     }

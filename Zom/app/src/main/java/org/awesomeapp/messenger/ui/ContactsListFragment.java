@@ -61,7 +61,6 @@ import im.zom.messenger.R;
 
 import org.awesomeapp.messenger.ImApp;
 
-//import com.bumptech.glide.Glide;
 
 public class ContactsListFragment extends Fragment {
 
@@ -322,7 +321,6 @@ public class ContactsListFragment extends Fragment {
 
             if (mAdapter.getItemCount() == 0) {
                 mRecView.setVisibility(View.GONE);
-//                mEmptyView.setVisibility(View.VISIBLE);
                 mEmptyView.setVisibility(View.VISIBLE);
 
             }
@@ -351,9 +349,6 @@ public class ContactsListFragment extends Fragment {
                 Imps.Presence.PRESENCE_CUSTOM_STATUS,
                 Imps.Chats.LAST_MESSAGE_DATE,
                 Imps.Chats.LAST_UNREAD_MESSAGE
-
         };
-
-
     }
 }

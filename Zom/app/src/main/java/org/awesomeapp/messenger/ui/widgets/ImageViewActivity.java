@@ -72,12 +72,12 @@ public class ImageViewActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.menu_message_forward:
-                forwardMediaFile();
-                return true;
-            case R.id.menu_message_share:
-                exportMediaFile();
-                return true;
+//            case R.id.menu_message_forward:
+//                forwardMediaFile();
+//                return true;
+//            case R.id.menu_message_share:
+//                exportMediaFile();
+//                return true;
             default:
         }
         return super.onOptionsItemSelected(item);
@@ -174,39 +174,39 @@ public class ImageViewActivity extends AppCompatActivity {
         return new Point( display.getWidth(), display.getHeight());
     }
 
-    public void exportMediaFile ()
-    {
-        java.io.File exportPath = SecureMediaStore.exportPath(mimeType, mediaUri);
-        exportMediaFile(mimeType, mediaUri, exportPath);
+//    public void exportMediaFile ()
+//    {
+//        java.io.File exportPath = SecureMediaStore.exportPath(mimeType, mediaUri);
+//        exportMediaFile(mimeType, mediaUri, exportPath);
+//
+//    };
+//
+//    private void exportMediaFile (String mimeType, Uri mediaUri, java.io.File exportPath)
+//    {
+//        try {
+//
+//            SecureMediaStore.exportContent(mimeType, mediaUri, exportPath);
+//            Intent shareIntent = new Intent();
+//            shareIntent.setAction(Intent.ACTION_SEND);
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportPath));
+//            shareIntent.setType(mimeType);
+//            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
+//        } catch (IOException e) {
+//            Toast.makeText(this, "Export Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
+//            e.printStackTrace();
+//        }
+//    }
 
-    };
-
-    private void exportMediaFile (String mimeType, Uri mediaUri, java.io.File exportPath)
-    {
-        try {
-
-            SecureMediaStore.exportContent(mimeType, mediaUri, exportPath);
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportPath));
-            shareIntent.setType(mimeType);
-            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
-        } catch (IOException e) {
-            Toast.makeText(this, "Export Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-    }
-
-    private void forwardMediaFile ()
-    {
-
-        String resharePath = mediaUri.toString();
-        Intent shareIntent = new Intent(this, ImUrlActivity.class);
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.setDataAndType(Uri.parse(resharePath), mimeType);
-        startActivity(shareIntent);
-
-    }
+//    private void forwardMediaFile ()
+//    {
+//
+//        String resharePath = mediaUri.toString();
+//        Intent shareIntent = new Intent(this, ImUrlActivity.class);
+//        shareIntent.setAction(Intent.ACTION_SEND);
+//        shareIntent.setDataAndType(Uri.parse(resharePath), mimeType);
+//        startActivity(shareIntent);
+//
+//    }
 
     private void resendMediaFile ()
     {

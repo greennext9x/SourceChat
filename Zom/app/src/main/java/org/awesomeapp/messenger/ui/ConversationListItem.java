@@ -102,7 +102,7 @@ public class ConversationListItem extends FrameLayout {
     public static final int COLUMN_LAST_MESSAGE_DATE = 10;
     public static final int COLUMN_LAST_MESSAGE = 11;
 
-    static Drawable AVATAR_DEFAULT_GROUP = null;
+//    static Drawable AVATAR_DEFAULT_GROUP = null;
     private PrettyTime sPrettyTime = null;
 
     public ConversationListItem(Context context, AttributeSet attrs) {
@@ -120,11 +120,11 @@ public class ConversationListItem extends FrameLayout {
             nickname = nickname.split("@")[0].split("\\.")[0];
         }
 
-        if (Imps.Contacts.TYPE_GROUP == contactType) {
-
-            String groupCountString = getGroupCount(getContext().getContentResolver(), contactId);
-            nickname += groupCountString;
-        }
+//        if (Imps.Contacts.TYPE_GROUP == contactType) {
+//
+//            String groupCountString = getGroupCount(getContext().getContentResolver(), contactId);
+//            nickname += groupCountString;
+//        }
 
         if (!TextUtils.isEmpty(underLineText)) {
             // highlight/underline the word being searched 
@@ -146,48 +146,32 @@ public class ConversationListItem extends FrameLayout {
         holder.mStatusIcon.setVisibility(View.GONE);
 
         if (holder.mAvatar != null) {
-            if (Imps.Contacts.TYPE_GROUP == contactType) {
+            Drawable avatar = null;
+
+            try {
+                avatar = DatabaseUtils.getAvatarFromAddress(this.getContext().getContentResolver(), address, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
+                // avatar = DatabaseUtils.getAvatarFromCursor(cursor, COLUMN_AVATAR_DATA, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
+            } catch (Exception e) {
+                //problem decoding avatar
+                Log.e(ImApp.LOG_TAG, "error decoding avatar", e);
+            }
+
+            try {
+                if (avatar != null) {
+                    holder.mAvatar.setImageDrawable(avatar);
+                } else {
+                    int padding = 24;
+                    LetterAvatar lavatar = new LetterAvatar(getContext(), nickname, padding);
+
+                    holder.mAvatar.setImageDrawable(lavatar);
+
+                }
 
                 holder.mAvatar.setVisibility(View.VISIBLE);
-
-                if (AVATAR_DEFAULT_GROUP == null)
-                    AVATAR_DEFAULT_GROUP = new RoundedAvatarDrawable(BitmapFactory.decodeResource(getResources(),
-                            R.drawable.group_chat));
-
-
-                holder.mAvatar.setImageDrawable(AVATAR_DEFAULT_GROUP);
-
-
+            } catch (OutOfMemoryError ome) {
+                //this seems to happen now and then even on tiny images; let's catch it and just not set an avatar
             }
-            else {
 
-                Drawable avatar = null;
-
-                try {
-                    avatar = DatabaseUtils.getAvatarFromAddress(this.getContext().getContentResolver(), address, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
-                    // avatar = DatabaseUtils.getAvatarFromCursor(cursor, COLUMN_AVATAR_DATA, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
-                } catch (Exception e) {
-                    //problem decoding avatar
-                    Log.e(ImApp.LOG_TAG, "error decoding avatar", e);
-                }
-
-                try {
-                    if (avatar != null) {
-                        holder.mAvatar.setImageDrawable(avatar);
-                    } else {
-                        int padding = 24;
-                        LetterAvatar lavatar = new LetterAvatar(getContext(), nickname, padding);
-
-                        holder.mAvatar.setImageDrawable(lavatar);
-
-                    }
-
-                    holder.mAvatar.setVisibility(View.VISIBLE);
-                } catch (OutOfMemoryError ome) {
-                    //this seems to happen now and then even on tiny images; let's catch it and just not set an avatar
-                }
-
-            }
         }
 
         if (showChatMsg && message != null) {
@@ -319,38 +303,6 @@ public class ConversationListItem extends FrameLayout {
         //mCurrentChatSession.getOtrChatSession();
 
     }
-
-    /**
-     * public void setAvatarBorder(int status, RoundedAvatarDrawable avatar) {
-     * switch (status) {
-     * case Presence.AVAILABLE:
-     * avatar.setBorderColor(getResources().getColor(R.color.holo_green_light));
-     * break;
-     * <p>
-     * case Presence.IDLE:
-     * avatar.setBorderColor(getResources().getColor(R.color.holo_green_dark));
-     * <p>
-     * break;
-     * <p>
-     * case Presence.AWAY:
-     * avatar.setBorderColor(getResources().getColor(R.color.holo_orange_light));
-     * break;
-     * <p>
-     * case Presence.DO_NOT_DISTURB:
-     * avatar.setBorderColor(getResources().getColor(R.color.holo_red_dark));
-     * <p>
-     * break;
-     * <p>
-     * case Presence.OFFLINE:
-     * avatar.setBorderColor(getResources().getColor(android.R.color.transparent));
-     * break;
-     * <p>
-     * <p>
-     * default:
-     * }
-     * }
-     **/
-
     public int getAvatarBorder(int status) {
         switch (status) {
             case Presence.AVAILABLE:
@@ -446,7 +398,6 @@ public class ConversationListItem extends FrameLayout {
                 Math.max((int) (g * factor), 0),
                 Math.max((int) (b * factor), 0));
     }
-
 
     @TargetApi(Build.VERSION_CODES.N)
     public Locale getCurrentLocale() {

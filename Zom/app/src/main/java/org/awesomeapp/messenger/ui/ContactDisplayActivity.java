@@ -131,8 +131,6 @@ public class ContactDisplayActivity extends BaseActivity {
 
         try {
 
-//            ImageView btnQrShare = (ImageView) findViewById(R.id.qrshare);
-//            ImageView iv = (ImageView)findViewById(R.id.qrcode);
             TextView tv = (TextView)findViewById(R.id.tvFingerprint);
 
             Button btnVerify = (Button)findViewById(R.id.btnVerify);
@@ -203,17 +201,6 @@ public class ContactDisplayActivity extends BaseActivity {
         findViewById(R.id.btnVerify).setVisibility(View.GONE);
     }
 
-//    private void showGallery (int contactId)
-//    {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        GalleryListFragment fragment = new GalleryListFragment();
-//        Bundle args = new Bundle();
-//        args.putInt("contactId", contactId);
-//        fragment.setArguments(args);
-//        fragmentTransaction.add(R.id.fragment_container, fragment, "MyActivity");
-//        fragmentTransaction.commit();
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2008 Esmertec AG. Copyright (C) 2008 The Android Open Source
- * Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.awesomeapp.messenger.ui;
 
 import im.zom.messenger.R;
@@ -166,9 +149,7 @@ public class MessageListItem extends FrameLayout {
             boolean scrolling, EncryptionState encryption, boolean showContact, int presenceStatus) {
 
         mHolder = holder;
-//        applyStyleColors();
         mHolder.mTextViewForMessages.setVisibility(View.VISIBLE);
-//        mHolder.mAudioContainer.setVisibility(View.GONE);
         mHolder.mMediaContainer.setVisibility(View.GONE);
 
         if (nickname == null)
@@ -376,7 +357,7 @@ public class MessageListItem extends FrameLayout {
         return path;
     }
 
-    private AudioPlayer mAudioPlayer;
+//    private AudioPlayer mAudioPlayer;
 
     public void onClickMediaIcon(String mimeType, Uri mediaUri) {
 
@@ -392,70 +373,70 @@ public class MessageListItem extends FrameLayout {
                 context.startActivity(intent);
             }
         }
-        else
-        {
-            exportMediaFile();
-        }
+//        else
+//        {
+//            exportMediaFile();
+//        }
     }
-    private void forwardMediaFile (String mimeType, Uri mediaUri)
-    {
+//    private void forwardMediaFile (String mimeType, Uri mediaUri)
+//    {
+//
+//        String resharePath = "vfs:/" + mediaUri.getPath();
+//        Intent shareIntent = new Intent(context, ImUrlActivity.class);
+//        shareIntent.setAction(Intent.ACTION_SEND);
+//        shareIntent.setDataAndType(Uri.parse(resharePath), mimeType);
+//        context.startActivity(shareIntent);
+//
+//
+//    }
+//
+//    public void forwardMediaFile ()
+//    {
+//        if (mimeType != null && mediaUri != null) {
+//            forwardMediaFile(mimeType, mediaUri);
+//        }
+//        else
+//        {
+//            Intent shareIntent = new Intent(context, ImUrlActivity.class);
+//            shareIntent.setAction(Intent.ACTION_SEND);
+//            shareIntent.putExtra(Intent.EXTRA_TEXT, lastMessage);
+//            shareIntent.setType("text/plain");
+//            context.startActivity(shareIntent);
+//        }
+//    }
 
-        String resharePath = "vfs:/" + mediaUri.getPath();
-        Intent shareIntent = new Intent(context, ImUrlActivity.class);
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.setDataAndType(Uri.parse(resharePath), mimeType);
-        context.startActivity(shareIntent);
-
-
-    }
-
-    public void forwardMediaFile ()
-    {
-        if (mimeType != null && mediaUri != null) {
-            forwardMediaFile(mimeType, mediaUri);
-        }
-        else
-        {
-            Intent shareIntent = new Intent(context, ImUrlActivity.class);
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_TEXT, lastMessage);
-            shareIntent.setType("text/plain");
-            context.startActivity(shareIntent);
-        }
-    }
-
-    public void exportMediaFile ()
-    {
-        if (mimeType != null && mediaUri != null) {
-            java.io.File exportPath = SecureMediaStore.exportPath(mimeType, mediaUri);
-            exportMediaFile(mimeType, mediaUri, exportPath);
-        }
-        else
-        {
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_TEXT,lastMessage);
-            shareIntent.setType("text/plain");
-            context.startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
-        }
-
-    };
-
-    private void exportMediaFile (String mimeType, Uri mediaUri, java.io.File exportPath)
-    {
-        try {
-
-            SecureMediaStore.exportContent(mimeType, mediaUri, exportPath);
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportPath));
-            shareIntent.setType(mimeType);
-            context.startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "Export Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-    }
+//    public void exportMediaFile ()
+//    {
+//        if (mimeType != null && mediaUri != null) {
+//            java.io.File exportPath = SecureMediaStore.exportPath(mimeType, mediaUri);
+//            exportMediaFile(mimeType, mediaUri, exportPath);
+//        }
+//        else
+//        {
+//            Intent shareIntent = new Intent();
+//            shareIntent.setAction(Intent.ACTION_SEND);
+//            shareIntent.putExtra(Intent.EXTRA_TEXT,lastMessage);
+//            shareIntent.setType("text/plain");
+//            context.startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
+//        }
+//
+//    };
+//
+//    private void exportMediaFile (String mimeType, Uri mediaUri, java.io.File exportPath)
+//    {
+//        try {
+//
+//            SecureMediaStore.exportContent(mimeType, mediaUri, exportPath);
+//            Intent shareIntent = new Intent();
+//            shareIntent.setAction(Intent.ACTION_SEND);
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportPath));
+//            shareIntent.setType(mimeType);
+//            context.startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
+//        } catch (Exception e) {
+//            Toast.makeText(getContext(), "Export Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
+//            e.printStackTrace();
+//        }
+//    }
 
     public static boolean isIntentAvailable(Context context, Intent intent) {
         final PackageManager packageManager = context.getPackageManager();

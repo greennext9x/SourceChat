@@ -80,41 +80,6 @@ public class ContactListActivity extends AppCompatActivity {
         return list.size() > 0;
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (resultCode == RESULT_OK) {
-//            if (requestCode == OnboardingManager.REQUEST_SCAN) {
-//
-//                ArrayList<String> resultScans = data.getStringArrayListExtra("result");
-//                for (String resultScan : resultScans)
-//                {
-//
-//                    try {
-//                        //parse each string and if they are for a new user then add the user
-//                        String[] parts = OnboardingManager.decodeInviteLink(resultScan);
-//                        String address = parts[0];
-//                        String fingerprint = null, nickname = null;
-//                        if (parts.length > 1)
-//                            fingerprint = parts[1];
-//                        if (parts.length > 2)
-//                            nickname = parts[2];
-//
-//                        new AddContactAsyncTask(mApp.getDefaultProviderId(),mApp.getDefaultAccountId(), mApp).execute(address, fingerprint, nickname);
-//
-//                        //if they are for a group chat, then add the group
-//                    }
-//                    catch (Exception e)
-//                    {
-//                        Log.w(ImApp.LOG_TAG, "error parsing QR invite link", e);
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
-
     public void startChat (long providerId, long accountId, String username)
     {
 

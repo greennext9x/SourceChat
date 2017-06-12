@@ -10,9 +10,7 @@ import org.awesomeapp.messenger.util.SecureMediaStore;
 
 import im.zom.messenger.R;
 
-/**
- * Created by n8fr8 on 8/10/15.
- */
+
 public class MediaViewHolder extends RecyclerView.ViewHolder  {
 
     public ImageView mMediaThumbnail;

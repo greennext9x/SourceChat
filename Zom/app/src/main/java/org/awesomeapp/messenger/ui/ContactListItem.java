@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2007-2008 Esmertec AG. Copyright (C) 2007-2008 The Android Open
- * Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.awesomeapp.messenger.ui;
 
 
@@ -144,53 +127,34 @@ public class ContactListItem extends FrameLayout {
         } else
             holder.mLine1.setText(nickname);
 
-        //holder.mStatusIcon.setVisibility(View.GONE);
-
         if (holder.mAvatar != null) {
-            if (Imps.Contacts.TYPE_GROUP == type) {
+            Drawable avatar = null;
+
+            try {
+                avatar = DatabaseUtils.getAvatarFromAddress(this.getContext().getContentResolver(), address, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
+
+            } catch (Exception e) {
+                //problem decoding avatar
+                Log.e(ImApp.LOG_TAG, "error decoding avatar", e);
+            }
+
+            try {
+                if (avatar != null) {
+                    if (avatar instanceof RoundedAvatarDrawable)
+                        setAvatarBorder(presence, (RoundedAvatarDrawable) avatar);
+
+                    holder.mAvatar.setImageDrawable(avatar);
+                } else {
+                    int padding = 24;
+                    LetterAvatar lavatar = new LetterAvatar(getContext(), nickname, padding);
+
+                    holder.mAvatar.setImageDrawable(lavatar);
+
+                }
 
                 holder.mAvatar.setVisibility(View.VISIBLE);
-
-                if (AVATAR_DEFAULT_GROUP == null)
-                    AVATAR_DEFAULT_GROUP = new RoundedAvatarDrawable(BitmapFactory.decodeResource(getResources(),
-                            R.drawable.group_chat));
-
-
-                holder.mAvatar.setImageDrawable(AVATAR_DEFAULT_GROUP);
-
-            } else {
-
-                Drawable avatar = null;
-
-                try {
-                    //avatar = DatabaseUtils.getAvatarFromCursor(cursor, COLUMN_AVATAR_DATA, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
-                    avatar = DatabaseUtils.getAvatarFromAddress(this.getContext().getContentResolver(), address, ImApp.SMALL_AVATAR_WIDTH, ImApp.SMALL_AVATAR_HEIGHT);
-
-                } catch (Exception e) {
-                    //problem decoding avatar
-                    Log.e(ImApp.LOG_TAG, "error decoding avatar", e);
-                }
-
-                try {
-                    if (avatar != null) {
-                        if (avatar instanceof RoundedAvatarDrawable)
-                            setAvatarBorder(presence, (RoundedAvatarDrawable) avatar);
-
-                        holder.mAvatar.setImageDrawable(avatar);
-                    } else {
-                        //int color = getAvatarBorder(presence);
-                        int padding = 24;
-                        LetterAvatar lavatar = new LetterAvatar(getContext(), nickname, padding);
-
-                        holder.mAvatar.setImageDrawable(lavatar);
-
-                    }
-
-                    holder.mAvatar.setVisibility(View.VISIBLE);
-                } catch (OutOfMemoryError ome) {
-                    //this seems to happen now and then even on tiny images; let's catch it and just not set an avatar
-                }
-
+            } catch (OutOfMemoryError ome) {
+                //this seems to happen now and then even on tiny images; let's catch it and just not set an avatar
             }
         }
 
