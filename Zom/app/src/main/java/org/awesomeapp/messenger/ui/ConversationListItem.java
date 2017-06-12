@@ -110,12 +110,6 @@ public class ConversationListItem extends FrameLayout {
         sPrettyTime = new PrettyTime(getCurrentLocale());
     }
 
-    /**
-     * public void bind(ConversationViewHolder holder, Cursor cursor, String underLineText, boolean scrolling) {
-     * bind(holder, cursor, underLineText, true, scrolling);
-     * }
-     */
-
     public void bind(ConversationViewHolder holder, long contactId, long providerId, long accountId, String address, String nickname, int contactType, String message, long messageDate, int presence, String underLineText, boolean showChatMsg, boolean scrolling) {
 
 
@@ -165,7 +159,6 @@ public class ConversationListItem extends FrameLayout {
 
 
             }
-            //   else if (cursor.getColumnIndex(Imps.Contacts.AVATAR_DATA)!=-1)
             else {
 
                 Drawable avatar = null;
@@ -180,12 +173,8 @@ public class ConversationListItem extends FrameLayout {
 
                 try {
                     if (avatar != null) {
-                        //if (avatar instanceof RoundedAvatarDrawable)
-                        //  setAvatarBorder(presence,(RoundedAvatarDrawable)avatar);
-
                         holder.mAvatar.setImageDrawable(avatar);
                     } else {
-                        // int color = getAvatarBorder(presence);
                         int padding = 24;
                         LetterAvatar lavatar = new LetterAvatar(getContext(), nickname, padding);
 

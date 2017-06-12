@@ -280,7 +280,6 @@ public class ConversationView {
 
                 }
 
-
             } catch (RemoteException re) {
             }
 
@@ -1376,17 +1375,17 @@ public class ConversationView {
 
     }
 
-    public void showGroupInfo() {
-
-        Intent intent = new Intent(mContext, GroupDisplayActivity.class);
-        intent.putExtra("nickname", mRemoteNickname);
-        intent.putExtra("address", mRemoteAddress);
-        intent.putExtra("provider", mProviderId);
-        intent.putExtra("account", mAccountId);
-        intent.putExtra("chat", mLastChatId);
-
-        mContext.startActivity(intent);
-    }
+//    public void showGroupInfo() {
+//
+//        Intent intent = new Intent(mContext, GroupDisplayActivity.class);
+//        intent.putExtra("nickname", mRemoteNickname);
+//        intent.putExtra("address", mRemoteAddress);
+//        intent.putExtra("provider", mProviderId);
+//        intent.putExtra("account", mAccountId);
+//        intent.putExtra("chat", mLastChatId);
+//
+//        mContext.startActivity(intent);
+//    }
 
 
     public void blockContact() {

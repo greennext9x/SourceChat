@@ -99,9 +99,9 @@ public class ConversationDetailActivity extends BaseActivity {
     private String mNickname = null;
 
     private ConversationView mConvoView = null;
-
-    MediaRecorder mMediaRecorder = null;
-    File mAudioFilePath = null;
+//
+//    MediaRecorder mMediaRecorder = null;
+//    File mAudioFilePath = null;
 
     private ImApp mApp;
 
@@ -354,9 +354,9 @@ public class ConversationDetailActivity extends BaseActivity {
             case R.id.menu_verify_or_view:
                 mConvoView.showVerifyDialog();
                 return true;
-            case R.id.menu_group_info:
-                mConvoView.showGroupInfo();
-                return true;
+//            case R.id.menu_group_info:
+//                mConvoView.showGroupInfo();
+//                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -509,45 +509,45 @@ public class ConversationDetailActivity extends BaseActivity {
     }
 
 
-    void startFilePicker() {
-
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE);
-
-        if (permissionCheck ==PackageManager.PERMISSION_DENIED)
-        {
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                Snackbar.make(mConvoView.getHistoryView(), R.string.grant_perms, Snackbar.LENGTH_LONG).show();
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_FILE);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
-        else {
-
-
-            Intent selectFile = new Intent(Intent.ACTION_GET_CONTENT);
-            Intent intentChooser = Intent.createChooser(selectFile, "Select File");
-
-            if (intentChooser != null)
-                startActivityForResult(Intent.createChooser(selectFile, "Select File"), REQUEST_SEND_FILE);
-        }
-    }
+//    void startFilePicker() {
+//
+//        int permissionCheck = ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.READ_EXTERNAL_STORAGE);
+//
+//        if (permissionCheck ==PackageManager.PERMISSION_DENIED)
+//        {
+//            // Should we show an explanation?
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//
+//
+//                // Show an expanation to the user *asynchronously* -- don't block
+//                // this thread waiting for the user's response! After the user
+//                // sees the explanation, try again to request the permission.
+//                Snackbar.make(mConvoView.getHistoryView(), R.string.grant_perms, Snackbar.LENGTH_LONG).show();
+//            } else {
+//
+//                // No explanation needed, we can request the permission.
+//
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                        MY_PERMISSIONS_REQUEST_FILE);
+//
+//                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+//                // app-defined int constant. The callback method gets the
+//                // result of the request.
+//            }
+//        }
+//        else {
+//
+//
+//            Intent selectFile = new Intent(Intent.ACTION_GET_CONTENT);
+//            Intent intentChooser = Intent.createChooser(selectFile, "Select File");
+//
+//            if (intentChooser != null)
+//                startActivityForResult(Intent.createChooser(selectFile, "Select File"), REQUEST_SEND_FILE);
+//        }
+//    }
 
     private boolean isCallable(Intent intent) {
         List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent,
@@ -647,40 +647,23 @@ public class ConversationDetailActivity extends BaseActivity {
                     return ;
                 }
 
-                /**
-                if (uri.getHost().equals("com.google.android.apps.photos.contentprovider"))
-                {
-
-                    try {
-                        String uriActual = URLDecoder.decode(uri.getPath(), "UTF-8");
-                        uriActual = uriActual.substring(uriActual.indexOf("content://"));
-                        uri = Uri.parse(uriActual);
-                    }
-                    catch (Exception e)
-                    {
-                        Log.e(ImApp.LOG_TAG,"error parsing photos app URI",e);
-                    }
-
-                }*/
-
-
                 boolean deleteFile = false;
                 boolean resizeImage = true;
                 boolean importContent = true;
                 handleSendDelete(uri, "image/jpeg", deleteFile, resizeImage, importContent);
             }
-            else if (requestCode == REQUEST_SEND_FILE || requestCode == REQUEST_SEND_AUDIO) {
-                Uri uri = resultIntent.getData() ;
-
-                if( uri == null ) {
-                    return;
-                }
-                boolean deleteFile = false;
-                boolean resizeImage = false;
-                boolean importContent = false;
-
-                handleSendDelete(uri, null, deleteFile, resizeImage, importContent);
-            }
+//            else if (requestCode == REQUEST_SEND_FILE || requestCode == REQUEST_SEND_AUDIO) {
+//                Uri uri = resultIntent.getData() ;
+//
+//                if( uri == null ) {
+//                    return;
+//                }
+//                boolean deleteFile = false;
+//                boolean resizeImage = false;
+//                boolean importContent = false;
+//
+//                handleSendDelete(uri, null, deleteFile, resizeImage, importContent);
+//            }
             else if (requestCode == REQUEST_TAKE_PICTURE)
             {
                 if (mLastPhoto != null) {
@@ -738,106 +721,106 @@ public class ConversationDetailActivity extends BaseActivity {
         return false; // was not sent
     }
 
-    boolean mIsAudioRecording = false;
-
-    public boolean isAudioRecording ()
-    {
-        return mIsAudioRecording;
-    }
-
-    public void startAudioRecording ()
-    {
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO);
-
-        if (permissionCheck ==PackageManager.PERMISSION_DENIED)
-        {
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.RECORD_AUDIO)) {
-
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                Snackbar.make(mConvoView.getHistoryView(), R.string.grant_perms, Snackbar.LENGTH_LONG).show();
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        MY_PERMISSIONS_REQUEST_AUDIO);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
-        else {
-            mMediaRecorder = new MediaRecorder();
-
-            String fileName = UUID.randomUUID().toString().substring(0,8) + ".m4a";
-            mAudioFilePath = new File(getFilesDir(), fileName);
-
-            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-
-            //maybe we can modify these in the future, or allow people to tweak them
-            mMediaRecorder.setAudioChannels(1);
-            mMediaRecorder.setAudioEncodingBitRate(22050);
-            mMediaRecorder.setAudioSamplingRate(64000);
-            mMediaRecorder.setOutputFile(mAudioFilePath.getAbsolutePath());
-
-            try {
-                mIsAudioRecording = true;
-                mMediaRecorder.prepare();
-                mMediaRecorder.start();
-            } catch (Exception e) {
-                Log.e(ImApp.LOG_TAG, "couldn't start audio", e);
-            }
-        }
-    }
-
-    public int getAudioAmplitude ()
-    {
-        return mMediaRecorder.getMaxAmplitude();
-    }
-
-    public void stopAudioRecording (boolean send)
-    {
-        if (mMediaRecorder != null && mAudioFilePath != null && mIsAudioRecording) {
-
-            try {
-                mMediaRecorder.stop();
-
-                mMediaRecorder.reset();
-                mMediaRecorder.release();
-
-                if (send) {
-                    Uri uriAudio = Uri.fromFile(mAudioFilePath);
-                    boolean deleteFile = true;
-                    boolean resizeImage = false;
-                    boolean importContent = true;
-                    handleSendDelete(uriAudio, "audio/mp4", deleteFile, resizeImage, importContent);
-                } else {
-                    mAudioFilePath.delete();
-                }
-            }
-            catch (IllegalStateException ise)
-            {
-                Log.e(ImApp.LOG_TAG,"error stopping audio recording",ise);
-            }
-            catch (RuntimeException re) //stop can fail so we should catch this here
-            {
-                Log.e(ImApp.LOG_TAG,"error stopping audio recording",re);
-            }
-
-            mIsAudioRecording = false;
-        }
-
-    }
+//    boolean mIsAudioRecording = false;
+//
+//    public boolean isAudioRecording ()
+//    {
+//        return mIsAudioRecording;
+//    }
+//
+//    public void startAudioRecording ()
+//    {
+//        int permissionCheck = ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.RECORD_AUDIO);
+//
+//        if (permissionCheck ==PackageManager.PERMISSION_DENIED)
+//        {
+//            // Should we show an explanation?
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                    Manifest.permission.RECORD_AUDIO)) {
+//
+//
+//                // Show an expanation to the user *asynchronously* -- don't block
+//                // this thread waiting for the user's response! After the user
+//                // sees the explanation, try again to request the permission.
+//                Snackbar.make(mConvoView.getHistoryView(), R.string.grant_perms, Snackbar.LENGTH_LONG).show();
+//            } else {
+//
+//                // No explanation needed, we can request the permission.
+//
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.RECORD_AUDIO},
+//                        MY_PERMISSIONS_REQUEST_AUDIO);
+//
+//                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+//                // app-defined int constant. The callback method gets the
+//                // result of the request.
+//            }
+//        }
+//        else {
+//            mMediaRecorder = new MediaRecorder();
+//
+//            String fileName = UUID.randomUUID().toString().substring(0,8) + ".m4a";
+//            mAudioFilePath = new File(getFilesDir(), fileName);
+//
+//            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+//            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+//
+//            //maybe we can modify these in the future, or allow people to tweak them
+//            mMediaRecorder.setAudioChannels(1);
+//            mMediaRecorder.setAudioEncodingBitRate(22050);
+//            mMediaRecorder.setAudioSamplingRate(64000);
+//            mMediaRecorder.setOutputFile(mAudioFilePath.getAbsolutePath());
+//
+//            try {
+//                mIsAudioRecording = true;
+//                mMediaRecorder.prepare();
+//                mMediaRecorder.start();
+//            } catch (Exception e) {
+//                Log.e(ImApp.LOG_TAG, "couldn't start audio", e);
+//            }
+//        }
+//    }
+//
+//    public int getAudioAmplitude ()
+//    {
+//        return mMediaRecorder.getMaxAmplitude();
+//    }
+//
+//    public void stopAudioRecording (boolean send)
+//    {
+//        if (mMediaRecorder != null && mAudioFilePath != null && mIsAudioRecording) {
+//
+//            try {
+//                mMediaRecorder.stop();
+//
+//                mMediaRecorder.reset();
+//                mMediaRecorder.release();
+//
+//                if (send) {
+//                    Uri uriAudio = Uri.fromFile(mAudioFilePath);
+//                    boolean deleteFile = true;
+//                    boolean resizeImage = false;
+//                    boolean importContent = true;
+//                    handleSendDelete(uriAudio, "audio/mp4", deleteFile, resizeImage, importContent);
+//                } else {
+//                    mAudioFilePath.delete();
+//                }
+//            }
+//            catch (IllegalStateException ise)
+//            {
+//                Log.e(ImApp.LOG_TAG,"error stopping audio recording",ise);
+//            }
+//            catch (RuntimeException re) //stop can fail so we should catch this here
+//            {
+//                Log.e(ImApp.LOG_TAG,"error stopping audio recording",re);
+//            }
+//
+//            mIsAudioRecording = false;
+//        }
+//
+//    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -885,9 +868,9 @@ public class ConversationDetailActivity extends BaseActivity {
 
     public static final int REQUEST_PICK_CONTACTS = RESULT_FIRST_USER + 1;
     public static final int REQUEST_SEND_IMAGE = REQUEST_PICK_CONTACTS + 1;
-    public static final int REQUEST_SEND_FILE = REQUEST_SEND_IMAGE + 1;
-    public static final int REQUEST_SEND_AUDIO = REQUEST_SEND_FILE + 1;
-    public static final int REQUEST_TAKE_PICTURE = REQUEST_SEND_AUDIO + 1;
+//    public static final int REQUEST_SEND_FILE = REQUEST_SEND_IMAGE + 1;
+//    public static final int REQUEST_SEND_AUDIO = REQUEST_SEND_FILE + 1;
+    public static final int REQUEST_TAKE_PICTURE = REQUEST_SEND_IMAGE + 1;
     public static final int REQUEST_SETTINGS = REQUEST_TAKE_PICTURE + 1;
     public static final int REQUEST_TAKE_PICTURE_SECURE = REQUEST_SETTINGS + 1;
     public static final int REQUEST_ADD_CONTACT = REQUEST_TAKE_PICTURE_SECURE + 1;

@@ -10,9 +10,9 @@
         app:showAsAction="always|collapseActionView" />
 
 
-    <item
-        android:id="@+id/menu_new_group_chat"
-        android:icon="@drawable/ic_people_white_36dp"
-        android:title="@string/create_group"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/menu_new_group_chat"-->
+        <!--android:icon="@drawable/ic_people_white_36dp"-->
+        <!--android:title="@string/create_group"-->
+        <!--app:showAsAction="always" />-->
 </menu>

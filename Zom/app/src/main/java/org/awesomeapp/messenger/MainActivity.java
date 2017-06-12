@@ -78,7 +78,6 @@ import org.awesomeapp.messenger.ui.ContactsListFragment;
 import org.awesomeapp.messenger.ui.ContactsPickerActivity;
 import org.awesomeapp.messenger.ui.ConversationDetailActivity;
 import org.awesomeapp.messenger.ui.ConversationListFragment;
-import org.awesomeapp.messenger.ui.MoreFragment;
 import org.awesomeapp.messenger.ui.legacy.SettingActivity;
 import org.awesomeapp.messenger.ui.onboarding.OnboardingActivity;
 import org.awesomeapp.messenger.ui.onboarding.OnboardingManager;
@@ -117,7 +116,7 @@ public class MainActivity extends BaseActivity {
 
     private ConversationListFragment mConversationList;
     private ContactsListFragment mContactList;
-    private MoreFragment mMoreFragment;
+//    private MoreFragment mMoreFragment;
     private AccountFragment mAccountFragment;
 
     @Override
@@ -148,13 +147,13 @@ public class MainActivity extends BaseActivity {
 
         mConversationList = new ConversationListFragment();
         mContactList = new ContactsListFragment();
-        mMoreFragment = new MoreFragment();
+//        mMoreFragment = new MoreFragment();
         mAccountFragment = new AccountFragment();
 
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(mConversationList, getString(R.string.title_chats), R.drawable.ic_message_white_36dp);
         adapter.addFragment(mContactList, getString(R.string.contacts), R.drawable.ic_people_white_36dp);
-        adapter.addFragment(mMoreFragment, getString(R.string.title_more), R.drawable.ic_more_horiz_white_36dp);
+//        adapter.addFragment(mMoreFragment, getString(R.string.title_more), R.drawable.ic_more_horiz_white_36dp);
 
         mAccountFragment = new AccountFragment();
 
@@ -172,9 +171,9 @@ public class MainActivity extends BaseActivity {
         tab.setIcon(R.drawable.ic_people_white_36dp);
         mTabLayout.addTab(tab);
 
-        tab = mTabLayout.newTab();
-        tab.setIcon(R.drawable.ic_explore_white_24dp);
-        mTabLayout.addTab(tab);
+//        tab = mTabLayout.newTab();
+//        tab.setIcon(R.drawable.ic_explore_white_24dp);
+//        mTabLayout.addTab(tab);
 
         tab = mTabLayout.newTab();
         tab.setIcon(R.drawable.ic_face_white_24dp);
@@ -256,9 +255,9 @@ public class MainActivity extends BaseActivity {
             case 1:
                 sb.append(getString(R.string.friends));
                 break;
-            case 2:
-                sb.append(getString(R.string.title_more));
-                break;
+//            case 2:
+//                sb.append(getString(R.string.title_more));
+//                break;
             case 3:
                 sb.append(getString(R.string.me_title));
                 break;
@@ -271,8 +270,8 @@ public class MainActivity extends BaseActivity {
 
             if (tabPosition == 1) {
                 mFab.setImageResource(R.drawable.ic_person_add_white_36dp);
-            } else if (tabPosition == 2) {
-                mFab.setVisibility(View.GONE);
+//            } else if (tabPosition == 2) {
+//                mFab.setVisibility(View.GONE);
 
             } else if (tabPosition == 3) {
                 mFab.setVisibility(View.GONE);
@@ -408,7 +407,7 @@ public class MainActivity extends BaseActivity {
                     ArrayList<String> users = data.getStringArrayListExtra(ContactsPickerActivity.EXTRA_RESULT_USERNAMES);
                     if (users != null) {
                         //start group and do invite here
-                        startGroupChat(users);
+//                        startGroupChat(users);
                     }
 
                 }
@@ -444,22 +443,22 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void startGroupChat(ArrayList<String> invitees) {
-
-
-        String chatRoom = "groupchat" + UUID.randomUUID().toString().substring(0, 8);
-        String chatServer = ""; //use the default
-        String nickname = mApp.getDefaultUsername().split("@")[0];
-        try {
-            IImConnection conn = mApp.getConnection(mApp.getDefaultProviderId(), mApp.getDefaultAccountId());
-            if (conn.getState() == ImConnection.LOGGED_IN) {
-                this.startGroupChat(chatRoom, chatServer, nickname, invitees, conn);
-
-            }
-        } catch (RemoteException re) {
-
-        }
-    }
+//    private void startGroupChat(ArrayList<String> invitees) {
+//
+//
+//        String chatRoom = "groupchat" + UUID.randomUUID().toString().substring(0, 8);
+//        String chatServer = ""; //use the default
+//        String nickname = mApp.getDefaultUsername().split("@")[0];
+//        try {
+//            IImConnection conn = mApp.getConnection(mApp.getDefaultProviderId(), mApp.getDefaultAccountId());
+//            if (conn.getState() == ImConnection.LOGGED_IN) {
+//                this.startGroupChat(chatRoom, chatServer, nickname, invitees, conn);
+//
+//            }
+//        } catch (RemoteException re) {
+//
+//        }
+//    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -629,177 +628,177 @@ public class MainActivity extends BaseActivity {
             }.executeOnExecutor(ImApp.sThreadPoolExecutor, username);
     }
 
-    public void showGroupChatDialog() {
+//    public void showGroupChatDialog() {
+//
+//        // This example shows how to add a custom layout to an AlertDialog
+//        LayoutInflater factory = LayoutInflater.from(this);
+//
+//        final View dialogGroup = factory.inflate(R.layout.alert_dialog_group_chat, null);
+//        AlertDialog dialog = new AlertDialog.Builder(this)
+//                .setTitle(R.string.create_group)
+//                .setView(dialogGroup)
+//                .setPositiveButton(R.string.connect, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                    /* User clicked OK so do some stuff */
+//
+//                        String chatRoom = null;
+//                        String chatServer = "";
+//                        String nickname = "";
+//
+//                        TextView tv = (TextView) dialogGroup.findViewById(R.id.chat_room);
+//                        chatRoom = tv.getText().toString();
+//                        try {
+//                            IImConnection conn = mApp.getConnection(mApp.getDefaultProviderId(), mApp.getDefaultAccountId());
+//                            if (conn.getState() == ImConnection.LOGGED_IN)
+//                                startGroupChat(chatRoom, chatServer, nickname, null, conn);
+//
+//                        } catch (RemoteException re) {
+//
+//                        }
+//
+//                        dialog.dismiss();
+//
+//                    }
+//                })
+//                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                    /* User clicked cancel so do some stuff */
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .create();
+//        dialog.show();
+//
+//        Typeface typeface;
+//
+//        if ((typeface = CustomTypefaceManager.getCurrentTypeface(this)) != null) {
+//            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+//            if (textView != null)
+//                textView.setTypeface(typeface);
+//
+//            textView = (TextView) dialog.findViewById(R.id.alertTitle);
+//            if (textView != null)
+//                textView.setTypeface(typeface);
+//
+//            Button btn = (Button) dialog.findViewById(android.R.id.button1);
+//            if (btn != null)
+//                btn.setTypeface(typeface);
+//
+//            btn = (Button) dialog.findViewById(android.R.id.button2);
+//            if (btn != null)
+//                btn.setTypeface(typeface);
+//
+//
+//            btn = (Button) dialog.findViewById(android.R.id.button3);
+//            if (btn != null)
+//                btn.setTypeface(typeface);
+//
+//
+//        }
+//
+//
+//    }
 
-        // This example shows how to add a custom layout to an AlertDialog
-        LayoutInflater factory = LayoutInflater.from(this);
+//    private IImConnection mLastConnGroup = null;
+//    private long mRequestedChatId = -1;
 
-        final View dialogGroup = factory.inflate(R.layout.alert_dialog_group_chat, null);
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.create_group)
-                .setView(dialogGroup)
-                .setPositiveButton(R.string.connect, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+//    public void startGroupChat(String room, String server, String nickname, final ArrayList<String> invitees, IImConnection conn) {
+//        mLastConnGroup = conn;
+//
+//        new AsyncTask<String, Long, String>() {
+//
+//            private ProgressDialog dialog;
+//
+//
+//            @Override
+//            protected void onPreExecute() {
+//                dialog = new ProgressDialog(MainActivity.this);
+//
+//                dialog.setMessage(getString(R.string.connecting_to_group_chat_));
+//                dialog.setCancelable(true);
+//                dialog.show();
+//            }
+//
+//            @Override
+//            protected String doInBackground(String... params) {
+//
+//                String subject = params[0];
+//                String chatRoom = "group" + UUID.randomUUID().toString().substring(0, 8);
+//                String server = params[1];
+//
+//
+//                try {
+//
+//                    IChatSessionManager manager = mLastConnGroup.getChatSessionManager();
+//
+//                    String roomAddress = (chatRoom + '@' + server).toLowerCase(Locale.US);
+//                    String nickname = params[2];
+//
+//                    IChatSession session = manager.getChatSession(roomAddress);
+//
+//                    if (session == null) {
+//                        session = manager.createMultiUserChatSession(roomAddress, subject, nickname, true);
+//
+//                        if (session != null) {
+//                            mRequestedChatId = session.getId();
+//                            publishProgress(mRequestedChatId);
+//
+//                        } else {
+//                            return getString(R.string.unable_to_create_or_join_group_chat);
+//
+//                        }
+//                    } else {
+//                        mRequestedChatId = session.getId();
+//                        publishProgress(mRequestedChatId);
+//                    }
+//
+//                    if (invitees != null && invitees.size() > 0) {
+//
+//                        //wait a second for the server to sort itself out
+//                        try {
+//                            Thread.sleep(100);
+//                        } catch (Exception e) {
+//                        }
+//
+//                        for (String invitee : invitees)
+//                            session.inviteContact(invitee);
+//                    }
+//
+//                    return null;
+//
+//                } catch (RemoteException e) {
+//                    return e.toString();
+//                }
+//
+//            }
+//
+//            @Override
+//            protected void onProgressUpdate(Long... showChatId) {
+//                showChat(showChatId[0]);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String result) {
+//                super.onPostExecute(result);
+//
+//                if (dialog.isShowing()) {
+//                    dialog.dismiss();
+//                }
+//            }
+//        }.executeOnExecutor(ImApp.sThreadPoolExecutor, room, server, nickname);
+//
+//
+//    }
 
-                    /* User clicked OK so do some stuff */
-
-                        String chatRoom = null;
-                        String chatServer = "";
-                        String nickname = "";
-
-                        TextView tv = (TextView) dialogGroup.findViewById(R.id.chat_room);
-                        chatRoom = tv.getText().toString();
-                        try {
-                            IImConnection conn = mApp.getConnection(mApp.getDefaultProviderId(), mApp.getDefaultAccountId());
-                            if (conn.getState() == ImConnection.LOGGED_IN)
-                                startGroupChat(chatRoom, chatServer, nickname, null, conn);
-
-                        } catch (RemoteException re) {
-
-                        }
-
-                        dialog.dismiss();
-
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                    /* User clicked cancel so do some stuff */
-                        dialog.dismiss();
-                    }
-                })
-                .create();
-        dialog.show();
-
-        Typeface typeface;
-
-        if ((typeface = CustomTypefaceManager.getCurrentTypeface(this)) != null) {
-            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-            if (textView != null)
-                textView.setTypeface(typeface);
-
-            textView = (TextView) dialog.findViewById(R.id.alertTitle);
-            if (textView != null)
-                textView.setTypeface(typeface);
-
-            Button btn = (Button) dialog.findViewById(android.R.id.button1);
-            if (btn != null)
-                btn.setTypeface(typeface);
-
-            btn = (Button) dialog.findViewById(android.R.id.button2);
-            if (btn != null)
-                btn.setTypeface(typeface);
-
-
-            btn = (Button) dialog.findViewById(android.R.id.button3);
-            if (btn != null)
-                btn.setTypeface(typeface);
-
-
-        }
-
-
-    }
-
-    private IImConnection mLastConnGroup = null;
-    private long mRequestedChatId = -1;
-
-    public void startGroupChat(String room, String server, String nickname, final ArrayList<String> invitees, IImConnection conn) {
-        mLastConnGroup = conn;
-
-        new AsyncTask<String, Long, String>() {
-
-            private ProgressDialog dialog;
-
-
-            @Override
-            protected void onPreExecute() {
-                dialog = new ProgressDialog(MainActivity.this);
-
-                dialog.setMessage(getString(R.string.connecting_to_group_chat_));
-                dialog.setCancelable(true);
-                dialog.show();
-            }
-
-            @Override
-            protected String doInBackground(String... params) {
-
-                String subject = params[0];
-                String chatRoom = "group" + UUID.randomUUID().toString().substring(0, 8);
-                String server = params[1];
-
-
-                try {
-
-                    IChatSessionManager manager = mLastConnGroup.getChatSessionManager();
-
-                    String roomAddress = (chatRoom + '@' + server).toLowerCase(Locale.US);
-                    String nickname = params[2];
-
-                    IChatSession session = manager.getChatSession(roomAddress);
-
-                    if (session == null) {
-                        session = manager.createMultiUserChatSession(roomAddress, subject, nickname, true);
-
-                        if (session != null) {
-                            mRequestedChatId = session.getId();
-                            publishProgress(mRequestedChatId);
-
-                        } else {
-                            return getString(R.string.unable_to_create_or_join_group_chat);
-
-                        }
-                    } else {
-                        mRequestedChatId = session.getId();
-                        publishProgress(mRequestedChatId);
-                    }
-
-                    if (invitees != null && invitees.size() > 0) {
-
-                        //wait a second for the server to sort itself out
-                        try {
-                            Thread.sleep(100);
-                        } catch (Exception e) {
-                        }
-
-                        for (String invitee : invitees)
-                            session.inviteContact(invitee);
-                    }
-
-                    return null;
-
-                } catch (RemoteException e) {
-                    return e.toString();
-                }
-
-            }
-
-            @Override
-            protected void onProgressUpdate(Long... showChatId) {
-                showChat(showChatId[0]);
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                super.onPostExecute(result);
-
-                if (dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-            }
-        }.executeOnExecutor(ImApp.sThreadPoolExecutor, room, server, nickname);
-
-
-    }
-
-    private void showChat(long chatId) {
-        Intent intent = new Intent(this, ConversationDetailActivity.class);
-        intent.putExtra("id", chatId);
-        startActivity(intent);
-    }
+//    private void showChat(long chatId) {
+//        Intent intent = new Intent(this, ConversationDetailActivity.class);
+//        intent.putExtra("id", chatId);
+//        startActivity(intent);
+//    }
 
     @Override
     protected void onPause() {
