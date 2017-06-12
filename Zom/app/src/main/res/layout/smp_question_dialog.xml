@@ -71,7 +71,6 @@
                     </TableRow>
                 </TableLayout>
             </ScrollView>
-
         </TableRow>
     </TableLayout>
 </LinearLayout>

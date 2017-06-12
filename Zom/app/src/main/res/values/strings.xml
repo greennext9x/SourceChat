@@ -1,78 +1,61 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!--
-/*
- * Copyright (C) 2007-2008 Esmertec AG.
- * Copyright (C) 2007-2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
---><resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- General: Names -->
-    <string name="ic_launcher_name">Zom</string>
-    <string name="app_name">Zom</string>
-    <string name="im_label">Zom</string>
+    <string name="ic_launcher_name">SeTalk</string>
+    <string name="app_name">SeTalk</string>
+    <string name="im_label">SeTalk</string>
 
     <!-- General: Permissions -->
-    <string name="ro_perm_label">read instant messages</string>
-    <string name="ro_perm_desc">Allows applications to read data from the IM content provider.</string>
-    <string name="wo_perm_label">write instant messages</string>
-    <string name="wo_perm_desc">Allows applications to write data to the IM content provider.</string>
-    <string name="perm_label">start IM service</string>
-    <string name="perm_desc">Allows applications to start IM service via intent.</string>
+    <string name="ro_perm_label">Đọc tin nhắn nhanh</string>
+    <string name="ro_perm_desc">Cho phép ứng dụng đọc dữ liệu từ nhà cung cấp nội dung IM.</string>
+    <string name="wo_perm_label">Viết tin nhắn nhanh</string>
+    <string name="wo_perm_desc">Cho phép ứng dụng ghi dữ liệu từ nhà cung cấp nội dung IM.</string>
+    <string name="perm_label">Bắt đầu dịch vụ IM</string>
+    <string name="perm_desc">Cho phép ứng dụng bắt đầu dịch vụ IM.</string>
 
     <!-- General: Actions -->
-    <string name="confirm">Confirm</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="yes">OK</string>
-    <string name="no">Cancel</string>
-    <string name="connect">Connect</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="ok">Chấp nhận</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="yes">Đồng ý</string>
+    <string name="no">Hủy bỏ</string>
+    <string name="connect">Kết nối</string>
     <!-- Views -->
-    <string name="title_activity_lock_screen">Zom Locked</string>
-    <string name="lock_screen_create_passphrase">Set Password</string>
-    <string name="lock_screen_confirm_passphrase">Confirm Password</string>
-    <string name="lock_screen_passphrase_hint">Password</string>
-    <string name="lock_screen_passphrase_not_set_enter">Please set a passphrase to lock the app</string>
-    <string name="lock_screen_passphrase_not_set_confirm">Confirm New Password</string>
-    <string name="lock_screen_passphrases_not_matching">Password did not match, please try again</string>
-    <string name="lock_screen_skip">Skip &gt;&gt;</string>
+    <string name="title_activity_lock_screen">SeTalk đã khóa</string>
+    <string name="lock_screen_create_passphrase">Đặt mật khẩu</string>
+    <string name="lock_screen_confirm_passphrase">Xác nhận mật khẩu</string>
+    <string name="lock_screen_passphrase_hint">Mật khẩu</string>
+    <string name="lock_screen_passphrase_not_set_enter">Vui lòng đặt mật khẩu để khóa ứng dụng</string>
+    <string name="lock_screen_passphrase_not_set_confirm">Xác nhận mật khẩu mới</string>
+    <string name="lock_screen_passphrases_not_matching">Mật khẩu không khớp, vui lòng thử lại</string>
+    <string name="lock_screen_skip">Bỏ qua &gt;&gt;</string>
     <!-- Views: Setup -->
-    <string name="add_account">Add <xliff:g id="account">%1$s</xliff:g> account</string>
+    <string name="add_account">Thêm <xliff:g id="account">%1$s</xliff:g> Tài khoản</string>
     <string name="menu_about">About</string>
 
-    <string name="signed_out_prompt_with_error">You have been signed out of <xliff:g id="account">%1$s</xliff:g> because <xliff:g id="reason">%2$s</xliff:g></string>
+    <string name="signed_out_prompt_with_error">Bạn đã đăng xuất khỏi <xliff:g id="account">%1$s</xliff:g> because <xliff:g id="reason">%2$s</xliff:g></string>
 
 
-    <string name="pass_err_length">Your passphrase was not long enough</string>
+    <string name="pass_err_length">Mật khẩu không đủ dài</string>
     <!-- Views: About: Welcome -->
     <!-- Views: About: OTR -->
     <!-- Views: About: Security -->
     <!-- Views: Account list -->
     <!-- Views: Setup: Account -->
-    <string name="sign_in">Sign in</string>
+    <string name="sign_in">Đăng nhập</string>
     <string name="account_setup_example_email_address">user@domain</string>
-    <string name="account_setup_new_username">new username</string>
-    <string name="account_setup_password">password</string>
-    <string name="account_setup_password_confirm">confirm password</string>
-    <string name="btn_create_new_account">Register Account</string>
+    <string name="account_setup_new_username">Người dùng mới</string>
+    <string name="account_setup_password">Mật khẩu</string>
+    <string name="account_setup_password_confirm">Xác nhận mật khẩu</string>
+    <string name="btn_create_new_account">Đăng ký tài khoản</string>
 
-    <string name="account_setup_pers_now_title">Sign In Now</string>
+    <string name="account_setup_pers_now_title">Đăng nhập ngay</string>
     <string name="_via_orbot">"Orbot (Tor)"</string>
-    <string name="select_domain_new_account">Chat service domain</string>
-    <string name="registering_new_account_">Registering new account…</string>
+    <string name="select_domain_new_account">Địa chỉ dịch vụ chat</string>
+    <string name="registering_new_account_">Đăng ký mới tài khoản…</string>
 
-    <string name="signing_in_wait">Signing in\u2026</string>
-    <string name="signing_out_wait">Signing out\u2026</string>
+    <string name="signing_in_wait">Đang đăng nhập\u2026</string>
+    <string name="signing_out_wait">Đang đăng xuất\u2026</string>
 
     <!-- Views: Settings: Account -->
     <string name="do_srv_lookup">Do SRV Lookup</string>

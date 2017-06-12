@@ -4,18 +4,18 @@
     <color name="window_background">#e6e7e8</color>
 
     <color name="android_green">#ccA4C639</color>
-            <color name="honeycombish_blue">#cc58BAED</color>
+    <color name="honeycombish_blue">#cc58BAED</color>
     <color name="background_light">#DDDEDEDE</color>
     <color name="background_med">#DDABABAB</color>
     <color name="background_dark">#DD343434</color>
-    
-<!--     <color name="message_background_light">#CCDEDEDE</color>
- -->
-  <color name="message_background_light">#FFFFFF</color>      
-      
-      <color name="message_background_dark">#565656</color>
-    
-     <!-- A light Holo shade of blue -->
+
+    <!--     <color name="message_background_light">#CCDEDEDE</color>
+     -->
+    <color name="message_background_light">#FFFFFF</color>
+
+    <color name="message_background_dark">#565656</color>
+
+    <!-- A light Holo shade of blue -->
     <color name="holo_blue_light">#cc33b5e5</color>
     <!-- A light Holo shade of green -->
     <color name="holo_green_light">#cc99cc00</color>
@@ -31,11 +31,11 @@
     <!-- A dark Holo shade of orange -->
     <!-- A really bright Holo shade of blue -->
     <color name="holo_blue_bright">#cc00ddff</color>
-    
-     <!-- A light Holo shade of gray -->
+
+    <!-- A light Holo shade of gray -->
     <color name="holo_grey_light">#ECEFF1</color>
-    
-     <!-- A light Holo shade of gray -->
+
+    <!-- A light Holo shade of gray -->
     <color name="holo_grey_dark">#DBDEE1</color>
 
     <color name="hot_pink">#ff00dd</color>
@@ -45,7 +45,7 @@
     <color name="otr_green">#99CC00</color>
     
      -->
-     
+
     <color name="zom_primary">#22c35b</color>
 
     <array name="zom_colors">
@@ -61,5 +61,5 @@
         <item>@color/background_dark</item>
 
     </array>
-    
-    </resources>
+
+</resources>
