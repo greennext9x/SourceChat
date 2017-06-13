@@ -21,13 +21,10 @@ import org.awesomeapp.messenger.service.IChatSession;
 import org.awesomeapp.messenger.service.IChatSessionListener;
 import org.awesomeapp.messenger.ImApp;
 import org.awesomeapp.messenger.model.Address;
-import org.awesomeapp.messenger.model.ChatGroup;
-import org.awesomeapp.messenger.model.ChatGroupManager;
 import org.awesomeapp.messenger.model.ChatSession;
 import org.awesomeapp.messenger.model.ChatSessionListener;
 import org.awesomeapp.messenger.model.ChatSessionManager;
 import org.awesomeapp.messenger.model.Contact;
-import org.awesomeapp.messenger.model.GroupListener;
 import org.awesomeapp.messenger.model.ImConnection;
 import org.awesomeapp.messenger.model.ImErrorInfo;
 import org.awesomeapp.messenger.plugin.xmpp.XmppAddress;
@@ -64,16 +61,16 @@ public class ChatSessionManagerAdapter extends
        
     }
 
-    public ChatGroupManager getChatGroupManager ()
-    {
-        if ((mConnection.getAdaptee().getCapability() & ImConnection.CAPABILITY_GROUP_CHAT) != 0) {
-            ChatGroupManager groupManager = mConnection.getAdaptee().getChatGroupManager();
-            groupManager.addGroupListener(new ChatGroupListenerAdapter());
-            return groupManager;
-        }
-        else
-            return null;
-    }
+//    public ChatGroupManager getChatGroupManager ()
+//    {
+//        if ((mConnection.getAdaptee().getCapability() & ImConnection.CAPABILITY_GROUP_CHAT) != 0) {
+//            ChatGroupManager groupManager = mConnection.getAdaptee().getChatGroupManager();
+//            groupManager.addGroupListener(new ChatGroupListenerAdapter());
+//            return groupManager;
+//        }
+//        else
+//            return null;
+//    }
     
     public ChatSessionManager getChatSessionManager() {
         return mConnection.getAdaptee().getChatSessionManager();
@@ -108,43 +105,43 @@ public class ChatSessionManagerAdapter extends
             return null;
     }
 
-    public IChatSession createMultiUserChatSession(String roomAddress, String subject, String nickname, boolean isNewChat)
-    {
-
-        ChatGroupManager groupMan = mConnection.getAdaptee().getChatGroupManager();
-
-        try
-        {
-            if (roomAddress.endsWith("@"))
-            {
-                String confServer = groupMan.getDefaultGroupChatService();
-                if (confServer != null)
-                    roomAddress += confServer;
-            }
-
-            groupMan.createChatGroupAsync(roomAddress, subject, nickname);
-
-            Address address = new XmppAddress(roomAddress); //TODO hard coding XMPP for now
-
-            ChatGroup chatGroup = groupMan.getChatGroup(address);
-
-            if (chatGroup != null)
-            {
-                ChatSession session = getChatSessionManager().createChatSession(chatGroup,isNewChat);
-
-                return getChatSessionAdapter(session, isNewChat);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        catch (Exception e)
-        {
-            Log.e(ImApp.LOG_TAG,"unable to join group chat" + e.getMessage());
-            return null;
-        }
-    }
+//    public IChatSession createMultiUserChatSession(String roomAddress, String subject, String nickname, boolean isNewChat)
+//    {
+//
+//        ChatGroupManager groupMan = mConnection.getAdaptee().getChatGroupManager();
+//
+//        try
+//        {
+//            if (roomAddress.endsWith("@"))
+//            {
+//                String confServer = groupMan.getDefaultGroupChatService();
+//                if (confServer != null)
+//                    roomAddress += confServer;
+//            }
+//
+//            groupMan.createChatGroupAsync(roomAddress, subject, nickname);
+//
+//            Address address = new XmppAddress(roomAddress); //TODO hard coding XMPP for now
+//
+//            ChatGroup chatGroup = groupMan.getChatGroup(address);
+//
+//            if (chatGroup != null)
+//            {
+//                ChatSession session = getChatSessionManager().createChatSession(chatGroup,isNewChat);
+//
+//                return getChatSessionAdapter(session, isNewChat);
+//            }
+//            else
+//            {
+//                return null;
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            Log.e(ImApp.LOG_TAG,"unable to join group chat" + e.getMessage());
+//            return null;
+//        }
+//    }
 
     public void closeChatSession(ChatSessionAdapter adapter) {
         synchronized (mActiveChatSessionAdapters) {
@@ -253,34 +250,34 @@ public class ChatSessionManagerAdapter extends
         }
     }
 
-    class ChatGroupListenerAdapter implements GroupListener {
-        public void onGroupCreated(ChatGroup group) {
-        }
-
-        public void onGroupDeleted(ChatGroup group) {
-            closeSession(group);
-        }
-
-        public void onGroupError(int errorType, String name, ImErrorInfo error) {
-            if (errorType == ERROR_CREATING_GROUP) {
-                mSessionListenerAdapter.notifyChatSessionCreateFailed(name, error);
-            }
-        }
-
-        public void onJoinedGroup(ChatGroup group) {
-            getChatSessionManager().createChatSession(group,false);
-        }
-
-        public void onLeftGroup(ChatGroup group) {
-            closeSession(group);
-        }
-
-        private void closeSession(ChatGroup group) {
-            String address = group.getAddress().getAddress();
-            IChatSession session = getChatSession(address);
-            if (session != null) {
-                closeChatSession((ChatSessionAdapter) session);
-            }
-        }
-    }
+//    class ChatGroupListenerAdapter implements GroupListener {
+//        public void onGroupCreated(ChatGroup group) {
+//        }
+//
+//        public void onGroupDeleted(ChatGroup group) {
+//            closeSession(group);
+//        }
+//
+//        public void onGroupError(int errorType, String name, ImErrorInfo error) {
+//            if (errorType == ERROR_CREATING_GROUP) {
+//                mSessionListenerAdapter.notifyChatSessionCreateFailed(name, error);
+//            }
+//        }
+//
+//        public void onJoinedGroup(ChatGroup group) {
+//            getChatSessionManager().createChatSession(group,false);
+//        }
+//
+//        public void onLeftGroup(ChatGroup group) {
+//            closeSession(group);
+//        }
+//
+//        private void closeSession(ChatGroup group) {
+//            String address = group.getAddress().getAddress();
+//            IChatSession session = getChatSession(address);
+//            if (session != null) {
+//                closeChatSession((ChatSessionAdapter) session);
+//            }
+//        }
+//    }
 }

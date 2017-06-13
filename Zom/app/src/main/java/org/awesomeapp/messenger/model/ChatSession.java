@@ -230,14 +230,14 @@ public class ChatSession {
 
             }
         }
-        else if (mParticipant instanceof ChatGroup)
-        {
-
-            message.setTo(mParticipant.getAddress());
-            message.setType(Imps.MessageType.OUTGOING);
-            mManager.sendMessageAsync(this, message);
-
-        }
+//        else if (mParticipant instanceof ChatGroup)
+//        {
+//
+//            message.setTo(mParticipant.getAddress());
+//            message.setType(Imps.MessageType.OUTGOING);
+//            mManager.sendMessageAsync(this, message);
+//
+//        }
         else
         {
             //what do we do ehre?

@@ -22,7 +22,6 @@ import org.awesomeapp.messenger.service.IConnectionListener;
 import org.awesomeapp.messenger.service.IContactListManager;
 import org.awesomeapp.messenger.service.IInvitationListener;
 import org.awesomeapp.messenger.ImApp;
-import org.awesomeapp.messenger.model.ChatGroupManager;
 import org.awesomeapp.messenger.model.ConnectionListener;
 import org.awesomeapp.messenger.model.Contact;
 import org.awesomeapp.messenger.model.ImConnection;
@@ -62,14 +61,14 @@ public class ImConnectionAdapter extends org.awesomeapp.messenger.service.IImCon
 
     ImConnection mConnection;
     private ConnectionListenerAdapter mConnectionListener;
-    private InvitationListenerAdapter mInvitationListener;
+//    private InvitationListenerAdapter mInvitationListener;
 
     final RemoteCallbackList<IConnectionListener> mRemoteConnListeners = new RemoteCallbackList<IConnectionListener>();
 
     ChatSessionManagerAdapter mChatSessionManager;
     ContactListManagerAdapter mContactListManager;
 
-    ChatGroupManager mGroupManager;
+//    ChatGroupManager mGroupManager;
     RemoteImService mService;
 
     long mProviderId = -1;
@@ -84,11 +83,11 @@ public class ImConnectionAdapter extends org.awesomeapp.messenger.service.IImCon
         mService = service;
         mConnectionListener = new ConnectionListenerAdapter();
         mConnection.addConnectionListener(mConnectionListener);
-        if ((connection.getCapability() & ImConnection.CAPABILITY_GROUP_CHAT) != 0) {
-            mGroupManager = mConnection.getChatGroupManager();
-            mInvitationListener = new InvitationListenerAdapter();
-            mGroupManager.setInvitationListener(mInvitationListener);
-        }
+//        if ((connection.getCapability() & ImConnection.CAPABILITY_GROUP_CHAT) != 0) {
+//            mGroupManager = mConnection.getChatGroupManager();
+//            mInvitationListener = new InvitationListenerAdapter();
+//            mGroupManager.setInvitationListener(mInvitationListener);
+//        }
 
         mChatSessionManager = new ChatSessionManagerAdapter(this);
         mContactListManager = new ContactListManagerAdapter(this);
@@ -266,12 +265,12 @@ public class ImConnectionAdapter extends org.awesomeapp.messenger.service.IImCon
         }
     }
 
-    @Override
-    public void setInvitationListener(IInvitationListener listener) {
-        if (mInvitationListener != null) {
-            mInvitationListener.mRemoteListener = listener;
-        }
-    }
+//    @Override
+//    public void setInvitationListener(IInvitationListener listener) {
+//        if (mInvitationListener != null) {
+//            mInvitationListener.mRemoteListener = listener;
+//        }
+//    }
 
 
 
@@ -322,41 +321,41 @@ public class ImConnectionAdapter extends org.awesomeapp.messenger.service.IImCon
         return mConnectionState;
     }
 
-    @Override
-    public void rejectInvitation(long id) {
-        handleInvitation(id, false);
-    }
+//    @Override
+//    public void rejectInvitation(long id) {
+//        handleInvitation(id, false);
+//    }
+//
+//    @Override
+//    public void acceptInvitation(long id) {
+//        handleInvitation(id, true);
+//    }
 
-    @Override
-    public void acceptInvitation(long id) {
-        handleInvitation(id, true);
-    }
-
-    private void handleInvitation(long id, boolean accept) {
-        if (mGroupManager == null) {
-            return;
-        }
-        ContentResolver cr = mService.getContentResolver();
-        Cursor c = cr.query(ContentUris.withAppendedId(Imps.Invitation.CONTENT_URI, id), null,
-                null, null, null);
-        if (c == null) {
-            return;
-        }
-        if (c.moveToFirst()) {
-            String inviteId = c.getString(c.getColumnIndexOrThrow(Imps.Invitation.INVITE_ID));
-            int status;
-            if (accept) {
-                mGroupManager.acceptInvitationAsync(inviteId);
-                status = Imps.Invitation.STATUS_ACCEPTED;
-            } else {
-                mGroupManager.rejectInvitationAsync(inviteId);
-                status = Imps.Invitation.STATUS_REJECTED;
-            }
-            // TODO c.updateInt(c.getColumnIndexOrThrow(Imps.Invitation.STATUS), status);
-            // c.commitUpdates();
-        }
-        c.close();
-    }
+//    private void handleInvitation(long id, boolean accept) {
+////        if (mGroupManager == null) {
+////            return;
+////        }
+//        ContentResolver cr = mService.getContentResolver();
+//        Cursor c = cr.query(ContentUris.withAppendedId(Imps.Invitation.CONTENT_URI, id), null,
+//                null, null, null);
+//        if (c == null) {
+//            return;
+//        }
+//        if (c.moveToFirst()) {
+//            String inviteId = c.getString(c.getColumnIndexOrThrow(Imps.Invitation.INVITE_ID));
+//            int status;
+//            if (accept) {
+//                mGroupManager.acceptInvitationAsync(inviteId);
+//                status = Imps.Invitation.STATUS_ACCEPTED;
+//            } else {
+//                mGroupManager.rejectInvitationAsync(inviteId);
+//                status = Imps.Invitation.STATUS_REJECTED;
+//            }
+//            // TODO c.updateInt(c.getColumnIndexOrThrow(Imps.Invitation.STATUS), status);
+//            // c.commitUpdates();
+//        }
+//        c.close();
+//    }
 
     void saveSessionCookie(ContentResolver cr) {
         Map<String, String> cookies = mConnection.getSessionContext();
@@ -582,39 +581,39 @@ public class ImConnectionAdapter extends org.awesomeapp.messenger.service.IImCon
         }
     }
 
-    final class InvitationListenerAdapter implements InvitationListener {
-        IInvitationListener mRemoteListener;
-
-        @Override
-        public void onGroupInvitation(Invitation invitation) {
-            String sender = invitation.getSender().getUser();
-            ContentValues values = new ContentValues(7);
-            values.put(Imps.Invitation.PROVIDER, mProviderId);
-            values.put(Imps.Invitation.ACCOUNT, mAccountId);
-            values.put(Imps.Invitation.INVITE_ID, invitation.getInviteID());
-            values.put(Imps.Invitation.SENDER, sender);
-            values.put(Imps.Invitation.GROUP_NAME, invitation.getGroupAddress().getUser());
-            values.put(Imps.Invitation.NOTE, invitation.getReason());
-            values.put(Imps.Invitation.STATUS, Imps.Invitation.STATUS_PENDING);
-            ContentResolver resolver = mService.getContentResolver();
-            Uri uri = resolver.insert(Imps.Invitation.CONTENT_URI, values);
-            long id = ContentUris.parseId(uri);
-            try {
-                if (mRemoteListener != null) {
-                    mRemoteListener.onGroupInvitation(id);
-                    return;
-                }
-            } catch (RemoteException e) {
-                RemoteImService.debug("onGroupInvitation: dead listener " + mRemoteListener
-                                      + "; removing", e);
-                mRemoteListener = null;
-            }
-            // No listener registered or failed to notify the listener, send a
-            // notification instead.
-            mService.getStatusBarNotifier().notifyGroupInvitation(mProviderId, mAccountId, id,
-                    sender);
-        }
-    }
+//    final class InvitationListenerAdapter implements InvitationListener {
+//        IInvitationListener mRemoteListener;
+//
+//        @Override
+//        public void onGroupInvitation(Invitation invitation) {
+//            String sender = invitation.getSender().getUser();
+//            ContentValues values = new ContentValues(7);
+//            values.put(Imps.Invitation.PROVIDER, mProviderId);
+//            values.put(Imps.Invitation.ACCOUNT, mAccountId);
+//            values.put(Imps.Invitation.INVITE_ID, invitation.getInviteID());
+//            values.put(Imps.Invitation.SENDER, sender);
+//            values.put(Imps.Invitation.GROUP_NAME, invitation.getGroupAddress().getUser());
+//            values.put(Imps.Invitation.NOTE, invitation.getReason());
+//            values.put(Imps.Invitation.STATUS, Imps.Invitation.STATUS_PENDING);
+//            ContentResolver resolver = mService.getContentResolver();
+//            Uri uri = resolver.insert(Imps.Invitation.CONTENT_URI, values);
+//            long id = ContentUris.parseId(uri);
+//            try {
+//                if (mRemoteListener != null) {
+//                    mRemoteListener.onGroupInvitation(id);
+//                    return;
+//                }
+//            } catch (RemoteException e) {
+//                RemoteImService.debug("onGroupInvitation: dead listener " + mRemoteListener
+//                                      + "; removing", e);
+//                mRemoteListener = null;
+//            }
+//            // No listener registered or failed to notify the listener, send a
+//            // notification instead.
+//            mService.getStatusBarNotifier().notifyGroupInvitation(mProviderId, mAccountId, id,
+//                    sender);
+//        }
+//    }
 
     public void sendTypingStatus (String to, boolean isTyping)
     {

@@ -10,7 +10,7 @@ interface IImConnection {
     void registerConnectionListener(IConnectionListener listener);
     void unregisterConnectionListener(IConnectionListener listener);
 
-    void setInvitationListener(IInvitationListener listener);
+//    void setInvitationListener(IInvitationListener listener);
 
     IContactListManager getContactListManager();
     IChatSessionManager getChatSessionManager();
@@ -51,8 +51,8 @@ interface IImConnection {
      */
     boolean isUsingTor();
 
-    void acceptInvitation(long id);
-    void rejectInvitation(long id);
+//    void acceptInvitation(long id);
+//    void rejectInvitation(long id);
     void sendHeartbeat();
     
     void setProxy(String type, String host, int port);

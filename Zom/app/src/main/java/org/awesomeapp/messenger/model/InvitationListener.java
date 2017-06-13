@@ -22,15 +22,6 @@ package org.awesomeapp.messenger.model;
  * other users.
  */
 public interface InvitationListener {
-    /**
-     * Calls when an invitation to join a certain group from another user
-     * received. The user should accept or reject the invitation by
-     * {@link ChatGroupManager#acceptInvitationAsync(Invitation)
-     * acceptInvitation} or
-     * {@link ChatGroupManager#rejectInvitationAsync(Invitation)
-     * rejectInvitation}
-     *
-     * @param invitation the invitation received.
-     */
+
     public void onGroupInvitation(Invitation invitation);
 }

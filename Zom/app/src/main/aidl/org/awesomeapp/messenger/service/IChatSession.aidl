@@ -23,7 +23,7 @@ interface IChatSession {
     /**
      * Tells if this ChatSession is a group session.
      */
-    boolean isGroupChatSession();
+//    boolean isGroupChatSession();
 
     /**
      * Gets the name of ChatSession.
@@ -44,7 +44,7 @@ interface IChatSession {
      * Convert a single chat to a group chat. If the chat session is already a
      * group chat or it's converting to group chat.
      */
-    void convertToGroupChat(String nickname);
+//    void convertToGroupChat(String nickname);
 
     /**
      * Invites a contact to join this ChatSession. The user can only invite

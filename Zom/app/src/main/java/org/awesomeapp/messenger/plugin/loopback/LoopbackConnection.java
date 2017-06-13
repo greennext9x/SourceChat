@@ -1,7 +1,6 @@
 package org.awesomeapp.messenger.plugin.loopback;
 
 import org.awesomeapp.messenger.model.Address;
-import org.awesomeapp.messenger.model.ChatGroupManager;
 import org.awesomeapp.messenger.model.ChatSession;
 import org.awesomeapp.messenger.model.ChatSessionManager;
 import org.awesomeapp.messenger.model.Contact;
@@ -76,11 +75,11 @@ public class LoopbackConnection extends ImConnection {
         return 0;
     }
 
-    @Override
-    public ChatGroupManager getChatGroupManager() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+//    @Override
+//    public ChatGroupManager getChatGroupManager() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 
     @Override
     public ChatSessionManager getChatSessionManager() {

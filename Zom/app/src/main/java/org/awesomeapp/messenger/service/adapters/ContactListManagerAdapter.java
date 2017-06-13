@@ -24,7 +24,6 @@ import org.awesomeapp.messenger.service.ISubscriptionListener;
 import im.zom.messenger.R;
 
 import org.awesomeapp.messenger.model.Address;
-import org.awesomeapp.messenger.model.ChatGroup;
 import org.awesomeapp.messenger.model.Contact;
 import org.awesomeapp.messenger.model.ContactList;
 import org.awesomeapp.messenger.model.ContactListListener;
@@ -356,25 +355,25 @@ public class ContactListManagerAdapter extends
         return result;
     }
     
-    public long queryGroup(ChatGroup c) {
-        long result = -1;
-
-        String username = mAdaptee.normalizeAddress(c.getAddress().getAddress());
-        String selection = Imps.Contacts.USERNAME + "=?";
-        String[] selectionArgs = { username };
-        String[] projection = { Imps.Contacts._ID };
-
-        Cursor cursor = mResolver.query(mContactUrl, projection, selection, selectionArgs, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            result = cursor.getLong(0);
-        } 
-        
-        if (cursor != null) {
-            cursor.close();
-        }
-        return result;
-    }
+//    public long queryGroup(ChatGroup c) {
+//        long result = -1;
+//
+//        String username = mAdaptee.normalizeAddress(c.getAddress().getAddress());
+//        String selection = Imps.Contacts.USERNAME + "=?";
+//        String[] selectionArgs = { username };
+//        String[] projection = { Imps.Contacts._ID };
+//
+//        Cursor cursor = mResolver.query(mContactUrl, projection, selection, selectionArgs, null);
+//
+//        if (cursor != null && cursor.moveToFirst()) {
+//            result = cursor.getLong(0);
+//        }
+//
+//        if (cursor != null) {
+//            cursor.close();
+//        }
+//        return result;
+//    }
 
     private long insertTemporary(Contact c) {
         synchronized (mTemporaryContacts) {
@@ -534,7 +533,7 @@ public class ContactListManagerAdapter extends
                 ChatSessionAdapter session = (ChatSessionAdapter) chatSessionManager
                         .getChatSession(contact.getAddress().getBareAddress());
 
-                if (session != null && (!session.isGroupChatSession()))
+                if (session != null)
                 {
                     session.presenceChanged(contact.getPresence().getStatus());
                 }

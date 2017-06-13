@@ -31,12 +31,8 @@ import org.awesomeapp.messenger.service.IDataListener;
 import im.zom.messenger.R;
 
 import org.awesomeapp.messenger.ImApp;
-import org.awesomeapp.messenger.model.ChatGroup;
-import org.awesomeapp.messenger.model.ChatGroupManager;
 import org.awesomeapp.messenger.model.ChatSession;
 import org.awesomeapp.messenger.model.Contact;
-import org.awesomeapp.messenger.model.GroupListener;
-import org.awesomeapp.messenger.model.GroupMemberListener;
 import org.awesomeapp.messenger.model.ImConnection;
 import org.awesomeapp.messenger.model.ImEntity;
 import org.awesomeapp.messenger.model.ImErrorInfo;
@@ -65,7 +61,6 @@ import android.net.Uri;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSession.Stub {
@@ -133,11 +128,12 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
         ImEntity participant = mChatSession.getParticipant();
 
-        if (participant instanceof ChatGroup) {
-            init((ChatGroup) participant,isNewSession);
-        } else {
-            init((Contact) participant,isNewSession);
-        }
+//        if (participant instanceof ChatGroup) {
+//            init((ChatGroup) participant,isNewSession);
+//        } else {
+//            init((Contact) participant,isNewSession);
+//        }
+        init((Contact) participant,isNewSession);
 
         initOtrChatSession(participant);
 
@@ -164,20 +160,20 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
                         mOtrChatSessions.put(key, adapter);
                     }
                 }
-                else if (participant instanceof ChatGroup)
-                {
-                    ChatGroup group = (ChatGroup)mChatSession.getParticipant();
-
-                    for (Contact contact : group.getMembers())
-                    {
-                        String key = contact.getAddress().getAddress();
-                        if (!mOtrChatSessions.containsKey(key)) {
-                            OtrChatSessionAdapter adapter = new OtrChatSessionAdapter(mConnection.getLoginUser().getAddress().getAddress(), contact, cm);
-                            mOtrChatSessions.put(key, adapter);
-                        }
-                    }
-
-                }
+//                else if (participant instanceof ChatGroup)
+//                {
+//                    ChatGroup group = (ChatGroup)mChatSession.getParticipant();
+//
+//                    for (Contact contact : group.getMembers())
+//                    {
+//                        String key = contact.getAddress().getAddress();
+//                        if (!mOtrChatSessions.containsKey(key)) {
+//                            OtrChatSessionAdapter adapter = new OtrChatSessionAdapter(mConnection.getLoginUser().getAddress().getAddress(), contact, cm);
+//                            mOtrChatSessions.put(key, adapter);
+//                        }
+//                    }
+//
+//                }
 
                 mDataHandler.setChatId(getId());
 
@@ -226,34 +222,34 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
     }
 
-    private void init(ChatGroup group, boolean isNewSession) {
-        
-        mIsGroupChat = true;
-
-        mContactId = insertOrUpdateGroupContactInDb(group);
-        group.addMemberListener(mListenerAdapter);
-
-        try {            
-            mChatSessionManager.getChatGroupManager().joinChatGroupAsync(group.getAddress(),group.getName());
-        
-            mMessageURI = Imps.Messages.getContentUriByThreadId(mContactId);
-    
-            mChatURI = ContentUris.withAppendedId(Imps.Chats.CONTENT_URI, mContactId);
-    
-            if (isNewSession)
-                insertOrUpdateChat("");
-    
-            for (Contact c : group.getMembers()) {
-                mContactStatusMap.put(c.getName(), c.getPresence().getStatus());
-            }
-            
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-        
-    }
+//    private void init(ChatGroup group, boolean isNewSession) {
+//
+//        mIsGroupChat = true;
+//
+//        mContactId = insertOrUpdateGroupContactInDb(group);
+//        group.addMemberListener(mListenerAdapter);
+//
+//        try {
+//            mChatSessionManager.getChatGroupManager().joinChatGroupAsync(group.getAddress(),group.getName());
+//
+//            mMessageURI = Imps.Messages.getContentUriByThreadId(mContactId);
+//
+//            mChatURI = ContentUris.withAppendedId(Imps.Chats.CONTENT_URI, mContactId);
+//
+//            if (isNewSession)
+//                insertOrUpdateChat("");
+//
+//            for (Contact c : group.getMembers()) {
+//                mContactStatusMap.put(c.getName(), c.getPresence().getStatus());
+//            }
+//
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
     private void init(Contact contact, boolean isNewSession) {
         mIsGroupChat = false;
@@ -278,9 +274,9 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
     }
 
-    private ChatGroupManager getGroupManager() {
-        return mConnection.getAdaptee().getChatGroupManager();
-    }
+//    private ChatGroupManager getGroupManager() {
+//        return mConnection.getAdaptee().getChatGroupManager();
+//    }
 
     public ChatSession getAdaptee() {
         return mChatSession;
@@ -291,22 +287,23 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
     }
 
     public String[] getParticipants() {
-        if (mIsGroupChat) {
-            Contact self = mConnection.getLoginUser();
-            ChatGroup group = (ChatGroup) mChatSession.getParticipant();
-            List<Contact> members = group.getMembers();
-            String[] result = new String[members.size() - 1];
-            int index = 0;
-            for (Contact c : members) {
-                if (!c.equals(self)) {
-                    result[index++] = c.getAddress().getAddress();
-                }
-            }
-            return result;
-        } else {
-
-            return new String[] { mChatSession.getParticipant().getAddress().getAddress() };
-        }
+//        if (mIsGroupChat) {
+//            Contact self = mConnection.getLoginUser();
+//            ChatGroup group = (ChatGroup) mChatSession.getParticipant();
+//            List<Contact> members = group.getMembers();
+//            String[] result = new String[members.size() - 1];
+//            int index = 0;
+//            for (Contact c : members) {
+//                if (!c.equals(self)) {
+//                    result[index++] = c.getAddress().getAddress();
+//                }
+//            }
+//            return result;
+//        } else {
+//
+//            return new String[] { mChatSession.getParticipant().getAddress().getAddress() };
+//        }
+        return new String[] { mChatSession.getParticipant().getAddress().getAddress() };
     }
 
     /**
@@ -317,24 +314,24 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
      * Note that the method is not thread-safe since it's always called from the
      * UI and Android uses single thread mode for UI.
      */
-    public void convertToGroupChat(String nickname) {
-        if (mIsGroupChat || mConvertingToGroupChat) {
-            return;
-        }
+//    public void convertToGroupChat(String nickname) {
+//        if (mIsGroupChat || mConvertingToGroupChat) {
+//            return;
+//        }
+//
+//        mConvertingToGroupChat = true;
+//        new ChatConvertor().convertToGroupChat(nickname);
+//    }
 
-        mConvertingToGroupChat = true;
-        new ChatConvertor().convertToGroupChat(nickname);
-    }
-
-    public boolean isGroupChatSession() {
-        return mIsGroupChat;
-    }
+//    public boolean isGroupChatSession() {
+//        return mIsGroupChat;
+//    }
 
     public String getName() {
 
-        if (isGroupChatSession())
-            return ((ChatGroup)mChatSession.getParticipant()).getName();
-        else
+//        if (isGroupChatSession())
+//            return ((ChatGroup)mChatSession.getParticipant()).getName();
+//        else
             return ((Contact)mChatSession.getParticipant()).getName();
 
     }
@@ -354,14 +351,14 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
         ContactListManagerAdapter listManager = (ContactListManagerAdapter) mConnection
                 .getContactListManager();
         Contact invitee = new Contact(new XmppAddress(contact),contact);
-        getGroupManager().inviteUserAsync((ChatGroup) mChatSession.getParticipant(), invitee);
+//        getGroupManager().inviteUserAsync((ChatGroup) mChatSession.getParticipant(), invitee);
 
     }
 
     public void leave() {
-        if (mIsGroupChat) {
-            getGroupManager().leaveChatGroupAsync((ChatGroup) mChatSession.getParticipant());
-        }
+//        if (mIsGroupChat) {
+//            getGroupManager().leaveChatGroupAsync((ChatGroup) mChatSession.getParticipant());
+//        }
 
         mContentResolver.delete(mMessageURI, null, null);
         mContentResolver.delete(mChatURI, null, null);
@@ -435,16 +432,16 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
                 Address remoteUser = new XmppAddress(getDefaultOtrChatSession().getRemoteUserId());
                 mDataHandler.offerData(offerId, localUser, remoteUser, url, headers);
             }
-            else if (mChatSession.getParticipant() instanceof ChatGroup)
-            {
-                ChatGroup group = (ChatGroup)mChatSession.getParticipant();
-
-                for (Contact member : group.getMembers())
-                {
-                    mDataHandler.offerData(offerId, localUser, member.getAddress(), url, headers);
-                }
-
-            }
+//            else if (mChatSession.getParticipant() instanceof ChatGroup)
+//            {
+//                ChatGroup group = (ChatGroup)mChatSession.getParticipant();
+//
+//                for (Contact member : group.getMembers())
+//                {
+//                    mDataHandler.offerData(offerId, localUser, member.getAddress(), url, headers);
+//                }
+//
+//            }
 
             return true;
         }
@@ -552,43 +549,44 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
     String getNickName(String username) {
         ImEntity participant = mChatSession.getParticipant();
-        if (mIsGroupChat) {
-            
-            ChatGroup group = (ChatGroup) participant;
-            List<Contact> members = group.getMembers();
-            for (Contact c : members) {
-                if (username.equals(c.getAddress().getAddress())) {
-                    
-                    return c.getAddress().getResource();
-                        
-                }
-            }
-            
-            // not found, impossible
-            String[] parts = username.split("/");
-            return parts[parts.length-1];
-        } else {
-            return ((Contact) participant).getName();
-        }
+//        if (mIsGroupChat) {
+//
+//            ChatGroup group = (ChatGroup) participant;
+//            List<Contact> members = group.getMembers();
+//            for (Contact c : members) {
+//                if (username.equals(c.getAddress().getAddress())) {
+//
+//                    return c.getAddress().getResource();
+//
+//                }
+//            }
+//
+//            // not found, impossible
+//            String[] parts = username.split("/");
+//            return parts[parts.length-1];
+//        } else {
+//            return ((Contact) participant).getName();
+//        }
+        return ((Contact) participant).getName();
     }
 
-    void onConvertToGroupChatSuccess(ChatGroup group) {
-        Contact oldParticipant = (Contact) mChatSession.getParticipant();
-        String oldAddress = getAddress();
-    //    mChatSession.setParticipant(group);
-        mChatSessionManager.updateChatSession(oldAddress, this);
-
-        Uri oldChatUri = mChatURI;
-        Uri oldMessageUri = mMessageURI;
-        init(group,false);
-        //copyHistoryMessages(oldParticipant);
-
-        mContentResolver.delete(oldMessageUri, NON_CHAT_MESSAGE_SELECTION, null);
-        mContentResolver.delete(oldChatUri, null, null);
-
-        mListenerAdapter.notifyChatSessionConverted();
-        mConvertingToGroupChat = false;
-    }
+//    void onConvertToGroupChatSuccess(ChatGroup group) {
+//        Contact oldParticipant = (Contact) mChatSession.getParticipant();
+//        String oldAddress = getAddress();
+//    //    mChatSession.setParticipant(group);
+//        mChatSessionManager.updateChatSession(oldAddress, this);
+//
+//        Uri oldChatUri = mChatURI;
+//        Uri oldMessageUri = mMessageURI;
+//        init(group,false);
+//        //copyHistoryMessages(oldParticipant);
+//
+//        mContentResolver.delete(oldMessageUri, NON_CHAT_MESSAGE_SELECTION, null);
+//        mContentResolver.delete(oldChatUri, null, null);
+//
+//        mListenerAdapter.notifyChatSessionConverted();
+//        mConvertingToGroupChat = false;
+//    }
 
     /**
     private void copyHistoryMessages(Contact oldParticipant) {
@@ -612,84 +610,84 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
         values.put(Imps.Chats.LAST_MESSAGE_DATE, System.currentTimeMillis());
         values.put(Imps.Chats.LAST_UNREAD_MESSAGE, message);
 
-         values.put(Imps.Chats.GROUP_CHAT, mIsGroupChat);
+//         values.put(Imps.Chats.GROUP_CHAT, mIsGroupChat);
          // ImProvider.insert() will replace the chat if it already exist.
          mContentResolver.insert(mChatURI, values);
          
 
     }
 
-    private long insertOrUpdateGroupContactInDb(ChatGroup group) {
-        // Insert a record in contacts table
-        ContentValues values = new ContentValues(4);
-        values.put(Imps.Contacts.USERNAME, group.getAddress().getAddress());
-        values.put(Imps.Contacts.NICKNAME, group.getName());
-        values.put(Imps.Contacts.CONTACTLIST, ContactListManagerAdapter.LOCAL_GROUP_LIST_ID);
-        values.put(Imps.Contacts.TYPE, Imps.Contacts.TYPE_GROUP);
+//    private long insertOrUpdateGroupContactInDb(ChatGroup group) {
+//        // Insert a record in contacts table
+//        ContentValues values = new ContentValues(4);
+//        values.put(Imps.Contacts.USERNAME, group.getAddress().getAddress());
+//        values.put(Imps.Contacts.NICKNAME, group.getName());
+//        values.put(Imps.Contacts.CONTACTLIST, ContactListManagerAdapter.LOCAL_GROUP_LIST_ID);
+//        values.put(Imps.Contacts.TYPE, Imps.Contacts.TYPE_GROUP);
+//
+//        Uri contactUri = ContentUris.withAppendedId(
+//                ContentUris.withAppendedId(Imps.Contacts.CONTENT_URI, mConnection.mProviderId),
+//                mConnection.mAccountId);
+//
+//        ContactListManagerAdapter listManager = (ContactListManagerAdapter) mConnection
+//                .getContactListManager();
+//
+//        long id = listManager.queryGroup(group);
+//
+//        if (id == -1)
+//        {
+//            id = ContentUris.parseId(mContentResolver.insert(contactUri, values));
+//
+//            ArrayList<ContentValues> memberValues = new ArrayList<ContentValues>();
+//            Contact self = mConnection.getLoginUser();
+//            for (Contact member : group.getMembers()) {
+//                if (!member.equals(self)) { // avoid to insert the user himself
+//                    ContentValues memberValue = new ContentValues(2);
+//                    memberValue.put(Imps.GroupMembers.USERNAME, member.getAddress().getAddress());
+//                    memberValue.put(Imps.GroupMembers.NICKNAME, member.getName());
+//                    memberValues.add(memberValue);
+//                }
+//            }
+//            if (!memberValues.isEmpty()) {
+//                ContentValues[] result = new ContentValues[memberValues.size()];
+//                memberValues.toArray(result);
+//                Uri memberUri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, id);
+//                mContentResolver.bulkInsert(memberUri, result);
+//            }
+//        }
+//
+//        return id;
+//    }
 
-        Uri contactUri = ContentUris.withAppendedId(
-                ContentUris.withAppendedId(Imps.Contacts.CONTENT_URI, mConnection.mProviderId),
-                mConnection.mAccountId);
-      
-        ContactListManagerAdapter listManager = (ContactListManagerAdapter) mConnection
-                .getContactListManager();
-        
-        long id = listManager.queryGroup(group);
-        
-        if (id == -1)
-        {
-            id = ContentUris.parseId(mContentResolver.insert(contactUri, values));
-        
-            ArrayList<ContentValues> memberValues = new ArrayList<ContentValues>();
-            Contact self = mConnection.getLoginUser();
-            for (Contact member : group.getMembers()) {
-                if (!member.equals(self)) { // avoid to insert the user himself
-                    ContentValues memberValue = new ContentValues(2);
-                    memberValue.put(Imps.GroupMembers.USERNAME, member.getAddress().getAddress());
-                    memberValue.put(Imps.GroupMembers.NICKNAME, member.getName());
-                    memberValues.add(memberValue);
-                }
-            }
-            if (!memberValues.isEmpty()) {
-                ContentValues[] result = new ContentValues[memberValues.size()];
-                memberValues.toArray(result);
-                Uri memberUri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, id);
-                mContentResolver.bulkInsert(memberUri, result);
-            }
-        }
-        
-        return id;
-    }
+//    void insertGroupMemberInDb(Contact member) {
+//
+//        if (mChatURI != null) {
+//            ContentValues values1 = new ContentValues(2);
+//            values1.put(Imps.GroupMembers.USERNAME, member.getAddress().getAddress());
+//            values1.put(Imps.GroupMembers.NICKNAME, member.getName());
+//            ContentValues values = values1;
+//
+//            long groupId = ContentUris.parseId(mChatURI);
+//            Uri uri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, groupId);
+//            mContentResolver.insert(uri, values);
+//
+//          //  insertMessageInDb(member.getName(), null, System.currentTimeMillis(),
+//              //      Imps.MessageType.PRESENCE_AVAILABLE);
+//        }
+//    }
 
-    void insertGroupMemberInDb(Contact member) {
-
-        if (mChatURI != null) {
-            ContentValues values1 = new ContentValues(2);
-            values1.put(Imps.GroupMembers.USERNAME, member.getAddress().getAddress());
-            values1.put(Imps.GroupMembers.NICKNAME, member.getName());
-            ContentValues values = values1;
-
-            long groupId = ContentUris.parseId(mChatURI);
-            Uri uri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, groupId);
-            mContentResolver.insert(uri, values);
-
-          //  insertMessageInDb(member.getName(), null, System.currentTimeMillis(),
-              //      Imps.MessageType.PRESENCE_AVAILABLE);
-        }
-    }
-
-    void deleteGroupMemberInDb(Contact member) {
-        String where = Imps.GroupMembers.USERNAME + "=?";
-        String[] selectionArgs = { member.getAddress().getAddress() };
-
-        if (mChatURI != null) {
-            long groupId = ContentUris.parseId(mChatURI);
-            Uri uri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, groupId);
-            mContentResolver.delete(uri, where, selectionArgs);
-        }
-      //  insertMessageInDb(member.getName(), null, System.currentTimeMillis(),
-            //    Imps.MessageType.PRESENCE_UNAVAILABLE);
-    }
+//    void deleteGroupMemberInDb(Contact member) {
+//        String where = Imps.GroupMembers.USERNAME + "=?";
+//        String[] selectionArgs = { member.getAddress().getAddress() };
+//
+//        if (mChatURI != null) {
+//            long groupId = ContentUris.parseId(mChatURI);
+//            Uri uri = ContentUris.withAppendedId(Imps.GroupMembers.CONTENT_URI, groupId);
+//            mContentResolver.delete(uri, where, selectionArgs);
+//        }
+//      //  insertMessageInDb(member.getName(), null, System.currentTimeMillis(),
+//            //    Imps.MessageType.PRESENCE_UNAVAILABLE);
+//    }
 
     void insertPresenceUpdatesMsg(String contact, Presence presence) {
         int status = presence.getStatus();
@@ -772,7 +770,7 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
 
 
-    class ListenerAdapter implements MessageListener, GroupMemberListener, OtrEngineListener {
+    class ListenerAdapter implements MessageListener, OtrEngineListener {
 
         public synchronized boolean onIncomingMessage(ChatSession ses, final org.awesomeapp.messenger.model.Message msg) {
             String body = msg.getBody();
@@ -844,67 +842,67 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
             mRemoteListeners.finishBroadcast();
         }
 
-        public void onSubjectChanged(ChatGroup group, String subject)
-        {
-            if (mChatURI != null) {
-                ContentValues values1 = new ContentValues(1);
-                values1.put(Imps.Contacts.NICKNAME,subject);
-                ContentValues values = values1;
-
-                Uri uriContact = ContentUris.withAppendedId(Imps.Contacts.CONTENT_URI, mContactId);
-                mContentResolver.update(uriContact, values, null, null);
-
-                //  insertMessageInDb(member.getName(), null, System.currentTimeMillis(),
-                //      Imps.MessageType.PRESENCE_AVAILABLE);
-            }
-        }
-
-        public void onMemberJoined(ChatGroup group, final Contact contact) {
-            insertGroupMemberInDb(contact);
-
-            final int N = mRemoteListeners.beginBroadcast();
-            for (int i = 0; i < N; i++) {
-                IChatListener listener = mRemoteListeners.getBroadcastItem(i);
-                try {
-                    listener.onContactJoined(ChatSessionAdapter.this, contact);
-                } catch (RemoteException e) {
-                    // The RemoteCallbackList will take care of removing the
-                    // dead listeners.
-                }
-            }
-            mRemoteListeners.finishBroadcast();
-        }
-
-        public void onMemberLeft(ChatGroup group, final Contact contact) {
-            deleteGroupMemberInDb(contact);
-
-            final int N = mRemoteListeners.beginBroadcast();
-            for (int i = 0; i < N; i++) {
-                IChatListener listener = mRemoteListeners.getBroadcastItem(i);
-                try {
-                    listener.onContactLeft(ChatSessionAdapter.this, contact);
-                } catch (RemoteException e) {
-                    // The RemoteCallbackList will take care of removing the
-                    // dead listeners.
-                }
-            }
-            mRemoteListeners.finishBroadcast();
-        }
-
-        public void onError(ChatGroup group, final ImErrorInfo error) {
-            // TODO: insert an error message?
-            final int N = mRemoteListeners.beginBroadcast();
-            for (int i = 0; i < N; i++) {
-                IChatListener listener = mRemoteListeners.getBroadcastItem(i);
-                try {
-                    listener.onInviteError(ChatSessionAdapter.this, error);
-                } catch (RemoteException e) {
-                    // The RemoteCallbackList will take care of removing the
-                    // dead listeners.
-                }
-            }
-            mRemoteListeners.finishBroadcast();
-        }
+//        public void onSubjectChanged(ChatGroup group, String subject)
+//        {
+//            if (mChatURI != null) {
+//                ContentValues values1 = new ContentValues(1);
+//                values1.put(Imps.Contacts.NICKNAME,subject);
+//                ContentValues values = values1;
+//
+//                Uri uriContact = ContentUris.withAppendedId(Imps.Contacts.CONTENT_URI, mContactId);
+//                mContentResolver.update(uriContact, values, null, null);
+//
+//                //  insertMessageInDb(member.getName(), null, System.currentTimeMillis(),
+//                //      Imps.MessageType.PRESENCE_AVAILABLE);
+//            }
+//        }
+//
+//        public void onMemberJoined(ChatGroup group, final Contact contact) {
+//            insertGroupMemberInDb(contact);
+//
+//            final int N = mRemoteListeners.beginBroadcast();
+//            for (int i = 0; i < N; i++) {
+//                IChatListener listener = mRemoteListeners.getBroadcastItem(i);
+//                try {
+//                    listener.onContactJoined(ChatSessionAdapter.this, contact);
+//                } catch (RemoteException e) {
+//                    // The RemoteCallbackList will take care of removing the
+//                    // dead listeners.
+//                }
+//            }
+//            mRemoteListeners.finishBroadcast();
+//        }
+//
+//        public void onMemberLeft(ChatGroup group, final Contact contact) {
+//            deleteGroupMemberInDb(contact);
+//
+//            final int N = mRemoteListeners.beginBroadcast();
+//            for (int i = 0; i < N; i++) {
+//                IChatListener listener = mRemoteListeners.getBroadcastItem(i);
+//                try {
+//                    listener.onContactLeft(ChatSessionAdapter.this, contact);
+//                } catch (RemoteException e) {
+//                    // The RemoteCallbackList will take care of removing the
+//                    // dead listeners.
+//                }
+//            }
+//            mRemoteListeners.finishBroadcast();
+//        }
+//
+//        public void onError(ChatGroup group, final ImErrorInfo error) {
+//            // TODO: insert an error message?
+//            final int N = mRemoteListeners.beginBroadcast();
+//            for (int i = 0; i < N; i++) {
+//                IChatListener listener = mRemoteListeners.getBroadcastItem(i);
+//                try {
+//                    listener.onInviteError(ChatSessionAdapter.this, error);
+//                } catch (RemoteException e) {
+//                    // The RemoteCallbackList will take care of removing the
+//                    // dead listeners.
+//                }
+//            }
+//            mRemoteListeners.finishBroadcast();
+//        }
 
         public void notifyChatSessionConverted() {
             final int N = mRemoteListeners.beginBroadcast();
@@ -1002,63 +1000,63 @@ public class ChatSessionAdapter extends org.awesomeapp.messenger.service.IChatSe
 
     }
 
-    class ChatConvertor implements GroupListener, GroupMemberListener {
-        private ChatGroupManager mGroupMgr;
-        private String mGroupName;
-
-        public ChatConvertor() {
-            mGroupMgr = mConnection.mGroupManager;
-        }
-
-        public void convertToGroupChat(String nickname) {
-            mGroupMgr.addGroupListener(this);
-            mGroupName = "G" + System.currentTimeMillis();
-            try
-            {
-                mGroupMgr.createChatGroupAsync(mGroupName, nickname, nickname);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        public void onGroupCreated(ChatGroup group) {
-            if (mGroupName.equalsIgnoreCase(group.getName())) {
-                mGroupMgr.removeGroupListener(this);
-                group.addMemberListener(this);
-                mGroupMgr.inviteUserAsync(group, (Contact) mChatSession.getParticipant());
-            }
-        }
-
-        public void onMemberJoined(ChatGroup group, Contact contact) {
-            if (mChatSession.getParticipant().equals(contact)) {
-                onConvertToGroupChatSuccess(group);
-            }
-
-            mContactStatusMap.put(contact.getName(), contact.getPresence().getStatus());
-        }
-
-        public void onSubjectChanged(ChatGroup group, String subject){}
-
-        public void onGroupDeleted(ChatGroup group) {
-        }
-
-        public void onGroupError(int errorType, String groupName, ImErrorInfo error) {
-        }
-
-        public void onJoinedGroup(ChatGroup group) {
-        }
-
-        public void onLeftGroup(ChatGroup group) {
-        }
-
-        public void onError(ChatGroup group, ImErrorInfo error) {
-        }
-
-        public void onMemberLeft(ChatGroup group, Contact contact) {
-            mContactStatusMap.remove(contact.getName());
-        }
-    }
+//    class ChatConvertor implements GroupListener, GroupMemberListener {
+//        private ChatGroupManager mGroupMgr;
+//        private String mGroupName;
+//
+//        public ChatConvertor() {
+//            mGroupMgr = mConnection.mGroupManager;
+//        }
+//
+//        public void convertToGroupChat(String nickname) {
+//            mGroupMgr.addGroupListener(this);
+//            mGroupName = "G" + System.currentTimeMillis();
+//            try
+//            {
+//                mGroupMgr.createChatGroupAsync(mGroupName, nickname, nickname);
+//            }
+//            catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//
+////        public void onGroupCreated(ChatGroup group) {
+////            if (mGroupName.equalsIgnoreCase(group.getName())) {
+////                mGroupMgr.removeGroupListener(this);
+////                group.addMemberListener(this);
+////                mGroupMgr.inviteUserAsync(group, (Contact) mChatSession.getParticipant());
+////            }
+////        }
+//
+////        public void onMemberJoined(ChatGroup group, Contact contact) {
+////            if (mChatSession.getParticipant().equals(contact)) {
+////                onConvertToGroupChatSuccess(group);
+////            }
+////
+////            mContactStatusMap.put(contact.getName(), contact.getPresence().getStatus());
+////        }
+//
+////        public void onSubjectChanged(ChatGroup group, String subject){}
+////
+////        public void onGroupDeleted(ChatGroup group) {
+////        }
+////
+////        public void onGroupError(int errorType, String groupName, ImErrorInfo error) {
+////        }
+////
+////        public void onJoinedGroup(ChatGroup group) {
+////        }
+////
+////        public void onLeftGroup(ChatGroup group) {
+////        }
+////
+////        public void onError(ChatGroup group, ImErrorInfo error) {
+////        }
+////
+////        public void onMemberLeft(ChatGroup group, Contact contact) {
+////            mContactStatusMap.remove(contact.getName());
+////        }
+//    }
 
     @Override
     public void setDataListener(IDataListener dataListener) throws RemoteException {

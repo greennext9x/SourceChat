@@ -47,7 +47,7 @@ public abstract class ImConnection {
     public static final int SUSPENDED = 5;
 
     /** The capability of supporting group chat. */
-    public static final int CAPABILITY_GROUP_CHAT = 1;
+//    public static final int CAPABILITY_GROUP_CHAT = 1;
     /** The capability of supporting session re-establishment. */
     public static final int CAPABILITY_SESSION_REESTABLISHMENT = 2;
 
@@ -159,9 +159,6 @@ public abstract class ImConnection {
     }
 
     /**
-     * Gets bit-or of capabilities supported by the underlying protocol. Valid
-     * capability bits are: {@value #CAPABILITY_GROUP_CHAT},
-     * {@value #CAPABILITY_SESSION_REESTABLISHMENT}
      *
      * @return bit-or of capabilities supported by the underlying protocol
      */
@@ -240,7 +237,7 @@ public abstract class ImConnection {
      * @throws UnsupportedOperationException if group chat is not supported by
      *             the underlying protocol.
      */
-    public abstract ChatGroupManager getChatGroupManager();
+//    public abstract ChatGroupManager getChatGroupManager();
 
     /**
      * Whether this connection is going over Tor or not.

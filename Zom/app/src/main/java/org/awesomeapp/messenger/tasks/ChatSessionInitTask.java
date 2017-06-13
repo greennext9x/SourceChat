@@ -44,8 +44,8 @@ public class ChatSessionInitTask extends AsyncTask<String, Long, Long> {
                     IChatSession session = conn.getChatSessionManager().getChatSession(address);
 
                     //always need to recreate the MUC after login
-                    if (mContactType == Imps.Contacts.TYPE_GROUP)
-                        session = conn.getChatSessionManager().createMultiUserChatSession(address, null, null, false);
+//                    if (mContactType == Imps.Contacts.TYPE_GROUP)
+//                        session = conn.getChatSessionManager().createMultiUserChatSession(address, null, null, false);
 
                     if (session != null && mContactType == Imps.Contacts.TYPE_NORMAL)
                     {
@@ -57,15 +57,14 @@ public class ChatSessionInitTask extends AsyncTask<String, Long, Long> {
 
                     } else {
 
-                        if (mContactType == Imps.Contacts.TYPE_GROUP)
-                            session = conn.getChatSessionManager().createMultiUserChatSession(address, null, null, false);
-                        else {
-                            session = conn.getChatSessionManager().createChatSession(address, false);
-                            session.getDefaultOtrChatSession().startChatEncryption();
-                        }
-
-
-
+//                        if (mContactType == Imps.Contacts.TYPE_GROUP)
+//                            session = conn.getChatSessionManager().createMultiUserChatSession(address, null, null, false);
+//                        else {
+//                            session = conn.getChatSessionManager().createChatSession(address, false);
+//                            session.getDefaultOtrChatSession().startChatEncryption();
+//                        }
+                        session = conn.getChatSessionManager().createChatSession(address, false);
+                        session.getDefaultOtrChatSession().startChatEncryption();
                     }
 
                     if (session != null)
