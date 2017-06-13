@@ -231,7 +231,7 @@ public class ContactsListFragment extends Fragment {
         viewHolder.mNickname = nickname;
 
 
-        viewHolder.mView.bind(viewHolder, cursor,"", false, false);
+        viewHolder.mView.bind(viewHolder, cursor, false, false);
 
             viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

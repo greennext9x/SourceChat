@@ -68,8 +68,8 @@ public class ContactListItem extends FrameLayout {
     public static final int COLUMN_LAST_MESSAGE = 11;
     public static final int COLUMN_AVATAR_HASH = 12;
     public static final int COLUMN_AVATAR_DATA = 13;
-
-    static Drawable AVATAR_DEFAULT_GROUP = null;
+//
+//    static Drawable AVATAR_DEFAULT_GROUP = null;
 
     private String address;
     private String nickname;
@@ -80,11 +80,11 @@ public class ContactListItem extends FrameLayout {
         super(context, attrs);
     }
 
-    public void bind(ContactViewHolder holder, Cursor cursor, String underLineText, boolean scrolling) {
-        bind(holder, cursor, underLineText, true, scrolling);
+    public void bind(ContactViewHolder holder, Cursor cursor, boolean scrolling) {
+        bind(holder, cursor, true, scrolling);
     }
 
-    public void bind(ContactViewHolder holder, Cursor cursor, String underLineText, boolean showChatMsg, boolean scrolling) {
+    public void bind(ContactViewHolder holder, Cursor cursor, boolean showChatMsg, boolean scrolling) {
 
 
         mHolder = holder;
@@ -110,22 +110,22 @@ public class ContactListItem extends FrameLayout {
         }
 
 
-        if (!TextUtils.isEmpty(underLineText)) {
-            // highlight/underline the word being searched 
-            String lowercase = nickname.toLowerCase();
-            int start = lowercase.indexOf(underLineText.toLowerCase());
-            if (start >= 0) {
-                int end = start + underLineText.length();
-                SpannableString str = new SpannableString(nickname);
-                str.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
-                holder.mLine1.setText(str);
-
-            } else
-                holder.mLine1.setText(nickname);
-
-        } else
-            holder.mLine1.setText(nickname);
+//        if (!TextUtils.isEmpty(underLineText)) {
+//            // highlight/underline the word being searched
+//            String lowercase = nickname.toLowerCase();
+//            int start = lowercase.indexOf(underLineText.toLowerCase());
+//            if (start >= 0) {
+//                int end = start + underLineText.length();
+//                SpannableString str = new SpannableString(nickname);
+//                str.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//
+//                holder.mLine1.setText(str);
+//
+//            } else
+//                holder.mLine1.setText(nickname);
+//
+//        } else
+//            holder.mLine1.setText(nickname);
 
         if (holder.mAvatar != null) {
             Drawable avatar = null;

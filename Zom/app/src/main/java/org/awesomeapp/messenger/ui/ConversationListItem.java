@@ -120,11 +120,6 @@ public class ConversationListItem extends FrameLayout {
             nickname = nickname.split("@")[0].split("\\.")[0];
         }
 
-//        if (Imps.Contacts.TYPE_GROUP == contactType) {
-//
-//            String groupCountString = getGroupCount(getContext().getContentResolver(), contactId);
-//            nickname += groupCountString;
-//        }
 
         if (!TextUtils.isEmpty(underLineText)) {
             // highlight/underline the word being searched 

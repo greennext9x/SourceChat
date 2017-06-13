@@ -85,9 +85,9 @@ public class ContactsPickerActivity extends BaseActivity {
     private String mExcludeClause;
     Uri mData;
 
-    private String mSearchString;
-
-    SearchView mSearchView = null;
+//    private String mSearchString;
+//
+//    SearchView mSearchView = null;
     ListView mListView = null;
 
     // The loader's unique id. Loader ids are specific to the Activity or
@@ -149,7 +149,7 @@ public class ContactsPickerActivity extends BaseActivity {
 
         });
 
-        doFilterAsync("");
+//        doFilterAsync("");
     }
     @Override
     protected void onActivityResult(int request, int response, Intent data) {
@@ -185,36 +185,34 @@ public class ContactsPickerActivity extends BaseActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contact_list_menu, menu);
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menu_search));
-
-        if (mSearchView != null )
-        {
-            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            mSearchView.setIconifiedByDefault(false);
-
-            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener()
-            {
-                public boolean onQueryTextChange(String newText)
-                {
-                    mSearchString = newText;
-                    doFilterAsync(mSearchString);
-                    return true;
-                }
-
-                public boolean onQueryTextSubmit(String query)
-                {
-                    mSearchString = query;
-                    doFilterAsync(mSearchString);
-
-                    return true;
-                }
-            };
-
-            mSearchView.setOnQueryTextListener(queryTextListener);
-        }
-
-
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menu_search));
+//
+//        if (mSearchView != null )
+//        {
+//            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//            mSearchView.setIconifiedByDefault(false);
+//
+//            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener()
+//            {
+//                public boolean onQueryTextChange(String newText)
+//                {
+//                    mSearchString = newText;
+//                    doFilterAsync(mSearchString);
+//                    return true;
+//                }
+//
+//                public boolean onQueryTextSubmit(String query)
+//                {
+//                    mSearchString = query;
+//                    doFilterAsync(mSearchString);
+//
+//                    return true;
+//                }
+//            };
+//
+//            mSearchView.setOnQueryTextListener(queryTextListener);
+//        }
 
         return true;
     }
@@ -226,45 +224,45 @@ public class ContactsPickerActivity extends BaseActivity {
     }
 
 
-    public void doFilterAsync (final String query)
-    {
+//    public void doFilterAsync (final String query)
+//    {
+//
+//            doFilter(query);
+//    }
 
-            doFilter(query);
-    }
+//    boolean mAwaitingUpdate = false;
 
-    boolean mAwaitingUpdate = false;
-
-    public synchronized void doFilter(String filterString) {
-
-        mSearchString = filterString;
-
-        if (mAdapter == null) {
-
-            mAdapter = new ContactAdapter(ContactsPickerActivity.this, R.layout.contact_view);
-
-           mListView.setAdapter(mAdapter);
-
-            mLoaderCallbacks = new MyLoaderCallbacks();
-            getSupportLoaderManager().initLoader(LOADER_ID, null, mLoaderCallbacks);
-        } else {
-
-            if (!mAwaitingUpdate)
-            {
-                mAwaitingUpdate = true;
-                mHandler.postDelayed(new Runnable ()
-                {
-
-                    public void run ()
-                    {
-
-                        getSupportLoaderManager().restartLoader(LOADER_ID, null, mLoaderCallbacks);
-                        mAwaitingUpdate = false;
-                    }
-                },1000);
-            }
-
-        }
-    }
+//    public synchronized void doFilter(String filterString) {
+//
+//        mSearchString = filterString;
+//
+//        if (mAdapter == null) {
+//
+//            mAdapter = new ContactAdapter(ContactsPickerActivity.this, R.layout.contact_view);
+//
+//           mListView.setAdapter(mAdapter);
+//
+//            mLoaderCallbacks = new MyLoaderCallbacks();
+//            getSupportLoaderManager().initLoader(LOADER_ID, null, mLoaderCallbacks);
+//        } else {
+//
+//            if (!mAwaitingUpdate)
+//            {
+//                mAwaitingUpdate = true;
+//                mHandler.postDelayed(new Runnable ()
+//                {
+//
+//                    public void run ()
+//                    {
+//
+//                        getSupportLoaderManager().restartLoader(LOADER_ID, null, mLoaderCallbacks);
+//                        mAwaitingUpdate = false;
+//                    }
+//                },1000);
+//            }
+//
+//        }
+//    }
 
     private Cursor mCursor;
 
@@ -354,7 +352,7 @@ public class ContactsPickerActivity extends BaseActivity {
             }
 
 
-            v.bind(holder, cursor, mSearchString, false);
+            v.bind(holder, cursor, false);
         }
     }
 
@@ -363,18 +361,18 @@ public class ContactsPickerActivity extends BaseActivity {
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             StringBuilder buf = new StringBuilder();
 
-            if (mSearchString != null) {
-                buf.append('(');
-                buf.append(Imps.Contacts.NICKNAME);
-                buf.append(" LIKE ");
-                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
-                buf.append(" OR ");
-                buf.append(Imps.Contacts.USERNAME);
-                buf.append(" LIKE ");
-                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
-                buf.append(')');
-                buf.append(" AND ");
-            }
+//            if (mSearchString != null) {
+//                buf.append('(');
+//                buf.append(Imps.Contacts.NICKNAME);
+//                buf.append(" LIKE ");
+//                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
+//                buf.append(" OR ");
+//                buf.append(Imps.Contacts.USERNAME);
+//                buf.append(" LIKE ");
+//                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
+//                buf.append(')');
+//                buf.append(" AND ");
+//            }
 
             buf.append(Imps.Contacts.TYPE).append('=').append(Imps.Contacts.TYPE_NORMAL);
 

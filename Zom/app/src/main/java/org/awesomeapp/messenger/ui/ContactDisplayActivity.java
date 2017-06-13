@@ -219,9 +219,6 @@ public class ContactDisplayActivity extends BaseActivity {
             case R.id.menu_verify_or_view:
                 verifyRemoteFingerprint();
                 return true;
-            case R.id.menu_verify_question:
-                initSmpUI();
-                return true;
             case R.id.menu_remove_contact:
                 deleteContact();
                 return true;
@@ -351,31 +348,4 @@ public class ContactDisplayActivity extends BaseActivity {
         }
 
     }
-
-    private void initSmpUI() {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View viewSmp = inflater.inflate(R.layout.smp_question_dialog, null, false);
-
-        if (viewSmp != null)
-        {
-            new AlertDialog.Builder(this).setTitle(this.getString(R.string.otr_qa_title)).setView(viewSmp)
-                    .setPositiveButton(this.getString(R.string.otr_qa_send), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-                            EditText eiQuestion = (EditText) viewSmp.findViewById(R.id.editSmpQuestion);
-                            EditText eiAnswer = (EditText) viewSmp.findViewById(R.id.editSmpAnswer);
-                            String question = eiQuestion.getText().toString();
-                            String answer = eiAnswer.getText().toString();
-                            initSmp(question, answer);
-                        }
-                    }).setNegativeButton(this.getString(R.string.otr_qa_cancel), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    // Do nothing.
-                }
-            }).show();
-        }
-    }
-
-
-
 }

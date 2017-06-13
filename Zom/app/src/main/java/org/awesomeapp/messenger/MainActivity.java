@@ -194,21 +194,23 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
 
                 int tabIdx = mViewPager.getCurrentItem();
-
-                if (tabIdx == 0) {
-
-                    if (mContactList.getContactCount() > 0) {
-                        Intent intent = new Intent(MainActivity.this, ContactsPickerActivity.class);
-                        startActivityForResult(intent, REQUEST_CHOOSE_CONTACT);
-                    } else {
-                        inviteContact();
-                    }
-
-                } else if (tabIdx == 1) {
+                if(tabIdx == 1){
                     inviteContact();
-                } else if (tabIdx == 2) {
-                    startPhotoTaker();
                 }
+//                if (tabIdx == 0) {
+//
+//                    if (mContactList.getContactCount() > 0) {
+//                        Intent intent = new Intent(MainActivity.this, ContactsPickerActivity.class);
+//                        startActivityForResult(intent, REQUEST_CHOOSE_CONTACT);
+//                    } else {
+//                        inviteContact();
+//                    }
+//
+//                } else if (tabIdx == 1) {
+//                    inviteContact();
+//                } else if (tabIdx == 2) {
+//                    startPhotoTaker();
+//                }
 
 
             }
@@ -259,7 +261,7 @@ public class MainActivity extends BaseActivity {
             } else if (tabPosition == 2) {
                 mFab.setVisibility(View.GONE);
             } else {
-                mFab.setImageResource(R.drawable.ic_add_white_24dp);
+                mFab.setVisibility(View.GONE);
             }
         }
 
@@ -484,42 +486,42 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private SearchView mSearchView;
+//    private SearchView mSearchView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menu_search));
-
-        if (mSearchView != null) {
-            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            mSearchView.setIconifiedByDefault(false);
-
-            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-                public boolean onQueryTextChange(String query) {
-                    mConversationList.doSearch(query);
-                    return true;
-                }
-
-                public boolean onQueryTextSubmit(String query) {
-                    mConversationList.doSearch(query);
-
-                    return true;
-                }
-            };
-
-            mSearchView.setOnQueryTextListener(queryTextListener);
-
-            mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
-                @Override
-                public boolean onClose() {
-                    mConversationList.doSearch(null);
-                    return false;
-                }
-            });
-        }
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menu_search));
+//
+//        if (mSearchView != null) {
+//            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//            mSearchView.setIconifiedByDefault(false);
+//
+//            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+//                public boolean onQueryTextChange(String query) {
+//                    mConversationList.doSearch(query);
+//                    return true;
+//                }
+//
+//                public boolean onQueryTextSubmit(String query) {
+//                    mConversationList.doSearch(query);
+//
+//                    return true;
+//                }
+//            };
+//
+//            mSearchView.setOnQueryTextListener(queryTextListener);
+//
+//            mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//                @Override
+//                public boolean onClose() {
+//                    mConversationList.doSearch(null);
+//                    return false;
+//                }
+//            });
+//        }
         return true;
     }
 

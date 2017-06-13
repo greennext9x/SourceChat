@@ -51,25 +51,6 @@ public class XmppPresenceMapping implements PresenceMapping {
     }
 
     public Map<String, Object> getExtra(int status) {
-        // We don't have extra values except OnlineStatus and UserAvaibility
-        // need to be sent to the server. If we do need other values to the server,
-        // return a map the values structured the same as they are defined in the spec.
-        //
-        // e.g.
-        // Map<String, Object> extra = new HashMap<String, Object>();
-        //
-        // HashMap<String, Object> commCap = new HashMap<String, Object>();
-        //
-        // HashMap<String, Object> commC = new HashMap<String, Object>();
-        // commC.put("Qualifier", "T");
-        // commC.put("Cap", "IM");
-        // commC.put("Status", "Open");
-        //
-        // commCap.put("Qualifier", "T");
-        // commCap.put("CommC", commC);
-        //
-        // extra.put("CommCap", commCap);
-        // return extra;
         return null;
     }
 
