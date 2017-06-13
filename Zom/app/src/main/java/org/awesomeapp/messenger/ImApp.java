@@ -315,15 +315,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
 
     public void stopImServiceIfInactive() {
 
-        //todo we don't wnat to do this right now
-        /**
-        if (!hasActiveConnections()) {
-            if (Log.isLoggable(LOG_TAG, Log.DEBUG))
-                log("stop ImService because there's no active connections");
-
-            forceStopImService();
-
-        }*/
     }
 
 
@@ -877,8 +868,6 @@ public class ImApp extends MultiDexApplication implements ICacheWordSubscriber {
                 ImpsProvider.awaitDataReady();
 
                 Log.d(LOG_TAG, "ImpsProvider ready");
-                // setupChatSecurePush will disconnect the CacheWordHandler when it's done
-//                setupChatSecurePush();
             }
         }).start();
     }

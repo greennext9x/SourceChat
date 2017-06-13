@@ -244,8 +244,6 @@ public class MessageListItem extends FrameLayout {
 
         }
 
-      //  if (isSelected())
-        //    mHolder.mContainer.setBackgroundColor(getResources().getColor(R.color.holo_blue_bright));
 
         if (lastMessage.length() > 0)
         {
@@ -373,71 +371,7 @@ public class MessageListItem extends FrameLayout {
                 context.startActivity(intent);
             }
         }
-//        else
-//        {
-//            exportMediaFile();
-//        }
     }
-//    private void forwardMediaFile (String mimeType, Uri mediaUri)
-//    {
-//
-//        String resharePath = "vfs:/" + mediaUri.getPath();
-//        Intent shareIntent = new Intent(context, ImUrlActivity.class);
-//        shareIntent.setAction(Intent.ACTION_SEND);
-//        shareIntent.setDataAndType(Uri.parse(resharePath), mimeType);
-//        context.startActivity(shareIntent);
-//
-//
-//    }
-//
-//    public void forwardMediaFile ()
-//    {
-//        if (mimeType != null && mediaUri != null) {
-//            forwardMediaFile(mimeType, mediaUri);
-//        }
-//        else
-//        {
-//            Intent shareIntent = new Intent(context, ImUrlActivity.class);
-//            shareIntent.setAction(Intent.ACTION_SEND);
-//            shareIntent.putExtra(Intent.EXTRA_TEXT, lastMessage);
-//            shareIntent.setType("text/plain");
-//            context.startActivity(shareIntent);
-//        }
-//    }
-
-//    public void exportMediaFile ()
-//    {
-//        if (mimeType != null && mediaUri != null) {
-//            java.io.File exportPath = SecureMediaStore.exportPath(mimeType, mediaUri);
-//            exportMediaFile(mimeType, mediaUri, exportPath);
-//        }
-//        else
-//        {
-//            Intent shareIntent = new Intent();
-//            shareIntent.setAction(Intent.ACTION_SEND);
-//            shareIntent.putExtra(Intent.EXTRA_TEXT,lastMessage);
-//            shareIntent.setType("text/plain");
-//            context.startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
-//        }
-//
-//    };
-//
-//    private void exportMediaFile (String mimeType, Uri mediaUri, java.io.File exportPath)
-//    {
-//        try {
-//
-//            SecureMediaStore.exportContent(mimeType, mediaUri, exportPath);
-//            Intent shareIntent = new Intent();
-//            shareIntent.setAction(Intent.ACTION_SEND);
-//            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportPath));
-//            shareIntent.setType(mimeType);
-//            context.startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.export_media)));
-//        } catch (Exception e) {
-//            Toast.makeText(getContext(), "Export Failed " + e.getMessage(), Toast.LENGTH_LONG).show();
-//            e.printStackTrace();
-//        }
-//    }
-
     public static boolean isIntentAvailable(Context context, Intent intent) {
         final PackageManager packageManager = context.getPackageManager();
         List<ResolveInfo> list =
@@ -518,7 +452,6 @@ public class MessageListItem extends FrameLayout {
             DeliveryState delivery, EncryptionState encryption) {
 
         mHolder = holder;
-//        applyStyleColors();
 
         mHolder.mTextViewForMessages.setVisibility(View.VISIBLE);
         mHolder.mMediaContainer.setVisibility(View.GONE);
@@ -842,50 +775,6 @@ public class MessageListItem extends FrameLayout {
             return spanText;
         }
     }
-//    public void applyStyleColors ()
-//    {
-//        //not set color
-//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
-//        int themeColorHeader = settings.getInt("themeColor",-1);
-//        int themeColorText = settings.getInt("themeColorText",-1);
-//        int themeColorBg = settings.getInt("themeColorBg",-1);
-//
-//        if (mHolder != null) {
-//            if (themeColorText != -1) {
-//                if (mHolder.mTextViewForMessages != null)
-//                    mHolder.mTextViewForMessages.setTextColor(themeColorText);
-//
-//                if (mHolder.mTextViewForTimestamp != null)
-//                    mHolder.mTextViewForTimestamp.setTextColor(themeColorText);
-//
-//            }
-//
-//            if (themeColorBg != -1)
-//            {
-//
-//                int textBubbleBg = getContrastColor(themeColorText);
-//                 if (textBubbleBg == Color.BLACK)
-//                    mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_dark);
-//                 else
-//                    mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_light);
-//
-//                //mHolder.mContainer.setBackgroundResource(android.R.color.transparent);
-//                //mHolder.mContainer.setBackgroundColor(themeColorBg);
-//            }
-//            else
-//            {
-//                mHolder.mContainer.setBackgroundResource(R.drawable.message_view_rounded_light);
-//
-//            }
-//        }
-//
-//    }
-
-//    public static int getContrastColor(int colorIn) {
-//        double y = (299 * Color.red(colorIn) + 587 * Color.green(colorIn) + 114 * Color.blue(colorIn)) / 1000;
-//        return y >= 128 ? Color.BLACK : Color.WHITE;
-//    }
-
     @TargetApi(Build.VERSION_CODES.N)
     public Locale getCurrentLocale(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){

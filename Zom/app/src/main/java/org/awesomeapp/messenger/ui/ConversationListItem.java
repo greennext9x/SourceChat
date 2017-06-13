@@ -110,7 +110,7 @@ public class ConversationListItem extends FrameLayout {
         sPrettyTime = new PrettyTime(getCurrentLocale());
     }
 
-    public void bind(ConversationViewHolder holder, long contactId, long providerId, long accountId, String address, String nickname, int contactType, String message, long messageDate, int presence, String underLineText, boolean showChatMsg, boolean scrolling) {
+    public void bind(ConversationViewHolder holder, long contactId, long providerId, long accountId, String address, String nickname, int contactType, String message, long messageDate, int presence, boolean showChatMsg, boolean scrolling) {
 
 
 
@@ -121,22 +121,22 @@ public class ConversationListItem extends FrameLayout {
         }
 
 
-        if (!TextUtils.isEmpty(underLineText)) {
-            // highlight/underline the word being searched 
-            String lowercase = nickname.toLowerCase();
-            int start = lowercase.indexOf(underLineText.toLowerCase());
-            if (start >= 0) {
-                int end = start + underLineText.length();
-                SpannableString str = new SpannableString(nickname);
-                str.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
-                holder.mLine1.setText(str);
-
-            } else
-                holder.mLine1.setText(nickname);
-
-        } else
-            holder.mLine1.setText(nickname);
+//        if (!TextUtils.isEmpty(underLineText)) {
+//            // highlight/underline the word being searched
+//            String lowercase = nickname.toLowerCase();
+//            int start = lowercase.indexOf(underLineText.toLowerCase());
+//            if (start >= 0) {
+//                int end = start + underLineText.length();
+//                SpannableString str = new SpannableString(nickname);
+//                str.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//
+//                holder.mLine1.setText(str);
+//
+//            } else
+//                holder.mLine1.setText(nickname);
+//
+//        } else
+//            holder.mLine1.setText(nickname);
 
         holder.mStatusIcon.setVisibility(View.GONE);
 

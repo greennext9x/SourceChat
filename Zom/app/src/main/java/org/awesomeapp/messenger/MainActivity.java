@@ -387,13 +387,6 @@ public class MainActivity extends BaseActivity {
                     long accountId = data.getLongExtra(ContactsPickerActivity.EXTRA_RESULT_ACCOUNT, -1);
 
                     startChat(providerId, accountId, username, true, true);
-//                } else {
-//
-//                    ArrayList<String> users = data.getStringArrayListExtra(ContactsPickerActivity.EXTRA_RESULT_USERNAMES);
-//                    if (users != null) {
-//                        //start group and do invite here
-////                        startGroupChat(users);
-//                    }
 
                 }
             } else if (requestCode == ConversationDetailActivity.REQUEST_TAKE_PICTURE) {
@@ -485,43 +478,9 @@ public class MainActivity extends BaseActivity {
         return false;
     }
 
-
-//    private SearchView mSearchView;
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menu_search));
-//
-//        if (mSearchView != null) {
-//            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//            mSearchView.setIconifiedByDefault(false);
-//
-//            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-//                public boolean onQueryTextChange(String query) {
-//                    mConversationList.doSearch(query);
-//                    return true;
-//                }
-//
-//                public boolean onQueryTextSubmit(String query) {
-//                    mConversationList.doSearch(query);
-//
-//                    return true;
-//                }
-//            };
-//
-//            mSearchView.setOnQueryTextListener(queryTextListener);
-//
-//            mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
-//                @Override
-//                public boolean onClose() {
-//                    mConversationList.doSearch(null);
-//                    return false;
-//                }
-//            });
-//        }
         return true;
     }
 
@@ -611,14 +570,6 @@ public class MainActivity extends BaseActivity {
         // start the image capture Intent
         startActivityForResult(intent, ConversationDetailActivity.REQUEST_TAKE_PICTURE);
     }
-
-    /**
-     * @Override public void onConfigurationChanged(Configuration newConfig) {
-     * super.onConfigurationChanged(newConfig);
-     * setContentView(R.layout.awesome_activity_main);
-     * <p>
-     * }
-     */
 
     public void applyStyle() {
 

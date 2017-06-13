@@ -334,8 +334,7 @@ public class ConversationView {
                         otrChatSession.startChatEncryption();
                         mIsStartingOtr = true;
 
-                    }
-                    else {
+                    } else {
                         otrChatSession.stopChatEncryption();
 
                     }
@@ -353,47 +352,6 @@ public class ConversationView {
 
 
     }
-
-
-//    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            if (!(view instanceof MessageListItem)) {
-//                return;
-//            }
-//
-//            URLSpan[] links = ((MessageListItem) view).getMessageLinks();
-//            if (links.length > 0) {
-//
-//                final ArrayList<String> linkUrls = new ArrayList<String>(links.length);
-//                for (URLSpan u : links) {
-//                    linkUrls.add(u.getURL());
-//                }
-//                ArrayAdapter<String> a = new ArrayAdapter<String>(mActivity,
-//                        android.R.layout.select_dialog_item, linkUrls);
-//                AlertDialog.Builder b = new AlertDialog.Builder(mActivity);
-//                b.setTitle(R.string.select_link_title);
-//                b.setCancelable(true);
-//                b.setAdapter(a, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Uri uri = Uri.parse(linkUrls.get(which));
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                        intent.putExtra(ImServiceConstants.EXTRA_INTENT_PROVIDER_ID, mProviderId);
-//                        intent.putExtra(ImServiceConstants.EXTRA_INTENT_ACCOUNT_ID, mAccountId);
-//                        intent.putExtra(Browser.EXTRA_APPLICATION_ID, mActivity.getPackageName());
-//                        mActivity.startActivity(intent);
-//                    }
-//                });
-//                b.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                b.show();
-//            }
-//        }
-//    };
 
     private final static int PROMPT_FOR_DATA_TRANSFER = 9999;
     private final static int SHOW_DATA_PROGRESS = 9998;

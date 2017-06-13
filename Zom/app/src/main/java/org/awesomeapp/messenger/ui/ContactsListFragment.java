@@ -71,7 +71,7 @@ public class ContactsListFragment extends Fragment {
     private int mLoaderId = 1001;
     private static RecyclerView mRecView;
     private View mEmptyView;
-    String mSearchString = null;
+//    String mSearchString = null;
 
 
     @Nullable
@@ -287,20 +287,20 @@ public class ContactsListFragment extends Fragment {
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             StringBuilder buf = new StringBuilder();
 
-            if (mSearchString != null) {
-                buf.append('(');
-                buf.append(Imps.Contacts.NICKNAME);
-                buf.append(" LIKE ");
-                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
-                buf.append(" OR ");
-                buf.append(Imps.Contacts.USERNAME);
-                buf.append(" LIKE ");
-                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
-                buf.append(')');
-                buf.append(" AND ");
-            }
+//            if (mSearchString != null) {
+//                buf.append('(');
+//                buf.append(Imps.Contacts.NICKNAME);
+//                buf.append(" LIKE ");
+//                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
+//                buf.append(" OR ");
+//                buf.append(Imps.Contacts.USERNAME);
+//                buf.append(" LIKE ");
+//                DatabaseUtils.appendValueToSql(buf, "%" + mSearchString + "%");
+//                buf.append(')');
+//                buf.append(" AND ");
+//            }
 
-            buf.append(Imps.Contacts.TYPE).append('=').append(Imps.Contacts.TYPE_NORMAL);
+//            buf.append(Imps.Contacts.TYPE).append('=').append(Imps.Contacts.TYPE_NORMAL);
 
             CursorLoader loader = new CursorLoader(getActivity(), mUri, CHAT_PROJECTION,
                     buf == null ? null : buf.toString(), null, Imps.Contacts.SUB_AND_ALPHA_SORT_ORDER);
